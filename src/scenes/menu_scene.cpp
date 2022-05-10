@@ -11,6 +11,8 @@ using namespace std::string_literals;
 
 game::scenes::MenuScene::MenuScene() {
     // Your scene initialization code here...
+    std::shared_ptr<game::core::Actor> titlescreenImage = std::make_unique<game::core::Actor>(std::make_unique<game::core::Sprite>(std::make_shared<game::core::Texture2D>("assets/graphics/backgrounds/titlescreen.png"), 0, 0));
+    this->actors.insert(std::make_pair("titlescreenImage", titlescreenImage));
 }
 
 game::scenes::MenuScene::~MenuScene() {
