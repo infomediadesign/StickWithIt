@@ -45,6 +45,9 @@ namespace game::core {
          */
         void sprite(std::shared_ptr<game::core::Sprite> sprite);
 
+        /*
+        * checks inputs and moves actor-object, should only be used on actor_player
+        */
         void playerMovement();
     };
 }
