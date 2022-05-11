@@ -1,3 +1,4 @@
+#include "game_scene.h"
 #include <memory>
 #include <string>
 
@@ -31,21 +32,21 @@ void game::scenes::GameScene::Update() {
 
     std::shared_ptr<Vector2> velocity = std::make_shared<Vector2>(0, 0);
 
-    if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT)) 
+    if (IsKeyPressed(KEY_A) || IsKeyPressed(KEY_LEFT)) 
     {
-        velocity->x -= 5;
+        velocity->x -= 32;
     }
-    if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT))
+    else if (IsKeyPressed(KEY_D) || IsKeyPressed(KEY_RIGHT))
     {
-        velocity->x += 5;
+        velocity->x += 32;
     }
-    if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))
+    else if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP))
     {
-        velocity->y -= 5;
+        velocity->y -= 32;
     }
-    if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN))
+    else if (IsKeyPressed(KEY_S) || IsKeyPressed(KEY_DOWN))
     {
-        velocity->y += 5;
+        velocity->y += 32;
     }
 
     actors.at("actor1")->sprite_->pos_x += velocity->x;
