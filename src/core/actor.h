@@ -44,5 +44,7 @@ namespace game::core {
          * @brief Replaces the current sprite object of the actor.
          */
         void sprite(std::shared_ptr<game::core::Sprite> sprite);
+
+        void playerMovement();
     };
 }

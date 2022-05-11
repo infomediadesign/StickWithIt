@@ -28,6 +28,8 @@ void game::scenes::GameScene::Update() {
     // Your process input and update game scene code here...
     if (IsKeyPressed(KEY_ESCAPE))
         game::core::Store::stage->switchToNewScene("pause"s, std::make_unique<PauseScene>());
+
+    actors.at("actor1")->playerMovement();
 }
 
 void game::scenes::GameScene::Draw() {
