@@ -19,7 +19,7 @@ void game::core::Actor::sprite(std::shared_ptr<game::core::Sprite> sprite) {
 }
 
 void game::core::Actor::playerMovement() {
-    std::shared_ptr<Vector2> velocity = std::make_shared<Vector2>(0, 0);
+    std::shared_ptr<Vector2> velocity = std::make_shared<Vector2>();
 
     if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP))
     {
