@@ -49,8 +49,8 @@ void game::scenes::GameScene::Update() {
         velocity->y += 32;
     }
 
-    actors.at("actor1")->sprite_->pos_x += velocity->x;
-    actors.at("actor1")->sprite_->pos_y += velocity->y;
+    //actors.at("actor1")->sprite_->pos_x += velocity->x;
+    //actors.at("actor1")->sprite_->pos_y += velocity->y;
 }
 
 void game::scenes::GameScene::Draw() {

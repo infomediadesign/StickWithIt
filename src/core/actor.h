@@ -15,10 +15,9 @@ namespace game::core {
      */
     class Actor {
     private:
-        //std::shared_ptr<game::core::Sprite> sprite_; Original
+        std::shared_ptr<game::core::Sprite> sprite_;
 
     public:
-        std::shared_ptr<game::core::Sprite> sprite_; // -> Now sprites can be moved in game_scene; Changed
         Actor() = delete;
 
         /**
