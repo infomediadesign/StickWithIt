@@ -5,6 +5,8 @@ include(../cmake/raylib_cpp.cmake)
 
 project(game VERSION 0.1.0 LANGUAGES CXX)
 
+include(../cmake/doxygen.cmake)
+
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -14,7 +16,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 add_subdirectory(core)
 add_subdirectory(scenes)
 
-add_executable(${PROJECT_NAME} main.cpp "Player/player_movement.h" "Player/player_movement.cpp")
+add_executable(${PROJECT_NAME} main.cpp)
 
 # Add config.h.in file
 configure_file(config.h.in config.h)
