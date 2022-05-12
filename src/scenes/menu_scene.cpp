@@ -37,7 +37,8 @@ void game::scenes::MenuScene::Draw() {
     // Your scene drawing code here...
     // Note that scene-actors are drawn automatically
 
-    DrawTexture(titlescreen, 0, 0, WHITE); //hieraus einen Actor machen!
+    DrawTexture(titlescreen, 0, 0, WHITE);
+
     DrawText("Start new game", 30, 40, 30, WHITE);
     DrawText("Continue", 30, 80, 30, WHITE);
     DrawText("Settings", 30, 120, 30, WHITE);
