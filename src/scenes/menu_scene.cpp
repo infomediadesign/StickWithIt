@@ -11,12 +11,12 @@ using namespace std::string_literals;
 
 game::scenes::MenuScene::MenuScene() {
     // Your scene initialization code here...
-    titlescreen = LoadTexture("assets/graphics/backgrounds/farmhouse_titlescreen.png");
+    titlescreen = LoadTexture("assets/graphics/backgrounds/farmhouse_titlescreen.png"); //@Levin delete this
 }
 
 game::scenes::MenuScene::~MenuScene() {
     // Your scene cleanup code here...
-    UnloadTexture(titlescreen);
+    UnloadTexture(titlescreen); //@Levin and this
 }
 
 void game::scenes::MenuScene::Update() {
@@ -37,7 +37,8 @@ void game::scenes::MenuScene::Draw() {
     // Your scene drawing code here...
     // Note that scene-actors are drawn automatically
 
-    DrawTexture(titlescreen, 0, 0, WHITE);
+    DrawTexture(titlescreen, 0, 0, WHITE); //@Levin and this
+    //@Levin and then create a actor with animated sprite here (when Sarahs finished with animated background)
 
     DrawText("Start new game", 30, 40, 30, WHITE);
     DrawText("Continue", 30, 80, 30, WHITE);
