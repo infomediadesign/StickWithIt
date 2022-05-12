@@ -23,6 +23,14 @@ void game::scenes::MenuScene::Update() {
     // Your process input and update game scene code here...
     if (IsKeyPressed(KEY_ENTER))
         game::core::Store::stage->replaceWithNewScene("menu"s, "game"s, std::make_unique<GameScene>());
+
+    //To implement
+
+    //if (IsKeyPressed(KEY_W)) dann eine Auswahl nach oben
+    //if (IsKeyPressed(KEY_S)) dann eine Auswahl nach unten
+    //if (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER)) dann Auswahl bestätigen
+
+    //Gucken, wie man andere Schrift miteinbinden kann und wie man Rückmeldung an den User geben kann, welche Auswahl gerade aktiv ist.
 }
 
 void game::scenes::MenuScene::Draw() {
