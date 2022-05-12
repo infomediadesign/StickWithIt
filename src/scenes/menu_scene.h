@@ -5,6 +5,8 @@
 namespace game::scenes {
 class MenuScene final : public game::core::Scene {
         public:
+            Texture2D titlescreen;
+
             MenuScene();
 
             ~MenuScene() override ;

@@ -11,10 +11,12 @@ using namespace std::string_literals;
 
 game::scenes::MenuScene::MenuScene() {
     // Your scene initialization code here...
+    titlescreen = LoadTexture("assets/graphics/backgrounds/farmhouse_titlescreen.png");
 }
 
 game::scenes::MenuScene::~MenuScene() {
     // Your scene cleanup code here...
+    UnloadTexture(titlescreen);
 }
 
 void game::scenes::MenuScene::Update() {
@@ -26,5 +28,10 @@ void game::scenes::MenuScene::Update() {
 void game::scenes::MenuScene::Draw() {
     // Your scene drawing code here...
     // Note that scene-actors are drawn automatically
-    DrawText("Menu - press ENTER to load game scene", 10, 10, 30, LIGHTGRAY);
+    DrawTexture(titlescreen, 0, 0, WHITE);
+    DrawText("Start new game", 30, 40, 30, WHITE);
+    DrawText("Continue", 30, 80, 30, WHITE);
+    DrawText("Settings", 30, 120, 30, WHITE);
+    DrawText("Exit game", 30, 160, 30, WHITE);
+    DrawText("Credits", 30, 200, 20, WHITE);
 }
