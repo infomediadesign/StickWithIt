@@ -1,5 +1,5 @@
 { "frames": {
-   "Button animation 0.aseprite": {
+   "all_menu_button_animation 0.aseprite": {
     "frame": { "x": 1, "y": 1, "w": 118, "h": 48 },
     "rotated": false,
     "trimmed": true,
@@ -7,7 +7,7 @@
     "sourceSize": { "w": 128, "h": 128 },
     "duration": 100
    },
-   "Button animation 1.aseprite": {
+   "all_menu_button_animation 1.aseprite": {
     "frame": { "x": 121, "y": 1, "w": 118, "h": 48 },
     "rotated": false,
     "trimmed": true,
@@ -15,7 +15,7 @@
     "sourceSize": { "w": 128, "h": 128 },
     "duration": 100
    },
-   "Button animation 2.aseprite": {
+   "all_menu_button_animation 2.aseprite": {
     "frame": { "x": 241, "y": 1, "w": 118, "h": 48 },
     "rotated": false,
     "trimmed": true,
@@ -23,7 +23,7 @@
     "sourceSize": { "w": 128, "h": 128 },
     "duration": 100
    },
-   "Button animation 3.aseprite": {
+   "all_menu_button_animation 3.aseprite": {
     "frame": { "x": 361, "y": 1, "w": 118, "h": 48 },
     "rotated": false,
     "trimmed": true,
@@ -42,7 +42,8 @@
   ],
   "layers": [
    { "name": "Background", "opacity": 255, "blendMode": "normal" },
-   { "name": "Linien", "opacity": 255, "blendMode": "normal" }
+   { "name": "Linien", "opacity": 255, "blendMode": "normal" },
+   { "name": "Options", "opacity": 255, "blendMode": "normal" }
   ],
   "slices": [
   ]
