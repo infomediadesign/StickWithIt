@@ -30,6 +30,9 @@ game::core::Game::Game(int stage_width, int stage_height, bool full_screen, int 
 
     if (!mouse)
         HideCursor();
+
+    SetWindowIcon(LoadImage("assets/graphics/other/logo.png"));
+    SetWindowTitle("Scary Joe");
 }
 
 game::core::Game::~Game() {

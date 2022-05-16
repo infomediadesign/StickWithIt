@@ -21,6 +21,7 @@ void game::core::Actor::sprite(std::shared_ptr<game::core::Sprite> sprite) {
 void game::core::Actor::playerMovement() {
     std::shared_ptr<Vector2> velocity = std::make_shared<Vector2>();
 
+    //simple input query
     if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP))
     {
         velocity->y -= 32;
@@ -38,6 +39,17 @@ void game::core::Actor::playerMovement() {
         velocity->x += 32;
     }
 
+    //limit sprite_pos to screen width and height
+    if (this->sprite_->pos_x + velocity->x < 0 || this->sprite_->pos_x + velocity->x > GetScreenWidth() - 32)
+    {
+        velocity->x = 0;
+    }
+    if (this->sprite_->pos_y + velocity->y < -16 || this->sprite_->pos_y + velocity->y > GetScreenHeight() - 16)
+    {
+        velocity->y = 0;
+    }
+
+    //move sprite
     this->sprite_->pos_x += velocity->x;
     this->sprite_->pos_y += velocity->y;
 }
