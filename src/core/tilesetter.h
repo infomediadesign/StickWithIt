@@ -19,13 +19,15 @@ namespace game::core {
 
 	private:
 		//vector out of tilesets (Images)
-		std::map<std::string, std::shared_ptr<Image>> tilesets;
+		std::map<std::string, std::shared_ptr<Image>> tilesetSource;
 
 		//map with tiles(converted to Texture2D) described by IDs
 		//std::map<int, std::shared_ptr<Texture2D>> tiles;
 		std::map<int, Texture2D> tiles;
 
-		//map with vector out of tilemaps
-		std::map<std::string, std::vector<Texture2D>> tilemaps;
+		//Vector with ID's -> here the tilemap gets manually built
+		//for example "level1", {13, 31, 12, 35, 31}
+		//For the length of map every ID(tile) gets drawn to correct position
+		std::map<std::string, std::vector<int>> tilemaps;
 	};
 }
