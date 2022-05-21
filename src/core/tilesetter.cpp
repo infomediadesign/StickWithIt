@@ -7,42 +7,50 @@ game::core::Tilesetter::Tilesetter() {
 
 	//Crop Image to tiles, give IDs, convert to Texture2Ds and add to map 
 	int ID = 0;
-	for (int y = 0; y < 13; y++)
+	for (int y = 0; y < amountOfTilesY; y++)
 	{
-		for (int x = 0; x < 20; x++)
+		for (int x = 0; x < amountOfTilesX; x++)
 		{
+			tiles.insert(std::pair<int, std::shared_ptr<Texture2D>>(ID, 
+				std::make_shared<Texture2D>(LoadTextureFromImage(ImageFromImage(*tilesetSource.find("wheat")->second, { float(x) * 32, float(y) * 32, 32, 32})))));
 			ID++;
-			tiles.insert(std::pair<int, Texture2D>(ID, 
-				LoadTextureFromImage(ImageFromImage(*tilesetSource.find("wheat")->second, { float(x) * 32, float(y) * 32, 32, 32}))));
 		}
 	}
 
 	//build tilemap for level1
-	tilemaps.insert(std::pair<std::string, std::vector<int>>("level1", {1, 3, 1, 1, 1}));
+	level1 = {
+	1,3,2,1,5,		2,5,2,1,4,		1,4,3,2,1,		2,5,6,2,1,
+	2,1,5,2,10,		2,4,4,1,2,		5,2,1,9,8,		2,5,6,4,2,
+	1,3,2,1,5,		2,5,2,1,4,		1,4,3,2,1,		2,5,6,2,1,
+	2,1,5,2,20,		2,4,4,1,2,		5,2,1,9,8,		2,5,6,4,2,
+	1,3,2,1,5,		2,5,2,1,4,		1,4,3,2,1,		2,5,6,2,1,
+
+	2,1,5,2,10,		2,4,4,1,2,		5,2,1,9,8,		2,5,6,4,2,
+	1,3,2,1,5,		2,5,2,1,4,		1,4,3,2,1,		2,5,6,2,1,
+	2,1,5,2,10,		2,4,4,1,2,		5,2,1,9,8,		2,5,6,4,2,
+	1,3,2,1,5,		2,5,2,1,4,		1,4,3,2,1,		2,5,6,2,1,
+	2,1,5,2,10,		2,4,4,1,2,		5,2,1,9,8,		2,5,6,4,2,
+
+	1,3,2,1,5,		2,5,2,1,4,		1,4,3,2,1,		2,5,6,2,1,
+	2,1,5,2,10,		2,4,4,1,2,		5,2,1,9,8,		2,5,6,4,2,
+	1,3,2,1,5,		2,5,2,1,4,		1,4,3,2,1,		2,5,6,2,1,
+	};
 }
 
 void game::core::Tilesetter::drawTilemap(int level) {
-	int amountOfTilesX = 20;
-	int amountOfTilesY = 13;
-	int idOfTile = 0;
+	int positionInTilemap = 0;
 
 	switch (level)
 	{
 		case 1:
 		{
-			//draw tilemap of level 1 here
-			for (int i = 0; i < tiles.size(); i++)
-			{
-				DrawTexture(tiles.find(i)->second, i * 32, 0, WHITE);
-			}
-
+			//draw tilemap of level(level) here
 			for (int y = 0; y < amountOfTilesY; y++)
 			{
 				for (int x = 0; x < amountOfTilesX; x++)
 				{
-					
-					DrawTexture(tiles.find(tilemaps.find("level1")->second[idOfTile])->second, x * 32, y * 32, WHITE);
-					idOfTile++;
+					DrawTexture(*tiles.find(level1[positionInTilemap])->second, x * 32, y * 32, WHITE);
+					positionInTilemap++;
 				}
 			}
 
@@ -50,10 +58,10 @@ void game::core::Tilesetter::drawTilemap(int level) {
 		}
 		case 2:
 		{
-			//build tilemap of level 1 here
+			//draw tilemap of level(level) here
 			for (int i = 0; i < tiles.size(); i++)
 			{
-				DrawTexture(tiles.find(i)->second, i * 32, 0, WHITE);
+				DrawTexture(*tiles.find(i)->second, i * 32, 0, WHITE);
 			}
 			break;
 		}
