@@ -7,6 +7,8 @@
 #include <sprite.h>
 #include <sprite_animated.h>
 
+#include "tilesetter.h"
+
 namespace game::scenes {
     class GameScene final : public game::core::Scene {
     public:
@@ -20,5 +22,6 @@ namespace game::scenes {
 
     private:
         // Add private members here...
+        std::unique_ptr<game::core::Tilesetter> tilemap;
     };
 }
