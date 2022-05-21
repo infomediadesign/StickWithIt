@@ -15,9 +15,6 @@ game::scenes::GameScene::GameScene() {
     // Your scene initialization code here...
     std::shared_ptr<game::core::Actor> actor_player = std::make_unique<game::core::Actor>(std::make_unique<game::core::SpriteAnimated>(std::make_shared<game::core::Texture2D>("assets/graphics/player/scarecrow_idle_animation.png"), 29.0f, 41.0f, 1, 9, 6, 320 - 16, 180 - 20.5));
     this->actors.insert(std::make_pair("actor_player", actor_player));
-
-    std::shared_ptr<game::core::Actor> actor_map_prototype = std::make_unique<game::core::Actor>(std::make_unique<game::core::Sprite>(std::make_shared<game::core::Texture2D>("assets/graphics/tilemaps/map_prototype2.png"), 0, 0));
-    this->actors.insert(std::make_pair("actor_map_prototype", actor_map_prototype));
 }
 
 game::scenes::GameScene::~GameScene() {
