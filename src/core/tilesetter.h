@@ -15,13 +15,17 @@ namespace game::core {
 		void drawTilemap(int level);
 
 		//exchanges tile on specific coordinate
-		void exchangeTile(Texture2D tile, Vector2 position);
+		void exchangeTile(Texture2D tileID, Vector2 position);
 
 	private:
-		//vector with tilesets (Texture2Ds)
-		std::map<std::string, std::shared_ptr<Texture2D>> tilesets;
+		//vector out of tilesets (Images)
+		std::map<std::string, std::shared_ptr<Image>> tilesets;
 
-		//vector with vectors with tiles
-		std::vector<std::vector<Texture2D>> tilemaps;
+		//map with tiles(converted to Texture2D) described by IDs
+		//std::map<int, std::shared_ptr<Texture2D>> tiles;
+		std::map<int, Texture2D> tiles;
+
+		//map with vector out of tilemaps
+		std::map<std::string, std::vector<Texture2D>> tilemaps;
 	};
 }

@@ -3,10 +3,17 @@
 game::core::Tilesetter::Tilesetter() {
 	
 	//add tilesets here
-	tilesets.insert(std::pair<std::string, std::shared_ptr<Texture2D>>("tilesetWheat", std::make_shared<Texture2D>(LoadTexture("assets/graphics/tilesets/tileset1.png"))));
+	tilesets.insert(std::pair<std::string, std::shared_ptr<Image>>("wheat", std::make_shared<Image>(LoadImage("assets/graphics/tilesets/tileset1.png"))));
 
-	//split tilemap into tiles and give them IDs
-
+	//Crop Image to tile, give ID, convert to Texture2D and add to map 
+	int ID = 0;
+	for (int y = 0; y < 13; y++)
+	{
+		for (int x = 0; x < 20; x++)
+		{
+			tiles.insert(std::pair<int, Texture2D>(ID, LoadTextureFromImage(ImageFromImage(*tilesets.find("wheat")->second, { float(x) * 32, float(y) * 32, 32, 32}))));
+		}
+	}
 }
 
 void game::core::Tilesetter::drawTilemap(int level) {
@@ -14,13 +21,20 @@ void game::core::Tilesetter::drawTilemap(int level) {
 	{
 		case 1:
 		{
-			DrawTextureRec(*tilesets.find("tilesetWheat")->second, { 0, 0, 32, 32 }, { 0, 0 }, WHITE);
-			DrawText("hello", 0, 0, 12, GREEN);
+			//build tilemap of level 1 here
+			for (int i = 0; i < tiles.size(); i++)
+			{
+				DrawTexture(tiles.find(i)->second, i * 32, 0, WHITE);
+			}
 			break;
 		}
 		case 2:
 		{
-
+			//build tilemap of level 1 here
+			for (int i = 0; i < tiles.size(); i++)
+			{
+				DrawTexture(tiles.find(i)->second, i * 32, 0, WHITE);
+			}
 			break;
 		}
 	}

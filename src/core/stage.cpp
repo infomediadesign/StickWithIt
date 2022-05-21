@@ -57,12 +57,14 @@ void game::core::Stage::Update() {
 void game::core::Stage::Draw() {
     ClearBackground(WHITE);
 
+    //twist this
+    this->scene_->Draw();
+
+    //with this to turn off y-Sorting
     for (auto const& [key, val] : this->scene_->actors) {
         val->sprite()->Update();
 
         if(val->sprite()->visible)
             game::core::Renderer::DrawTexture(val->sprite());
     }
-
-    this->scene_->Draw();
 }
