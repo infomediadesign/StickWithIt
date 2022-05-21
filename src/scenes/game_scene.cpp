@@ -29,6 +29,12 @@ void game::scenes::GameScene::Update() {
         game::core::Store::stage->switchToNewScene("pause"s, std::make_unique<PauseScene>());
 
     actors.at("actor_player")->playerMovement();
+
+    //TEMP press b and switch level
+    if (IsKeyPressed(KEY_B))
+    {
+        level++;
+    }
 }
 
 void game::scenes::GameScene::Draw() {
@@ -36,5 +42,5 @@ void game::scenes::GameScene::Draw() {
     // Note that scene-actors are drawn automatically
     DrawText("This is the game scene - press ESCAPE for pause", 10, 10, 30, LIGHTGRAY);
 
-    tilemap->drawTilemap(1);
+    tilemap->drawTilemap(level);
 }

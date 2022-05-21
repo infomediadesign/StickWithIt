@@ -23,5 +23,7 @@ namespace game::scenes {
     private:
         // Add private members here...
         std::unique_ptr<game::core::Tilesetter> tilemap;
+
+        int level = 1;
     };
 }
