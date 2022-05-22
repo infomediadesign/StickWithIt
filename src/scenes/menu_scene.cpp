@@ -12,11 +12,19 @@ using namespace std::string_literals;
 game::scenes::MenuScene::MenuScene() {
     // Your scene initialization code here...
     titlescreen = LoadTexture("assets/graphics/backgrounds/farmhouse_titlescreen.png"); //@Levin delete this
+    startscreen_button = LoadTexture("assets/graphics/ui/startscreen-sheet.png");
+    start_button = LoadTexture("assets/graphics/ui/start_button_sheet.png");
+    options_button = LoadTexture("assets/graphics/ui/weiﬂ_options_button.png");
+    exit_button = LoadTexture("assets/graphics/ui/weiﬂ_exit_button.png");
 }
 
 game::scenes::MenuScene::~MenuScene() {
     // Your scene cleanup code here...
     UnloadTexture(titlescreen); //@Levin and this
+    UnloadTexture(startscreen_button);
+    UnloadTexture(start_button);
+    UnloadTexture(options_button);
+    UnloadTexture(exit_button);
 }
 
 void game::scenes::MenuScene::Update() {
@@ -39,10 +47,14 @@ void game::scenes::MenuScene::Draw() {
 
     DrawTexture(titlescreen, 0, 0, WHITE); //@Levin and this
     //@Levin and then create a actor with animated sprite here (when Sarahs finished with animated background)
+    DrawTexture(startscreen_button, 95, 220, WHITE);
+    DrawTexture(start_button, 124, 251, WHITE);
+    DrawTexture(options_button, 261, 251, WHITE);
+    DrawTexture(exit_button, 398, 251, WHITE);
 
-    DrawText("Start new game", 30, 40, 30, WHITE);
+ /* DrawText("Start new game", 30, 40, 30, WHITE);
     DrawText("Continue", 30, 80, 30, WHITE);
     DrawText("Settings", 30, 120, 30, WHITE);
     DrawText("Exit game", 30, 160, 30, WHITE);
-    DrawText("Credits", 30, 200, 20, WHITE);
+    DrawText("Credits", 30, 200, 20, WHITE);*/
 }
