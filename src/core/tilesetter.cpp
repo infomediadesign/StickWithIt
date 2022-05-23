@@ -67,7 +67,7 @@ void game::core::Tilesetter::drawTilemap(int level) {
 			{
 				for (int x = 0; x < amountOfTilesX; x++)
 				{
-					DrawTexture(*tiles.find(levels.find("level1")->second[positionInTilemap])->second, x * 32 - 16, y * 32 - 16, WHITE);
+					DrawTexture(*tiles.find(levels.find("level1")->second[positionInTilemap])->second, x * 32 - 16, y * 32 - 14, WHITE);
 					positionInTilemap++;
 				}
 			}
@@ -80,7 +80,7 @@ void game::core::Tilesetter::drawTilemap(int level) {
 			{
 				for (int x = 0; x < amountOfTilesX; x++)
 				{
-					DrawTexture(*tiles.find(levels.find("level2")->second[positionInTilemap])->second, x * 32 - 16, y * 32 - 16, WHITE);
+					DrawTexture(*tiles.find(levels.find("level2")->second[positionInTilemap])->second, x * 32 - 16, y * 32 - 14, WHITE);
 					positionInTilemap++;
 				}
 			}
