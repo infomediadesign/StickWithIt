@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <map>
+#include <memory>
 
 namespace game::core {
 	class Tilesetter {
