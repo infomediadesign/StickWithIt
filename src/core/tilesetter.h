@@ -28,7 +28,7 @@ namespace game::core {
 		//every level contains a vector of integers (ids, that triggers dependant tiles to be drawn)
 		std::map<std::string, std::vector<int>> levels;
 		
-		const int amountOfTilesX = 20;
+		const int amountOfTilesX = 21;
 		const int amountOfTilesY = 13;
 
 		//TODO const int playerwidth + height
