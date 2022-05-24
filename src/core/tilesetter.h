@@ -20,13 +20,13 @@ namespace game::core {
 
 	private:
 		//vector out of tilesets (Images)
-		std::map<std::string, std::shared_ptr<Image>> tilesetSource;
+		std::map<std::string, std::shared_ptr<Texture2D>> tilesetSource;
 
-		//map with tiles(converted to Texture2D) described by IDs
-		std::map<int, std::shared_ptr<Texture2D>> tiles;
+		//vector out of vectors that contain x and y data of texture to crop into tile
+		std::vector<Rectangle> tiles;
 
 		//map out of levels
-		//every level contains a vector of integers (ids, that triggers dependant tiles to be drawn)
+		//every level contains a vector of integers (that triggers dependant tile to be drawn)
 		std::map<std::string, std::vector<int>> levels;
 		
 		const int amountOfTilesX = 21;

@@ -3,17 +3,14 @@
 game::core::Tilesetter::Tilesetter() {
 	
 	//add tilesets here
-	tilesetSource.insert(std::pair<std::string, std::shared_ptr<Image>>("wheat", std::make_shared<Image>(LoadImage("assets/graphics/tilesets/tileset1.png"))));
+	tilesetSource.insert(std::pair<std::string, std::shared_ptr<Texture2D>>("wheat", std::make_shared<Texture2D>(LoadTexture("assets/graphics/tilesets/tileset1.png"))));
 
-	//Crop Image to tiles, give IDs, convert to Texture2Ds and add to map 
-	int ID = 0;
-	for (int y = 0; y < 7; y++) // 7 = tilesetwidth
+	//evualuate the position of all tiles the tileset has
+	for (int y = 0; y < 7; y++) // 7 = tileset_width
 	{
-		for (int x = 0; x < 10; x++) // 10 = tilesetheight
+		for (int x = 0; x < 10; x++) // 10 = tileset_height
 		{
-			tiles.insert(std::pair<int, std::shared_ptr<Texture2D>>(ID, 
-				std::make_shared<Texture2D>(LoadTextureFromImage(ImageFromImage(*tilesetSource.find("wheat")->second, { float(x) * 32, float(y) * 32, 32, 32})))));
-			ID++;
+			tiles.push_back({ float(x * 32), float(y * 32), 32.0, 32.0 });
 		}
 	}
 
@@ -62,12 +59,12 @@ void game::core::Tilesetter::drawTilemap(int level) {
 	{
 		case 1:
 		{
-			//draw tilemap of level(level) here
+			//draw tilemap of level 1 here
 			for (int y = 0; y < amountOfTilesY; y++)
 			{
 				for (int x = 0; x < amountOfTilesX; x++)
 				{
-					DrawTexture(*tiles.find(levels.find("level1")->second[positionInTilemap])->second, x * 32 - 16, y * 32 - 14, WHITE);
+					DrawTextureRec(*tilesetSource.find("wheat")->second, tiles[levels.find("level1")->second[positionInTilemap]], {float(x) * 32 - 16, float(y) * 32 - 14}, WHITE);
 					positionInTilemap++;
 				}
 			}
@@ -75,12 +72,12 @@ void game::core::Tilesetter::drawTilemap(int level) {
 		}
 		case 2:
 		{
-			//draw tilemap of level(level) here
+			//draw tilemap of level 2 here
 			for (int y = 0; y < amountOfTilesY; y++)
 			{
 				for (int x = 0; x < amountOfTilesX; x++)
 				{
-					DrawTexture(*tiles.find(levels.find("level2")->second[positionInTilemap])->second, x * 32 - 16, y * 32 - 14, WHITE);
+					DrawTextureRec(*tilesetSource.find("wheat")->second, tiles[levels.find("level2")->second[positionInTilemap]], { float(x) * 32 - 16, float(y) * 32 - 14 }, WHITE);
 					positionInTilemap++;
 				}
 			}
