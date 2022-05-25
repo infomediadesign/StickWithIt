@@ -1,6 +1,7 @@
 #include <raylib.h>
 
 #include "actor.h"
+#include "information.h"
 
 game::core::Actor::Actor(std::shared_ptr<game::core::Sprite> sprite) : sprite_(std::move(sprite)){
     TraceLog(LOG_INFO, "game::core::Actor constructor called");
@@ -19,37 +20,41 @@ void game::core::Actor::sprite(std::shared_ptr<game::core::Sprite> sprite) {
 }
 
 void game::core::Actor::playerMovement() {
-    std::shared_ptr<Vector2> velocity = std::make_shared<Vector2>();
+    Vector2 velocity = {0, 0};
 
     //simple input query
     if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP))
     {
-        velocity->y -= 32;
+        velocity.y -= 32;
     }
     if (IsKeyPressed(KEY_S) || IsKeyPressed(KEY_DOWN))
     {
-        velocity->y += 32;
+        velocity.y += 32;
     }
     if (IsKeyPressed(KEY_A) || IsKeyPressed(KEY_LEFT))
     {
-        velocity->x -= 32;
+        velocity.x -= 32;
     }
     if (IsKeyPressed(KEY_D) || IsKeyPressed(KEY_RIGHT))
     {
-        velocity->x += 32;
+        velocity.x += 32;
     }
 
     //limit sprite_pos to screen width and height
-    if (this->sprite_->pos_x + velocity->x < 0 || this->sprite_->pos_x + velocity->x > GetScreenWidth() - 32)
+    if (this->sprite_->pos_x + velocity.x < 0 || this->sprite_->pos_x + velocity.x > game_width - 32)
     {
-        velocity->x = 0;
+        velocity.x = 0;
     }
-    if (this->sprite_->pos_y + velocity->y < -16 || this->sprite_->pos_y + velocity->y > GetScreenHeight() - 16)
+    if (this->sprite_->pos_y + velocity.y < -16 || this->sprite_->pos_y + velocity.y > game_height - 16)
     {
-        velocity->y = 0;
+        velocity.y = 0;
     }
 
     //move sprite
-    this->sprite_->pos_x += velocity->x;
-    this->sprite_->pos_y += velocity->y;
+    this->sprite_->pos_x += velocity.x;
+    this->sprite_->pos_y += velocity.y;
+}
+
+Vector2 game::core::Actor::getPlayerMovement() {
+    return { static_cast<float>(this->sprite_->pos_x), static_cast<float>(this->sprite_->pos_y) };
 }

@@ -22,7 +22,7 @@ namespace game::scenes {
 
     private:
         // Add private members here...
-        std::unique_ptr<game::core::Tilesetter> tilemap;
+        std::unique_ptr<game::core::Tilesetter> tilesetter;
 
         int level = 1;
     };

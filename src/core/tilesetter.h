@@ -6,6 +6,7 @@
 #include <iostream>
 #include <map>
 #include <memory>
+#include "actor.h"
 
 namespace game::core {
 	class Tilesetter {
@@ -19,19 +20,18 @@ namespace game::core {
 		void exchangeTile(Texture2D tileID, Vector2 position);
 
 	private:
-		//vector out of tilesets (Images)
-		std::map<std::string, std::shared_ptr<Texture2D>> tilesetSource;
+		//the tileset
+		std::unique_ptr<Texture> tileset;
 
-		//vector out of vectors that contain x and y data of texture to crop into tile
+		//vector out of Rectangles that contain the tiles positions on the tileset
 		std::vector<Rectangle> tiles;
 
 		//map out of levels
 		//every level contains a vector of integers (that triggers dependant tile to be drawn)
 		std::map<std::string, std::vector<int>> levels;
+
 		
 		const int amountOfTilesX = 21;
 		const int amountOfTilesY = 13;
-
-		//TODO const int playerwidth + height
 	};
 }

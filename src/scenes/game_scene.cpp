@@ -19,7 +19,7 @@ game::scenes::GameScene::GameScene() {
         ("assets/graphics/player/scarecrow_idle_animation.png"), 29, 40, 1, 9, 6, game_width / 2 - player_sprite_width / 2, game_height / 2 - player_sprite_height / 2));
     this->actors.insert(std::make_pair("actor_player", actor_player));
 
-    tilemap = std::make_unique<game::core::Tilesetter>();
+    tilesetter = std::make_unique<game::core::Tilesetter>();
 }
 
 game::scenes::GameScene::~GameScene() {
@@ -45,5 +45,5 @@ void game::scenes::GameScene::Draw() {
     // Note that scene-actors are drawn automatically
     DrawText("This is the game scene - press ESCAPE for pause", 10, 10, 30, LIGHTGRAY);
 
-    tilemap->drawTilemap(level);
+    tilesetter->drawTilemap(level);
 }
