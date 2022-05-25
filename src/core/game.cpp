@@ -18,7 +18,7 @@ game::core::Game::Game(int stage_width, int stage_height, bool full_screen, int 
     // Render texture initialization, used to hold the rendering result, so we can easily resize it
     this->render_target_ = LoadRenderTexture(this->stage_width_, this->stage_height_);
     // Set texture scale filter to use
-    SetTextureFilter(this->render_target_.texture, TEXTURE_FILTER_BILINEAR);
+    SetTextureFilter(this->render_target_.texture, TEXTURE_FILTER_POINT);
 
     SetExitKey(exit_key);
 

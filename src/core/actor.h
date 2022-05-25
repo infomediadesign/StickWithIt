@@ -1,6 +1,7 @@
 #pragma once
 
 #include "sprite.h"
+#include "iostream"
 
 namespace game::core {
     /**
@@ -46,5 +47,7 @@ namespace game::core {
         void sprite(std::shared_ptr<game::core::Sprite> sprite);
 
         void playerMovement();
+
+        Vector2 getPlayerMovement();
     };
 }
