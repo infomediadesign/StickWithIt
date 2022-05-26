@@ -7,6 +7,7 @@
 #include <map>
 #include <memory>
 #include "actor.h"
+#include "information.h"
 
 namespace game::core {
 	class Tilesetter {
@@ -19,7 +20,7 @@ namespace game::core {
 		//exchanges tile on specific coordinate
 		//if Rectangle(x, y) == Playerposition.x +? && Playerposition.y, 
 		//dann schau welche Zahl sich an der Position befindet und wechsel Tile, sofern Weizen zu kaputtes Feld tile
-		void exchangeTile();
+		void exchangeTile(Vector2 playerPosition);
 
 	private:
 		//the tileset
@@ -27,6 +28,9 @@ namespace game::core {
 
 		//vector out of Rectangles that contain the tiles positions on the tileset
 		std::map<int, Rectangle> tiles;
+
+		//reverse tiles map
+		std::vector<Vector2> ids;
 
 		//map out of levels
 		//every level contains a vector of integers (that triggers dependant tile to be drawn)

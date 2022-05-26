@@ -20,7 +20,6 @@ namespace game::scenes {
 
         void Draw() override;
 
-        Vector2 getPlayerPosition();
     private:
         // Add private members here...
         std::unique_ptr<game::core::Tilesetter> tilesetter;

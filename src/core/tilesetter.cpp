@@ -42,15 +42,20 @@ game::core::Tilesetter::Tilesetter() {
 	tileset = std::make_unique<Texture>(LoadTexture("assets/graphics/tilesets/tileset1.png"));
 
 	//evaluate all the rectangles the tileset will be cropped into and give them ids
-	int id = 0;
-	for (int y = 0; y < 7; y++) // 7 = tileset_width
+	int id = 1;
+	for (int y = 0; y < tileset_height; y++)
 	{
-		for (int x = 0; x < 10; x++) // 10 = tileset_height
+		for (int x = 0; x < tileset_width; x++)
 		{
 			tiles.insert(std::pair<int, Rectangle>(id, { float(x * 32), float(y * 32), 32.0, 32.0 }));
 			id++;
 		}
 	}
+
+	//for (int i = 0; i < tileset_width * tileset_height; i++)
+	//{
+	//	ids.push_back({ tiles.find(i)->second.x, tiles.find(i)->second.y});
+	//}
 }
 
 void game::core::Tilesetter::drawTilemap(int level) {
@@ -65,7 +70,7 @@ void game::core::Tilesetter::drawTilemap(int level) {
 			{
 				for (int x = 0; x < amountOfTilesX; x++)
 				{
-					DrawTextureRec(*tileset, tiles.find(levels.find("level1")->second[xPlacedTile] - 1)->second, {float(x) * 32 - 16, float(y) * 32 - 14}, WHITE);
+					DrawTextureRec(*tileset, tiles.find(levels.find("level1")->second[xPlacedTile])->second, {float(x) * 32 - 16, float(y) * 32 - 14}, WHITE);
 					xPlacedTile++;
 				}
 			}
@@ -78,7 +83,7 @@ void game::core::Tilesetter::drawTilemap(int level) {
 			{
 				for (int x = 0; x < amountOfTilesX; x++)
 				{
-					DrawTextureRec(*tileset, tiles.find(levels.find("level2")->second[xPlacedTile] - 1)->second, { float(x) * 32 - 16, float(y) * 32 - 14 }, WHITE);
+					DrawTextureRec(*tileset, tiles.find(levels.find("level2")->second[xPlacedTile])->second, { float(x) * 32 - 16, float(y) * 32 - 14 }, WHITE);
 					xPlacedTile++;
 				}
 			}
@@ -90,8 +95,10 @@ void game::core::Tilesetter::drawTilemap(int level) {
 //to be implemented after prototype phase //TODO
 //if Rectangle(x, y) == Playerposition.x +? && Playerposition.y, 
 //dann schau welche Zahl sich an der Position befindet und wechsel Tile, sofern Weizen zu kaputtes Feld tile
-void game::core::Tilesetter::exchangeTile() {
-	//if (tiles.find())
-	//{
-	//}
+void game::core::Tilesetter::exchangeTile(Vector2 playerPosition) {
+	if (true)
+	{
+		//find id of the tile the players staying on and compare if its a wheat tile
+		
+	}
 }

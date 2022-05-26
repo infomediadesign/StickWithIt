@@ -38,6 +38,8 @@ void game::scenes::GameScene::Update() {
     {
         level++;
     }
+
+    tilesetter->exchangeTile(actors.at("actor_player")->getActorPosition());
 }
 
 void game::scenes::GameScene::Draw() {
@@ -46,8 +48,4 @@ void game::scenes::GameScene::Draw() {
     DrawText("This is the game scene - press ESCAPE for pause", 10, 10, 30, LIGHTGRAY);
 
     tilesetter->drawTilemap(level);
-}
-
-Vector2 game::scenes::GameScene::getPlayerPosition() {
-    return { actors.find("actor_player")->second->returnActorPosition().x, actors.find("actor_player")->second->returnActorPosition().y };
 }

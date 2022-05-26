@@ -48,6 +48,6 @@ namespace game::core {
 
         void playerMovement();
 
-        Vector2 returnActorPosition();
+        Vector2 getActorPosition();
     };
 }
