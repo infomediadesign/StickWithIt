@@ -47,3 +47,7 @@ void game::scenes::GameScene::Draw() {
 
     tilesetter->drawTilemap(level);
 }
+
+Vector2 game::scenes::GameScene::getPlayerPosition() {
+    return { actors.find("actor_player")->second->returnActorPosition().x, actors.find("actor_player")->second->returnActorPosition().y };
+}
