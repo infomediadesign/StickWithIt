@@ -41,12 +41,14 @@ game::core::Tilesetter::Tilesetter() {
 	//load tilesets here
 	tileset = std::make_unique<Texture>(LoadTexture("assets/graphics/tilesets/tileset1.png"));
 
-	//evaluate all the rectangles the tileset will be cropped into to get tiles
+	//evaluate all the rectangles the tileset will be cropped into and give them ids
+	int id = 0;
 	for (int y = 0; y < 7; y++) // 7 = tileset_width
 	{
 		for (int x = 0; x < 10; x++) // 10 = tileset_height
 		{
-			tiles.push_back({ float(x * 32), float(y * 32), 32.0, 32.0 });
+			tiles.insert(std::pair<int, Rectangle>(id, { float(x * 32), float(y * 32), 32.0, 32.0 }));
+			id++;
 		}
 	}
 }
@@ -63,7 +65,7 @@ void game::core::Tilesetter::drawTilemap(int level) {
 			{
 				for (int x = 0; x < amountOfTilesX; x++)
 				{
-					DrawTextureRec(*tileset, tiles[levels.find("level1")->second[xPlacedTile] - 1], {float(x) * 32 - 16, float(y) * 32 - 14}, WHITE);
+					DrawTextureRec(*tileset, tiles.find(levels.find("level1")->second[xPlacedTile] - 1)->second, {float(x) * 32 - 16, float(y) * 32 - 14}, WHITE);
 					xPlacedTile++;
 				}
 			}
@@ -76,7 +78,7 @@ void game::core::Tilesetter::drawTilemap(int level) {
 			{
 				for (int x = 0; x < amountOfTilesX; x++)
 				{
-					DrawTextureRec(*tileset, tiles[levels.find("level2")->second[xPlacedTile] - 1], { float(x) * 32 - 16, float(y) * 32 - 14 }, WHITE);
+					DrawTextureRec(*tileset, tiles.find(levels.find("level2")->second[xPlacedTile] - 1)->second, { float(x) * 32 - 16, float(y) * 32 - 14 }, WHITE);
 					xPlacedTile++;
 				}
 			}
@@ -86,6 +88,10 @@ void game::core::Tilesetter::drawTilemap(int level) {
 }
 
 //to be implemented after prototype phase //TODO
-void game::core::Tilesetter::exchangeTile(Texture2D tile, Vector2 position) {
-
+//if Rectangle(x, y) == Playerposition.x +? && Playerposition.y, 
+//dann schau welche Zahl sich an der Position befindet und wechsel Tile, sofern Weizen zu kaputtes Feld tile
+void game::core::Tilesetter::exchangeTile() {
+	//if (tiles.find())
+	//{
+	//}
 }
