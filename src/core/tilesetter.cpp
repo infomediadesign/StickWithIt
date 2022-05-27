@@ -52,11 +52,12 @@ game::core::Tilesetter::Tilesetter() {
 		}
 	}
 
+	id = 1;
 	for (int y = 0; y < amountOfTilesY; y++)
 	{
 		for (int x = 0; x < amountOfTilesX; x++)
 		{
-			tilePlace.insert(std::pair<std::vector<int>, int>({ x * 32, y * 32 }, id));
+			tilePlace.insert(std::pair<std::vector<float>, float>({ static_cast<float>(x * 32), static_cast<float>(y * 32) }, id));
 			id++;
 		}
 	}
@@ -101,18 +102,19 @@ void game::core::Tilesetter::exchangeTile(Vector2 playerPosition, int level) {
 
 
 	//kontrolliere, ob das Tile an der Spielerposition ein Weizenteil ist, wenn ja, dann ersetze es durch ein kaputtes Weizenteil
-	if (level)
+	if (level == 1)
 	{
-		if (levels.find("level1")->second[static_cast<std::vector<int, std::allocator<int>>::size_type>(tilePlace.find({ static_cast<int>(playerPosition.x - 18 - 32 * 7), static_cast<int>(playerPosition.y) - 64 })->second)] < 10)
+		if (levels.at("level1")[tilePlace.find({ playerPosition.x - 18, playerPosition.y + 32 })->second] < 10)
 		{
-			levels.find("level1")->second[static_cast<std::vector<int, std::allocator<int>>::size_type>(tilePlace.find({ static_cast<int>(playerPosition.x - 18 - 32 * 7), static_cast<int>(playerPosition.y) - 64 })->second)] = 11;
+			levels.at("level1")[tilePlace.find({ playerPosition.x - 18, playerPosition.y + 32})->second] = 11;
 		}
-		// x306	y160
-		// x288 y160
 	}
 
-	if (level)
+	if (level == 2)
 	{
-
+		if (levels.at("level2")[tilePlace.find({ playerPosition.x - 18, playerPosition.y + 32 })->second] < 10)
+		{
+			levels.at("level2")[tilePlace.find({ playerPosition.x - 18, playerPosition.y + 32 })->second] = 11;
+		}
 	}
 }

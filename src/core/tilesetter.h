@@ -30,7 +30,7 @@ namespace game::core {
 		std::map<int, Rectangle> tiles;
 
 		//give every tile a number dependant on place
-		std::map<std::vector<int>, int> tilePlace;
+		std::map<std::vector<float>, int> tilePlace;
 
 		//map out of levels
 		//every level contains a vector of integers (that triggers dependant tile to be drawn)
