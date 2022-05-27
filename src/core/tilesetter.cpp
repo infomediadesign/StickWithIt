@@ -41,21 +41,25 @@ game::core::Tilesetter::Tilesetter() {
 	//load tilesets here
 	tileset = std::make_unique<Texture>(LoadTexture("assets/graphics/tilesets/tileset1.png"));
 
-	//evaluate all the rectangles the tileset will be cropped into and give them ids
+	//evaluate all the rectangles the tileset will be cropped into and give them tilePlace
 	int id = 1;
 	for (int y = 0; y < tileset_height; y++)
 	{
 		for (int x = 0; x < tileset_width; x++)
 		{
-			tiles.insert(std::pair<int, Rectangle>(id, { float(x * 32), float(y * 32), 32.0, 32.0 }));
+			tiles.insert(std::pair<int, Rectangle>(id, { static_cast<float>(x * 32), static_cast<float>(y * 32), 32.0, 32.0 }));
 			id++;
 		}
 	}
 
-	//for (int i = 0; i < tileset_width * tileset_height; i++)
-	//{
-	//	ids.push_back({ tiles.find(i)->second.x, tiles.find(i)->second.y});
-	//}
+	for (int y = 0; y < amountOfTilesY; y++)
+	{
+		for (int x = 0; x < amountOfTilesX; x++)
+		{
+			tilePlace.insert(std::pair<std::vector<int>, int>({ x * 32, y * 32 }, id));
+			id++;
+		}
+	}
 }
 
 void game::core::Tilesetter::drawTilemap(int level) {
@@ -92,13 +96,23 @@ void game::core::Tilesetter::drawTilemap(int level) {
 	}
 }
 
-//to be implemented after prototype phase //TODO
-//if Rectangle(x, y) == Playerposition.x +? && Playerposition.y, 
-//dann schau welche Zahl sich an der Position befindet und wechsel Tile, sofern Weizen zu kaputtes Feld tile
-void game::core::Tilesetter::exchangeTile(Vector2 playerPosition) {
-	if (true)
+
+void game::core::Tilesetter::exchangeTile(Vector2 playerPosition, int level) {
+
+
+	//kontrolliere, ob das Tile an der Spielerposition ein Weizenteil ist, wenn ja, dann ersetze es durch ein kaputtes Weizenteil
+	if (level)
 	{
-		//find id of the tile the players staying on and compare if its a wheat tile
-		
+		if (levels.find("level1")->second[static_cast<std::vector<int, std::allocator<int>>::size_type>(tilePlace.find({ static_cast<int>(playerPosition.x - 18 - 32 * 7), static_cast<int>(playerPosition.y) - 64 })->second)] < 10)
+		{
+			levels.find("level1")->second[static_cast<std::vector<int, std::allocator<int>>::size_type>(tilePlace.find({ static_cast<int>(playerPosition.x - 18 - 32 * 7), static_cast<int>(playerPosition.y) - 64 })->second)] = 11;
+		}
+		// x306	y160
+		// x288 y160
+	}
+
+	if (level)
+	{
+
 	}
 }
