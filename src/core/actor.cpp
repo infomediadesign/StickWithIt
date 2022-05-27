@@ -55,6 +55,6 @@ void game::core::Actor::playerMovement() {
     this->sprite_->pos_y += velocity.y;
 }
 
-Vector2 game::core::Actor::getPlayerMovement() {
+Vector2 game::core::Actor::getActorPosition() {
     return { static_cast<float>(this->sprite_->pos_x), static_cast<float>(this->sprite_->pos_y) };
 }
