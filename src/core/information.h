@@ -10,4 +10,4 @@ const int tileset_height = 7;
 const int tileset_width = 10;
 
 const int amountOfTilesX = 21;
-const int amountOfTilesY = 13;
+const int amountOfTilesY = 12;
