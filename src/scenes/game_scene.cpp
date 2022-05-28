@@ -43,6 +43,8 @@ void game::scenes::GameScene::Update() {
         tilesetter->exchangeTile(actors.at("actor_player")->getActorPosition(), level);
     }
 
+    tilesetter->exchangeTile(actors.at("actor_player")->getActorPosition(), level);
+
     //TEMP press b and switch level
     if (IsKeyPressed(KEY_B) && level != 2)
     {

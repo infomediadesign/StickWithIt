@@ -108,6 +108,7 @@ bool game::core::Actor::getFirstMovementIsOver()
     return firstMovementIsOver;
 }
 
+
 void game::core::Actor::setFirstMovementIsOver(bool isOver)
 {
     switch (isOver)
@@ -126,4 +127,8 @@ void game::core::Actor::setFirstMovementIsOver(bool isOver)
 
 int game::core::Actor::getMovePoints() {
     return movePoints;
+}
+
+Vector2 game::core::Actor::getActorPosition() {
+    return { static_cast<float>(this->sprite_->pos_x), static_cast<float>(this->sprite_->pos_y) };
 }
