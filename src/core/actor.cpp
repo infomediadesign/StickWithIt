@@ -127,3 +127,8 @@ void game::core::Actor::setFirstMovementIsOver(bool isOver)
 int game::core::Actor::getMovePoints() {
     return movePoints;
 }
+
+void game::core::Actor::setPlayerPosition(int x, int y) {
+    this->sprite_->pos_x = x;
+    this->sprite_->pos_y = y;
+}

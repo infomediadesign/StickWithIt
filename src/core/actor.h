@@ -65,5 +65,6 @@ namespace game::core {
         //getter/setter 
         void setFirstMovementIsOver(bool isOver);
         bool getFirstMovementIsOver();
+        void setPlayerPosition(int x, int y);
     };
 }

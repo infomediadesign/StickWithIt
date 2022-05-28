@@ -48,6 +48,7 @@ void game::scenes::GameScene::Update() {
     {
         level++;
         actors.at("actor_player")->setFirstMovementIsOver(false);
+        actors.at("actor_player")->setPlayerPosition(game_width / 2 - player_sprite_width / 2, game_height / 2 - player_sprite_height / 2);
     }
 }
 
