@@ -17,8 +17,6 @@ namespace game::core {
     class Actor {
     private:
         std::shared_ptr<game::core::Sprite> sprite_;
-        int movePoints;
-        bool firstMovementIsOver = false;
 
     public:
         Actor() = delete;
@@ -48,22 +46,8 @@ namespace game::core {
          */
         void sprite(std::shared_ptr<game::core::Sprite> sprite);
 
-        //defines player movement (32px movement)
-        void playerMovement(bool isPlayerAllowedToMove);
-
-        //checks if all movePoints have been used
-        bool isPlayerAllowedToMove();
-
-        //getter for movePoints
-        int getMovePoints();
+        void playerMovement();
 
         Vector2 getActorPosition();
-
-        //place player at beginning of level
-        void placePlayer();
-
-        //getter/setter 
-        void setFirstMovementIsOver(bool isOver);
-        bool getFirstMovementIsOver();
     };
 }

@@ -31,17 +31,7 @@ void game::scenes::GameScene::Update() {
     if (IsKeyPressed(KEY_ESCAPE))
         game::core::Store::stage->switchToNewScene("pause"s, std::make_unique<PauseScene>());
 
-    //place player at round start, transparent
-    actors.at("actor_player")->placePlayer();
-
-    //move player when keys pressed
-    actors.at("actor_player")->playerMovement(actors.at("actor_player")->isPlayerAllowedToMove());
-
-    //exchange tiles when player touches them
-    if (actors.at("actor_player")->getFirstMovementIsOver())
-    {
-        tilesetter->exchangeTile(actors.at("actor_player")->getActorPosition(), level);
-    }
+    actors.at("actor_player")->playerMovement();
 
     tilesetter->exchangeTile(actors.at("actor_player")->getActorPosition(), level);
 
@@ -49,7 +39,6 @@ void game::scenes::GameScene::Update() {
     if (IsKeyPressed(KEY_B) && level != 2)
     {
         level++;
-        actors.at("actor_player")->setFirstMovementIsOver(false);
     }
 }
 
@@ -58,21 +47,5 @@ void game::scenes::GameScene::Draw() {
     // Note that scene-actors are drawn automatically
     DrawText("This is the game scene - press ESCAPE for pause", 10, 10, 30, LIGHTGRAY);
 
-    //draw level
     tilesetter->drawTilemap(level);
-
-    //shows how many points player is allowed to move
-    if (IsKeyPressed(KEY_ENTER))
-    {
-        actors.at("actor_player")->setFirstMovementIsOver(true);
-    }
-    if (actors.at("actor_player")->getFirstMovementIsOver())
-    {
-        DrawText(TextFormat("%i moves left", actors.at("actor_player")->getMovePoints()), 20, 20, 20, BLACK);
-    }
-    else
-    {
-        actors.at("actor_player")->setFirstMovementIsOver(false);
-        DrawText(TextFormat("Place Player and press enter", actors.at("actor_player")->getMovePoints()), 20, 20, 20, BLACK);
-    }
 }
