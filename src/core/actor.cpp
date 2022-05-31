@@ -55,9 +55,13 @@ void game::core::Actor::playerMovement(bool isPlayerAllowedToMove) {
             velocity.y = 0;
         }
 
-        //move sprite
+        //move sprite, prevent diagonal movement
         this->sprite_->pos_x += velocity.x;
-        this->sprite_->pos_y += velocity.y;
+        if (velocity.x == 0)
+        {
+            this->sprite_->pos_y += velocity.y;
+        }
+
 
         if (velocity.x != 0 || velocity.y != 0)
         {

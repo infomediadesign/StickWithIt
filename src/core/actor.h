@@ -48,6 +48,9 @@ namespace game::core {
          */
         void sprite(std::shared_ptr<game::core::Sprite> sprite);
 
+        void getSprite();
+        void setSprite();
+
         //defines player movement (32px movement)
         void playerMovement(bool isPlayerAllowedToMove);
 
