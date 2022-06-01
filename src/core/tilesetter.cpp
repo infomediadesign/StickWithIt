@@ -37,7 +37,7 @@ game::core::Tilesetter::Tilesetter() {
 	//load tilesets here
 	tileset = std::make_unique<Texture>(LoadTexture("assets/graphics/tilesets/tileset1.png"));
 
-	//evaluate all the rectangles the tileset will be cropped into and give them tilePlace
+	//evaluate all the rectangles the tileset will be cropped into and give them ids
 	int id = 1;
 	for (int y = 0; y < tileset_height; y++)
 	{
@@ -48,69 +48,68 @@ game::core::Tilesetter::Tilesetter() {
 		}
 	}
 
+	//revert the map so you can get ids by inputting dependant rectangles
 	id = 1;
 	for (int y = 0; y < amountOfTilesY; y++)
 	{
 		for (int x = 0; x < amountOfTilesX; x++)
 		{
-			tilePlace.insert(std::pair<std::vector<float>, float>({ static_cast<float>(x * 32), static_cast<float>(y * 32) }, id));
+			tileLocation.insert(std::pair<std::vector<float>, float>({ static_cast<float>(x * 32), static_cast<float>(y * 32) }, id));
 			id++;
 		}
 	}
 }
 
-void game::core::Tilesetter::drawTilemap(int level) {
+void game::core::Tilesetter::drawTilemap(int specificLevel) {
+
+	std::string level;
 	int xPlacedTile = 0;
 
-	switch (level)
+	switch (specificLevel)
 	{
 		case 1:
 		{
-			//draw tilemap of level 1 here
-			for (int y = 0; y < amountOfTilesY; y++)
-			{
-				for (int x = 0; x < amountOfTilesX; x++)
-				{
-					DrawTextureRec(*tileset, tiles.find(levels.find("level1")->second[xPlacedTile])->second, {float(x) * 32 - 16, float(y) * 32 - 14}, WHITE);
-					xPlacedTile++;
-				}
-			}
+			level = "level1";
 			break;
 		}
 		case 2:
 		{
-			//draw tilemap of level 2 here
-			for (int y = 0; y < amountOfTilesY; y++)
-			{
-				for (int x = 0; x < amountOfTilesX; x++)
-				{
-					DrawTextureRec(*tileset, tiles.find(levels.find("level2")->second[xPlacedTile])->second, { float(x) * 32 - 16, float(y) * 32 - 14 }, WHITE);
-					xPlacedTile++;
-				}
-			}
+			level = "level2";
 			break;
+		}
+	}
+
+	for (int y = 0; y < amountOfTilesY; y++)
+	{
+		for (int x = 0; x < amountOfTilesX; x++)
+		{
+			DrawTextureRec(*tileset, tiles.find(levels.find(level)->second[xPlacedTile])->second, { float(x) * 32 - 16, float(y) * 32 - 14 }, WHITE);
+			xPlacedTile++;
 		}
 	}
 }
 
 
-void game::core::Tilesetter::exchangeTile(Vector2 playerPosition, int level) {
+void game::core::Tilesetter::exchangeTile(Vector2 playerPosition, int specificLevel) {
 
+	std::string level;
 
-	//kontrolliere, ob das Tile an der Spielerposition ein Weizenteil ist, wenn ja, dann ersetze es durch ein kaputtes Weizenteil
-	if (level == 1)
+	switch (specificLevel)
 	{
-		if (levels.at("level1")[tilePlace.find({ playerPosition.x - 18, playerPosition.y + 32 })->second] < 10)
-		{
-			levels.at("level1")[tilePlace.find({ playerPosition.x - 18, playerPosition.y + 32})->second] = 11;
-		}
+	case 1:
+	{
+		level = "level1";
+		break;
+	}
+	case 2:
+	{
+		level = "level2";
+		break;
+	}
 	}
 
-	if (level == 2)
+	if (levels.at(level)[tileLocation.find({ playerPosition.x - 18, playerPosition.y + 32 })->second] < 10)
 	{
-		if (levels.at("level2")[tilePlace.find({ playerPosition.x - 18, playerPosition.y + 32 })->second] < 10)
-		{
-			levels.at("level2")[tilePlace.find({ playerPosition.x - 18, playerPosition.y + 32 })->second] = 11;
-		}
+		levels.at(level)[tileLocation.find({ playerPosition.x - 18, playerPosition.y + 32})->second] = 11;
 	}
 }
