@@ -13,7 +13,7 @@
 
 using namespace std::string_literals;
 
-game::scenes::GameScene::GameScene() {
+game::scenes::GameScene::GameScene() : level(1) {
     // Your scene initialization code here...
     std::shared_ptr<game::core::Actor> actor_player = std::make_unique<game::core::Actor>(std::make_unique<game::core::SpriteAnimated>(std::make_shared<game::core::Texture2D>
         ("assets/graphics/player/scarecrow_idle_animation.png"), 29, 40, 1, 9, 6, game_width / 2 - player_sprite_width / 2, game_height / 2 - player_sprite_height / 2));

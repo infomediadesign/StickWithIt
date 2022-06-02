@@ -2,12 +2,13 @@
 
 #include <raylib.h>
 #include <vector>
-
 #include <iostream>
 #include <map>
 #include <memory>
+
 #include "actor.h"
 #include "information.h"
+#include "level.h"
 
 namespace game::core {
 	class Tilesetter {
@@ -30,8 +31,7 @@ namespace game::core {
 		//give every tile a number dependant on place
 		std::map<std::vector<float>, int> tileLocation;
 
-		//map out of levels
-		//every level contains a vector of integers (that triggers dependant tile to be drawn)
-		std::map<std::string, std::vector<int>> levels;
+		//level object that stores the tilemap of all levels
+		Level tilemaps;
 	};
 }
