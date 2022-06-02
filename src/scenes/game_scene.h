@@ -8,6 +8,7 @@
 #include <sprite_animated.h>
 
 #include "tilesetter.h"
+#include "player.h"
 
 namespace game::scenes {
     class GameScene final : public game::core::Scene {

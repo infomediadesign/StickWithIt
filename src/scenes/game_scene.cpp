@@ -15,9 +15,9 @@ using namespace std::string_literals;
 
 game::scenes::GameScene::GameScene() : level(1) {
     // Your scene initialization code here...
-    std::shared_ptr<game::core::Actor> actor_player = std::make_unique<game::core::Actor>(std::make_unique<game::core::SpriteAnimated>(std::make_shared<game::core::Texture2D>
+    std::shared_ptr<game::core::Actor> player = std::make_shared<game::core::Actor>(std::make_unique<game::core::SpriteAnimated>(std::make_shared<game::core::Texture2D>
         ("assets/graphics/player/scarecrow_idle_animation.png"), 29, 40, 1, 9, 6, game_width / 2 - player_sprite_width / 2, game_height / 2 - player_sprite_height / 2));
-    this->actors.insert(std::make_pair("actor_player", actor_player));
+    this->actors.insert(std::make_pair("player", player));
 
     tilesetter = std::make_unique<game::core::Tilesetter>();
 }
@@ -32,23 +32,23 @@ void game::scenes::GameScene::Update() {
         game::core::Store::stage->switchToNewScene("pause"s, std::make_unique<PauseScene>());
 
     //place player at round start, transparent
-    actors.at("actor_player")->placePlayer();
+    actors.at("player")->placePlayer();
 
     //move player when keys pressed
-    actors.at("actor_player")->playerMovement(actors.at("actor_player")->isPlayerAllowedToMove());
+    actors.at("player")->playerMovement(actors.at("player")->isPlayerAllowedToMove());
 
     //exchange tiles when player touches them
-    if (actors.at("actor_player")->getFirstMovementIsOver())
+    if (actors.at("player")->getFirstMovementIsOver())
     {
-        tilesetter->exchangeTile(actors.at("actor_player")->getActorPosition(), level);
+        tilesetter->exchangeTile(actors.at("player")->getActorPosition(), level);
     }
 
     //TEMP press b and switch level
     if (IsKeyPressed(KEY_B) && level != 2)
     {
         level++;
-        actors.at("actor_player")->setFirstMovementIsOver(false);
-        actors.at("actor_player")->setPlayerPosition(game_width / 2 - player_sprite_width / 2, game_height / 2 - player_sprite_height / 2);
+        actors.at("player")->setFirstMovementIsOver(false);
+        actors.at("player")->setPlayerPosition(game_width / 2 - player_sprite_width / 2, game_height / 2 - player_sprite_height / 2);
     }
 }
 
@@ -63,15 +63,15 @@ void game::scenes::GameScene::Draw() {
     //shows how many points player is allowed to move
     if (IsKeyPressed(KEY_ENTER))
     {
-        actors.at("actor_player")->setFirstMovementIsOver(true);
+        actors.at("player")->setFirstMovementIsOver(true);
     }
-    if (actors.at("actor_player")->getFirstMovementIsOver())
+    if (actors.at("player")->getFirstMovementIsOver())
     {
-        DrawText(TextFormat("%i moves left", actors.at("actor_player")->getMovePoints()), 20, 20, 20, BLACK);
+        DrawText(TextFormat("%i moves left", actors.at("player")->getMovePoints()), 20, 20, 20, BLACK);
     }
     else
     {
-        actors.at("actor_player")->setFirstMovementIsOver(false);
-        DrawText(TextFormat("Place Player and press enter", actors.at("actor_player")->getMovePoints()), 20, 20, 20, BLACK);
+        actors.at("player")->setFirstMovementIsOver(false);
+        DrawText(TextFormat("Place Player and press enter", actors.at("player")->getMovePoints()), 20, 20, 20, BLACK);
     }
 }
