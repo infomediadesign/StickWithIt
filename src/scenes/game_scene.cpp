@@ -19,7 +19,7 @@ game::scenes::GameScene::GameScene() : level(1) {
     actors.insert(std::make_pair("player", std::make_unique<game::core::Actor>(std::make_unique<game::core::SpriteAnimated>(std::make_shared<game::core::Texture2D>
         ("assets/graphics/player/scarecrow_idle_animation.png"), 29, 40, 1, 9, 6, game_width / 2 - player_sprite_width / 2, game_height / 2 - player_sprite_height / 2))));
 
-    tilesetter = std::make_unique<game::core::Tilesetter>();
+    //std::shared_ptr<game::core::Actor> Player = std::make_shared<game::core::Player>()
 }
 
 game::scenes::GameScene::~GameScene() {
