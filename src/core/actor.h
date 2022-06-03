@@ -15,7 +15,7 @@ namespace game::core {
      * The position and appearance of an actor object in the game depends on attributes (e.g. position and rotation) of its sprite member.
      */
     class Actor {
-    private:
+    protected:
         std::shared_ptr<game::core::Sprite> sprite_;
         int movePoints;
         bool firstMovementIsOver = false;
@@ -23,13 +23,7 @@ namespace game::core {
     public:
         Actor() = delete;
 
-        /**
-         * @brief Constructor.
-         *
-         * Create a new Actor object.
-         * @param sprite Sprite object that is assigned to the Actor.
-         */
-        explicit Actor(std::shared_ptr<game::core::Sprite> sprite);
+        Actor(std::shared_ptr<game::core::Sprite> sprite);
 
         Actor(const game::core::Actor &actor) = delete;
 
@@ -37,19 +31,19 @@ namespace game::core {
 
         virtual ~Actor();
 
-        /**
-         * @brief Returns the sprite object of the actor
-         * @return Shared pointer of the objects Sprite.
-         */
         [[nodiscard]] const std::shared_ptr<game::core::Sprite> &sprite() const;
 
-        /**
-         * @brief Replaces the current sprite object of the actor.
-         */
         void sprite(std::shared_ptr<game::core::Sprite> sprite);
 
-        void getSprite();
-        void setSprite();
+        //get sprite
+        std::shared_ptr<game::core::Sprite> getSprite();
+
+        //set sprite
+        void setSprite(int posX, int posY);
+
+
+
+
 
         //defines player movement (32px movement)
         void playerMovement(bool isPlayerAllowedToMove);

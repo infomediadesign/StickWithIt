@@ -21,6 +21,16 @@ void game::core::Actor::sprite(std::shared_ptr<game::core::Sprite> sprite) {
     this->sprite_ = std::move(sprite);
 }
 
+std::shared_ptr<game::core::Sprite> game::core::Actor::getSprite() {
+    return sprite_;
+}
+
+void game::core::Actor::setSprite(int posX, int posY) {
+    sprite_->pos_x = posX;
+    sprite_->pos_y = posY;
+}
+
+
 void game::core::Actor::playerMovement(bool isPlayerAllowedToMove) {
 
     if (isPlayerAllowedToMove)
