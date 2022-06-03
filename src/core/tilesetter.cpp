@@ -7,9 +7,9 @@ game::core::Tilesetter::Tilesetter() {
 
 	//evaluate all the rectangles the tileset will be cropped into and give them ids
 	int id = 1;
-	for (int y = 0; y < tileset_height; y++)
+	for (int y = 0; y < tilesetHeight; y++)
 	{
-		for (int x = 0; x < tileset_width; x++)
+		for (int x = 0; x < tilesetWidth; x++)
 		{
 			tiles.insert(std::pair<int, Rectangle>(id, { static_cast<float>(x * 32), static_cast<float>(y * 32), 32.0, 32.0 }));
 			id++;
