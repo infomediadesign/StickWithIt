@@ -6,11 +6,9 @@
 #include "information.h"
 
 game::core::Actor::Actor(std::shared_ptr<game::core::Sprite> sprite) : sprite_(std::move(sprite)), movePoints(10) {
-    TraceLog(LOG_INFO, "game::core::Actor constructor called");
 }
 
 game::core::Actor::~Actor() {
-    TraceLog(LOG_INFO, "game::core::Actor destructor called");
 }
 
 const std::shared_ptr<game::core::Sprite> &game::core::Actor::sprite() const {

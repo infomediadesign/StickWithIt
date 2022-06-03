@@ -4,16 +4,6 @@
 #include "iostream"
 
 namespace game::core {
-    /**
-     * @brief Actor base class. Actors represent all game objects, such as players, enemies and other obstacles.
-     *
-     * Graphically, actors are represented via a sprite object associated with them. The sprite must be passed in the constructor call.
-     *
-     * Actors can be placed in the actor-map of a scene object and will be drawn automatically if their visible
-     * attribute is true. If actor objects are supposed to be available across scenes, they can be stored in
-     * game::core::actors. Objects that are only referenced there will not be drawn automatically.
-     * The position and appearance of an actor object in the game depends on attributes (e.g. position and rotation) of its sprite member.
-     */
     class Actor {
     protected:
         std::shared_ptr<game::core::Sprite> sprite_;
@@ -38,9 +28,9 @@ namespace game::core {
 
         //=========================================
 
+        virtual void move() = 0;
 
-
-
+        virtual void placeOnMap() = 0;
 
 
 
