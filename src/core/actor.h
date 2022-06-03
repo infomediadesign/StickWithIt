@@ -17,16 +17,17 @@ namespace game::core {
     class Actor {
     protected:
         std::shared_ptr<game::core::Sprite> sprite_;
+
         int movePoints;
         bool firstMovementIsOver = false;
 
     public:
-        Actor() = delete;
-
         Actor(std::shared_ptr<game::core::Sprite> sprite);
 
-        Actor(const game::core::Actor &actor) = delete;
+        Actor() = delete;
 
+        //prevent slicing
+        Actor(const game::core::Actor& actor) = delete;
         Actor &operator=(const Actor &) = delete;
 
         virtual ~Actor();
@@ -35,11 +36,9 @@ namespace game::core {
 
         void sprite(std::shared_ptr<game::core::Sprite> sprite);
 
-        //get sprite
-        std::shared_ptr<game::core::Sprite> getSprite();
+        //=========================================
 
-        //set sprite
-        void setSprite(int posX, int posY);
+
 
 
 
