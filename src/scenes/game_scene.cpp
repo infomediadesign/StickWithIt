@@ -10,11 +10,13 @@
 #include "renderer.h"
 #include "player.h"
 #include "information.h"
+#include "boar.h"
 
 using namespace std::string_literals;
 
 game::scenes::GameScene::GameScene() {
     actors.insert(std::make_pair("player", std::make_unique<game::core::Player>()));
+    actors.insert(std::make_pair("boar", std::make_unique<game::core::Boar>()));
 }
 
 game::scenes::GameScene::~GameScene() {
