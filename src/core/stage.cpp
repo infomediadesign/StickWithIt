@@ -57,8 +57,16 @@ void game::core::Stage::Update() {
 void game::core::Stage::Draw() {
     ClearBackground(WHITE);
 
-    //twist this
+    //draw background
     this->scene_->Draw();
+
+    //y-sort TODO
+    for (auto const& [key, val] : this->scene_->actors) {
+        //Alle Elemente müssen durchgeguckt und anschließend sortiert werden.
+        //z.B. for(int i; i < Bildschirmhöhe; i++)
+        //Wenn i = Element->y dann insert;
+        //vtl Vector anlegen, map wird an sich ja nicht mehr gebraucht
+    }
 
     //with this to turn off y-Sorting
     for (auto const& [key, val] : this->scene_->actors) {

@@ -44,12 +44,18 @@ void game::scenes::GameScene::Draw() {
     //tilesetter draws tilemap dependant on level
     tilesetter->drawTilemap(level);
 
-    //preperationphase
+    //TODO y-sorting here
+    //compare 
+    //actors.at(x)->sprite->pos_y
+    //to
+    //actors.at(y)->sprite->pos_y
+
+    //if players not placed yet, show "preperation phase"
     if (!actors.at("player")->getIsPlayerPlaced())
     {
         DrawText("Press enter to leave preperation phase", 20, 20, 20, WHITE);
     }
-    //if player is placed, count turns
+    //if player is placed, count "turns left"
     else
     {
         DrawText(TextFormat("Moves left: %i", actors.at("player")->getMovementPoints()), 20, 20, 20, WHITE);
