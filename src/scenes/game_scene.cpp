@@ -35,10 +35,16 @@ void game::scenes::GameScene::Update() {
     //move player dependant on input
     actors.at("player")->handleMovement(level);
 
+    //TODO make boar run in a straight line x-move points when player turn is over
+    //Make sure boars position is compatible with tilesetter tile positions
+
     //exchange tiles on players position when preperation phase is over
     if (actors.at("player")->getIsPlayerPlaced())
     {
         tilesetter->exchangeTile(actors.at("player")->sprite()->position(), level);
+
+        //TODO run through for each loop and call exchangeTile() on every object
+        tilesetter->exchangeTile(actors.at("boar")->sprite()->position(), level);
     }
 }
 
