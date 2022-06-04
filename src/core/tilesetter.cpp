@@ -1,4 +1,6 @@
 #include "tilesetter.h"
+#include "information.h"
+
 
 
 game::core::Tilesetter::Tilesetter() {

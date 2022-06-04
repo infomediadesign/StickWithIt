@@ -7,7 +7,6 @@
 #include <memory>
 
 #include "actor.h"
-#include "information.h"
 #include "level.h"
 
 namespace game::core {

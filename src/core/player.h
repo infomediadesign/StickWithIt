@@ -1,27 +1,30 @@
 #pragma once
 
-#include "raylib.h"
+#include <iostream>
+
 #include "actor.h"
+#include "sprite_animated.h"
 
 namespace game::core {
-	class Player : public game::core::Actor{
+	class Player : public game::core::Actor {
 	public:
-		//construct player and give sprite
-		Player() = delete;
-		Player(std::shared_ptr<game::core::Sprite> sprite);
+		Player();
+
 		~Player() override;
 
-		//handle movement
-		void move() override;
+		void handleMovement();
 
-		//handle placement when entering new level
-		void placeOnMap() override;
+		//player specific
+		int getMovementPoints() override;
+		void setMovementPoints(int movementPoints) override;
+		bool getIsPlayerPlaced() override;
+		void setIsPlayerPlaced(bool isPlayerPlaced) override;
 
 	private:
 		//if player-object has been placed this turns true and preperation phase will end
-		bool playerIsPlaced = false;
+		bool _isPlayerPlaced = false;
 
 		//set the number of tiles a player can move before enemy-turn starts
-		bool movementPoints = 10;
+		int _movementPoints = 10;
 	};
 }
