@@ -47,7 +47,7 @@ namespace game::core {
 
         //=========================================
 
-        virtual void handleMovement() = 0;
+        virtual void handleMovement(int level) = 0;
 
         virtual int getMovementPoints();
 

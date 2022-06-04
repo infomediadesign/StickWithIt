@@ -12,8 +12,18 @@ game::core::Player::~Player() {
     TraceLog(LOG_INFO, "game::core::Player destructor called");
 }
 
-void game::core::Player::handleMovement()
+void game::core::Player::handleMovement(int level)
 {
+    //checks if new level has entered, reset position, reset to preperation phase, reset movement points, increment tempLevel
+    if (tempLevel != level)
+    {
+        sprite_->pos_x = playerStartpositionX;
+        sprite_->pos_y = playerStartpositionY;
+        _isPlayerPlaced = false;
+        _movementPoints = 10;
+        tempLevel++;
+    }
+
     //handles transparency at level start
     if (!_isPlayerPlaced)
     {
@@ -73,7 +83,7 @@ void game::core::Player::handleMovement()
         }
 
         //if there is movement, decrease movement points by 1
-        if (velocity.x != 0 || velocity.y != 0 && _isPlayerPlaced)
+        if (_isPlayerPlaced && (velocity.x != 0 || velocity.y != 0))
         {
             _movementPoints--;
         }

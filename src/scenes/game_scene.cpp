@@ -9,33 +9,49 @@
 #include "scenes.h"
 #include "renderer.h"
 #include "player.h"
+#include "information.h"
 
 using namespace std::string_literals;
 
 game::scenes::GameScene::GameScene() {
-    // Your scene initialization code here...
-
     actors.insert(std::make_pair("player", std::make_unique<game::core::Player>()));
 }
 
 game::scenes::GameScene::~GameScene() {
-    // Your scene cleanup code here...
 }
 
 void game::scenes::GameScene::Update() {
-    // Your process input and update game scene code here...
     if (IsKeyPressed(KEY_ESCAPE))
         game::core::Store::stage->switchToNewScene("pause"s, std::make_unique<PauseScene>());
 
-    actors.at("player")->handleMovement();
+    //switch level when pressing P
+    if (IsKeyPressed(KEY_P))
+    {
+        level++;
+    }
 
-    tilesetter->exchangeTile(actors.at("player")->sprite()->position(), level);
+    //move player dependant on input
+    actors.at("player")->handleMovement(level);
+
+    //exchange tiles on players position when preperation phase is over
+    if (actors.at("player")->getIsPlayerPlaced())
+    {
+        tilesetter->exchangeTile(actors.at("player")->sprite()->position(), level);
+    }
 }
 
 void game::scenes::GameScene::Draw() {
-    // Your scene drawing code here...
-    // Note that scene-actors are drawn automatically
-    DrawText("This is the game scene - press ESCAPE for pause", 10, 10, 30, LIGHTGRAY);
-    
+    //tilesetter draws tilemap dependant on level
     tilesetter->drawTilemap(level);
+
+    //preperationphase
+    if (!actors.at("player")->getIsPlayerPlaced())
+    {
+        DrawText("Press enter to leave preperation phase", 20, 20, 20, WHITE);
+    }
+    //if player is placed, count turns
+    else
+    {
+        DrawText(TextFormat("Moves left: %i", actors.at("player")->getMovementPoints()), 20, 20, 20, WHITE);
+    }
 }
