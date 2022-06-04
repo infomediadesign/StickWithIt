@@ -15,6 +15,8 @@
 using namespace std::string_literals;
 
 int main() {
+    srand((unsigned)time(0));
+
     game::core::Game game(game::Config::kStageWidth, game::Config::kStageHeight, game::Config::kFullScreen,
                           game::Config::kTargetFps, game::Config::kWindowFlags, game::Config::kExitKey,
                           game::Config::kUseMouse, game::Config::kAudio, game::Config::kProjectName);

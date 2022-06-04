@@ -76,10 +76,10 @@ void game::core::Player::handleMovement(int level)
         }
 
         //move sprite, prevent diagonal movement
-        sprite_->pos_x += velocity.x;
+        sprite_->pos_x += static_cast<float>(velocity.x);
         if (velocity.x == 0)
         {
-            sprite_->pos_y += velocity.y;
+            sprite_->pos_y += static_cast<float>(velocity.y);
         }
 
         //if there is movement, decrease movement points by 1

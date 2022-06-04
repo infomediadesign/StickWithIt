@@ -56,5 +56,7 @@ namespace game::core {
         virtual bool getIsPlayerPlaced();
 
         virtual void setIsPlayerPlaced(bool isPlayerPlaced);
+
+        virtual void placeEnemyAtRandomLocation();
     };
 }

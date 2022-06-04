@@ -12,5 +12,8 @@ namespace game::core {
 		~Boar() override;
 
 		void handleMovement(int level) override;
+
+	private:
+
 	};
 }

@@ -1,11 +1,13 @@
 #include "boar.h"
+
 #include "information.h"
+#include "sprite_animated.h"
 
 #include <iostream>
 
 game::core::Boar::Boar()
     : Enemy(std::make_unique<game::core::SpriteAnimated>(std::make_shared<game::core::Texture2D>
-        (), boarFrameWidth, boarFrameHeight, boarRow, boarSteps, boarSpeed, boarStartpositionX, boarStartpositionY))
+        (boarTexturePath), boarFrameWidth, boarFrameHeight, boarRow, boarSteps, boarSpeed, boarStartpositionX, boarStartpositionY), boarFrameHeight, boarFrameWidth)
 {
     TraceLog(LOG_INFO, "game::core::Boar constructor called");
 }
