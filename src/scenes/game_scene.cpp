@@ -34,6 +34,7 @@ void game::scenes::GameScene::Update() {
 
     //move player dependant on input
     actors.at("player")->handleMovement(level);
+    actors.at("boar")->placeEnemyAtRandomLocation();
 
     //TODO make boar run in a straight line x-move points when player turn is over
     //Make sure boars position is compatible with tilesetter tile positions
