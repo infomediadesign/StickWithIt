@@ -9,7 +9,6 @@
 game::core::Enemy::Enemy(std::shared_ptr<game::core::Sprite> sprite, int enemySpriteHeight, int enemySpriteWidth)
     : Actor(sprite), _enemySpriteHight(enemySpriteHeight), _enemySpriteWidth(enemySpriteWidth)
 {
-	placeEnemyAtRandomLocation();
 }
 
 game::core::Enemy::~Enemy() {

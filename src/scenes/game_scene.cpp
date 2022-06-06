@@ -34,7 +34,8 @@ void game::scenes::GameScene::Update() {
 
     //move player dependant on input
     actors.at("player")->handleMovement(level);
-    actors.at("boar")->placeEnemyAtRandomLocation();
+
+    //actors.at("boar")->placeEnemyAtRandomLocation();
 
     //TODO make boar run in a straight line x-move points when player turn is over
     //Make sure boars position is compatible with tilesetter tile positions
@@ -45,13 +46,21 @@ void game::scenes::GameScene::Update() {
         tilesetter->exchangeTile(actors.at("player")->sprite()->position(), level);
 
         //TODO run through for each loop and call exchangeTile() on every object
-        tilesetter->exchangeTile(actors.at("boar")->sprite()->position(), level);
+        //tilesetter->exchangeTile(actors.at("boar")->sprite()->position(), level); //-> this makes the game crash, cuz boar pos != tiles pos
+    }
+
+    if (IsKeyPressed(KEY_R) && actors.at("player")->getMovementPoints() == 0)
+    {
+        actors.at("player")->setMovementPoints(10);
     }
 }
 
 void game::scenes::GameScene::Draw() {
     //tilesetter draws tilemap dependant on level
     tilesetter->drawTilemap(level);
+
+    //counts the wheat tiles left
+    DrawText(TextFormat("Wheat left: %i", tilesetter->getNumberOfWheat(level)), 20, 50, 20, WHITE);
 
     //TODO y-sorting here
     //compare 
