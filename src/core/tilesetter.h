@@ -20,6 +20,9 @@ namespace game::core {
 		//if the tile the player stands on is a wheat-tile, it gets exchanged to a destroyed-wheat-tile
 		void exchangeTile(Vector2 playerPosition, int specificLevel);
 
+		//get number of wheat tiles
+		int getNumberOfWheat(int level);
+
 	private:
 		//the tileset
 		std::unique_ptr<Texture> tileset;

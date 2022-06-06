@@ -29,3 +29,6 @@ bool game::core::Actor::getIsPlayerPlaced() {
 
 void game::core::Actor::setIsPlayerPlaced(bool isPlayerPlaced) {
 }
+
+void game::core::Actor::placeEnemyAtRandomLocation(){
+}

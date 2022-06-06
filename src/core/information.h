@@ -21,3 +21,13 @@ const int playerSteps = 9;
 const int playerSpeed = 6;
 const int playerStartpositionX = gameWidth / 2 - playerFrameWidth / 2;
 const int playerStartpositionY = gameHeight / 2 - playerFrameHeight / 2;
+
+//boar tileset
+static const char* const boarTexturePath = "assets/graphics/enemies/boar/boar_walking_animation.png";
+const int boarFrameWidth = 128;
+const int boarFrameHeight = 125;
+const int boarRow = 1;
+const int boarSteps = 8;
+const int boarSpeed = 6;
+const int boarStartpositionX = 0;
+const int boarStartpositionY = 0;

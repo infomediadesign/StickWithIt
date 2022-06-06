@@ -84,3 +84,32 @@ void game::core::Tilesetter::exchangeTile(Vector2 playerPosition, int specificLe
 		tilemaps.setLevelTilemaps(level, tileLocation, playerPosition.x, playerPosition.y);
 	}
 }
+
+int game::core::Tilesetter::getNumberOfWheat(int level) {
+	int count = 0;
+	std::string levelToString;
+
+	switch (level)
+	{
+	case 1:
+	{
+		levelToString = "level1";
+		break;
+	}
+	case 2:
+	{
+		levelToString = "level2";
+		break;
+	}
+	}
+
+	for (int i = 0; i < tilemaps.getLevelTilemaps().at(levelToString).size(); i++)
+	{
+		if (tilemaps.getLevelTilemaps().at(levelToString)[i] < 10)
+		{
+			count++;
+		}
+	}
+
+	return count;
+}
