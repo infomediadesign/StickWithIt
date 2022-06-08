@@ -1,7 +1,6 @@
 #pragma once
 
 #include "sprite.h"
-#include "iostream"
 
 namespace game::core {
     /**
@@ -15,10 +14,8 @@ namespace game::core {
      * The position and appearance of an actor object in the game depends on attributes (e.g. position and rotation) of its sprite member.
      */
     class Actor {
-    private:
+    protected:
         std::shared_ptr<game::core::Sprite> sprite_;
-        int movePoints;
-        bool firstMovementIsOver = false;
 
     public:
         Actor() = delete;
@@ -31,9 +28,9 @@ namespace game::core {
          */
         explicit Actor(std::shared_ptr<game::core::Sprite> sprite);
 
-        Actor(const game::core::Actor &actor) = delete;
+        Actor(const game::core::Actor& actor) = delete;
 
-        Actor &operator=(const Actor &) = delete;
+        Actor& operator=(const Actor&) = delete;
 
         virtual ~Actor();
 
@@ -41,30 +38,25 @@ namespace game::core {
          * @brief Returns the sprite object of the actor
          * @return Shared pointer of the objects Sprite.
          */
-        [[nodiscard]] const std::shared_ptr<game::core::Sprite> &sprite() const;
+        [[nodiscard]] const std::shared_ptr<game::core::Sprite>& sprite() const;
 
         /**
          * @brief Replaces the current sprite object of the actor.
          */
         void sprite(std::shared_ptr<game::core::Sprite> sprite);
 
-        //defines player movement (32px movement)
-        void playerMovement(bool isPlayerAllowedToMove);
+        //=========================================
 
-        //checks if all movePoints have been used
-        bool isPlayerAllowedToMove();
+        virtual void handleMovement(int level) = 0;
 
-        //getter for movePoints
-        int getMovePoints();
+        virtual int getMovementPoints();
 
-        Vector2 getActorPosition();
+        virtual void setMovementPoints(int movementPoints);
 
-        //place player at beginning of level
-        void placePlayer();
+        virtual bool getIsPlayerPlaced();
 
-        //getter/setter 
-        void setFirstMovementIsOver(bool isOver);
-        bool getFirstMovementIsOver();
-        void setPlayerPosition(int x, int y);
+        virtual void setIsPlayerPlaced(bool isPlayerPlaced);
+
+        virtual void placeEnemyAtRandomLocation();
     };
 }

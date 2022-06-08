@@ -1,0 +1,73 @@
+{ "frames": {
+   "Vogelscheuche Sense vorne 0.aseprite": {
+    "frame": { "x": 0, "y": 0, "w": 46, "h": 53 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 34, "y": 33, "w": 46, "h": 53 },
+    "sourceSize": { "w": 100, "h": 100 },
+    "duration": 100
+   },
+   "Vogelscheuche Sense vorne 1.aseprite": {
+    "frame": { "x": 46, "y": 0, "w": 46, "h": 53 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 34, "y": 33, "w": 46, "h": 53 },
+    "sourceSize": { "w": 100, "h": 100 },
+    "duration": 100
+   },
+   "Vogelscheuche Sense vorne 2.aseprite": {
+    "frame": { "x": 92, "y": 0, "w": 46, "h": 53 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 34, "y": 33, "w": 46, "h": 53 },
+    "sourceSize": { "w": 100, "h": 100 },
+    "duration": 100
+   },
+   "Vogelscheuche Sense vorne 3.aseprite": {
+    "frame": { "x": 138, "y": 0, "w": 46, "h": 53 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 34, "y": 33, "w": 46, "h": 53 },
+    "sourceSize": { "w": 100, "h": 100 },
+    "duration": 130
+   },
+   "Vogelscheuche Sense vorne 4.aseprite": {
+    "frame": { "x": 184, "y": 0, "w": 46, "h": 53 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 34, "y": 33, "w": 46, "h": 53 },
+    "sourceSize": { "w": 100, "h": 100 },
+    "duration": 130
+   },
+   "Vogelscheuche Sense vorne 5.aseprite": {
+    "frame": { "x": 0, "y": 0, "w": 46, "h": 53 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 34, "y": 33, "w": 46, "h": 53 },
+    "sourceSize": { "w": 100, "h": 100 },
+    "duration": 130
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.2.35-x64",
+  "format": "RGBA8888",
+  "size": { "w": 230, "h": 53 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Group 1" },
+   { "name": "Schatten", "group": "Group 1", "opacity": 160, "blendMode": "normal" },
+   { "name": "Vertikal Stock", "group": "Group 1", "opacity": 255, "blendMode": "normal" },
+   { "name": "Horizontaler Stock", "group": "Group 1", "opacity": 255, "blendMode": "normal" },
+   { "name": "Kleidung ", "group": "Group 1", "opacity": 255, "blendMode": "normal" },
+   { "name": "Schatten Kleidung", "group": "Group 1", "opacity": 255, "blendMode": "normal" },
+   { "name": "Kürbis", "group": "Group 1", "opacity": 255, "blendMode": "normal" },
+   { "name": "Hut ", "group": "Group 1", "opacity": 255, "blendMode": "normal" },
+   { "name": "Sense", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

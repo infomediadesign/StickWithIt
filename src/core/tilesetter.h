@@ -2,12 +2,12 @@
 
 #include <raylib.h>
 #include <vector>
-
 #include <iostream>
 #include <map>
 #include <memory>
+
 #include "actor.h"
-#include "information.h"
+#include "level.h"
 
 namespace game::core {
 	class Tilesetter {
@@ -15,12 +15,13 @@ namespace game::core {
 		Tilesetter();
 
 		//draws tilemap of specific level
-		void drawTilemap(int level);
+		void drawTilemap(int specificLevel);
 
-		//exchanges tile on specific coordinate
-		//if Rectangle(x, y) == Playerposition.x +? && Playerposition.y, 
-		//dann schau welche Zahl sich an der Position befindet und wechsel Tile, sofern Weizen zu kaputtes Feld tile
-		void exchangeTile(Vector2 playerPosition, int level);
+		//if the tile the player stands on is a wheat-tile, it gets exchanged to a destroyed-wheat-tile
+		void exchangeTile(Vector2 playerPosition, int specificLevel);
+
+		//get number of wheat tiles
+		int getNumberOfWheat(int level);
 
 	private:
 		//the tileset
@@ -30,10 +31,9 @@ namespace game::core {
 		std::map<int, Rectangle> tiles;
 
 		//give every tile a number dependant on place
-		std::map<std::vector<float>, int> tilePlace;
+		std::map<std::vector<float>, int> tileLocation;
 
-		//map out of levels
-		//every level contains a vector of integers (that triggers dependant tile to be drawn)
-		std::map<std::string, std::vector<int>> levels;
+		//level object that stores the tilemap of all levels
+		Level tilemaps;
 	};
 }
