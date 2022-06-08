@@ -1,0 +1,109 @@
+{ "frames": {
+   "Sprung2 rechts 0.aseprite": {
+    "frame": { "x": 0, "y": 0, "w": 24, "h": 41 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 18, "y": 6, "w": 24, "h": 41 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "Sprung2 rechts 1.aseprite": {
+    "frame": { "x": 24, "y": 0, "w": 24, "h": 41 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 18, "y": 6, "w": 24, "h": 41 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "Sprung2 rechts 2.aseprite": {
+    "frame": { "x": 48, "y": 0, "w": 24, "h": 41 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 18, "y": 6, "w": 24, "h": 41 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "Sprung2 rechts 3.aseprite": {
+    "frame": { "x": 72, "y": 0, "w": 24, "h": 41 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 18, "y": 6, "w": 24, "h": 41 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "Sprung2 rechts 4.aseprite": {
+    "frame": { "x": 96, "y": 0, "w": 24, "h": 41 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 18, "y": 6, "w": 24, "h": 41 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "Sprung2 rechts 5.aseprite": {
+    "frame": { "x": 120, "y": 0, "w": 24, "h": 41 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 18, "y": 6, "w": 24, "h": 41 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "Sprung2 rechts 6.aseprite": {
+    "frame": { "x": 144, "y": 0, "w": 24, "h": 41 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 18, "y": 6, "w": 24, "h": 41 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "Sprung2 rechts 7.aseprite": {
+    "frame": { "x": 168, "y": 0, "w": 24, "h": 41 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 18, "y": 6, "w": 24, "h": 41 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "Sprung2 rechts 8.aseprite": {
+    "frame": { "x": 192, "y": 0, "w": 24, "h": 41 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 18, "y": 6, "w": 24, "h": 41 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "Sprung2 rechts 9.aseprite": {
+    "frame": { "x": 192, "y": 0, "w": 24, "h": 41 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 18, "y": 6, "w": 24, "h": 41 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "Sprung2 rechts 10.aseprite": {
+    "frame": { "x": 168, "y": 0, "w": 24, "h": 41 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 18, "y": 6, "w": 24, "h": 41 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.2.35-x64",
+  "format": "RGBA8888",
+  "size": { "w": 216, "h": 41 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Schatten", "opacity": 160, "blendMode": "normal" },
+   { "name": "Vertikaler Stock", "opacity": 255, "blendMode": "normal" },
+   { "name": "Klamotten", "opacity": 255, "blendMode": "normal" },
+   { "name": "Kürbis", "opacity": 255, "blendMode": "normal" },
+   { "name": "Hut", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}
