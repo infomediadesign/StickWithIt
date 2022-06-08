@@ -1,0 +1,84 @@
+{ "frames": {
+   "MushroomBack2 0.aseprite": {
+    "frame": { "x": 0, "y": 0, "w": 26, "h": 28 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 3, "y": 0, "w": 26, "h": 28 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 200
+   },
+   "MushroomBack2 1.aseprite": {
+    "frame": { "x": 26, "y": 0, "w": 26, "h": 28 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 3, "y": 0, "w": 26, "h": 28 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 200
+   },
+   "MushroomBack2 2.aseprite": {
+    "frame": { "x": 52, "y": 0, "w": 26, "h": 28 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 3, "y": 0, "w": 26, "h": 28 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 200
+   },
+   "MushroomBack2 3.aseprite": {
+    "frame": { "x": 78, "y": 0, "w": 26, "h": 28 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 3, "y": 0, "w": 26, "h": 28 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 200
+   },
+   "MushroomBack2 4.aseprite": {
+    "frame": { "x": 104, "y": 0, "w": 26, "h": 28 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 3, "y": 0, "w": 26, "h": 28 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 200
+   },
+   "MushroomBack2 5.aseprite": {
+    "frame": { "x": 130, "y": 0, "w": 26, "h": 28 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 3, "y": 0, "w": 26, "h": 28 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 200
+   },
+   "MushroomBack2 6.aseprite": {
+    "frame": { "x": 156, "y": 0, "w": 26, "h": 28 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 3, "y": 0, "w": 26, "h": 28 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 200
+   },
+   "MushroomBack2 7.aseprite": {
+    "frame": { "x": 182, "y": 0, "w": 26, "h": 28 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 3, "y": 0, "w": 26, "h": 28 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 200
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.2.34.1-x64",
+  "image": "mushroom_walking_animation_back.png",
+  "format": "RGBA8888",
+  "size": { "w": 208, "h": 28 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Head", "opacity": 255, "blendMode": "normal" },
+   { "name": "Körper", "opacity": 255, "blendMode": "normal" },
+   { "name": "Fußi", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}
