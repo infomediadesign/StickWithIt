@@ -4,8 +4,9 @@
 //game
 const int gameHeight = 360;
 const int gameWidth = 640;
-//y = -16
-//x = -14
+//oberstesTileX = 0
+//oberstesTileY = 0
+//->diagonal unten links = 32, 32
 
 //tilesetter
 const int tilesetHeight = 7;
@@ -23,6 +24,8 @@ const int playerSteps = 9;
 const int playerSpeed = 6;
 const int playerStartpositionX = gameWidth / 2 - playerFrameWidth / 2;
 const int playerStartpositionY = gameHeight / 2 - playerFrameHeight / 2;
+const float playerDeviationX = 18;
+const float playerDeviationY = 32; //32 so the tile UNDER the scarecrow gets exchanged
 
 //boar tileset
 static const char* const boarTexturePath = "assets/graphics/enemies/boar/boar_walking_animation.png";
@@ -41,5 +44,11 @@ const int mushroomFrameHeight = 28;
 const int mushroomRow = 1;
 const int mushroomSteps = 7;
 const int mushroomSpeed = 6;
-const int mushroomStartpositionX = 16 + 3; //16 to get center of tile, 3 (is half of 32-26) to deny misplacement
-const int mushroomStartpositionY = 16 + 2 - 8; //-8 to get sprites "feet" to the center
+//const int mushroomStartpositionX = 16 + 3; //16 to get center of tile, 3 (is half of 32-26) to deny misplacement
+//const int mushroomStartpositionY = 16 + 2 - 8; //-8 to get sprites "feet" to the center
+//const float mushroomDeviationX = 13;
+//const float mushroomDeviationY = 16;
+const int mushroomStartpositionX = 32 - mushroomFrameWidth / 2; //16 to get center of tile, 3 (is half of 32-26) to deny misplacement
+const int mushroomStartpositionY = 32 - mushroomFrameHeight / 2; //-8 to get sprites "feet" to the center
+const float mushroomDeviationX = 19; // = StartpositionX
+const float mushroomDeviationY = 14; // = 32 - StartpositionY

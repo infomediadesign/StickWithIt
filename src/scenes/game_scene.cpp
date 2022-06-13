@@ -11,12 +11,13 @@
 #include "player.h"
 #include "boar.h"
 #include "mushroom.h"
+#include "information.h"
 
 using namespace std::string_literals;
 
 game::scenes::GameScene::GameScene() {
     actors.insert(std::make_pair("player", std::make_unique<game::core::Player>()));
-    actors.insert(std::make_pair("boar", std::make_unique<game::core::Boar>()));
+    //actors.insert(std::make_pair("boar", std::make_unique<game::core::Boar>()));
     actors.insert(std::make_pair("mushroom", std::make_unique<game::core::Mushroom>()));
 }
 
@@ -31,43 +32,40 @@ void game::scenes::GameScene::Update() {
     {
         //move player dependant on input
         actors.at("player")->handleMovement(level);
+
+        //if player has been placed, start exchanging tiles
+        if (actors.at("player")->getIsPlayerPlaced())
+        {
+            tilesetter->exchangeTile(actors.at("player")->sprite()->position(), playerDeviationX, playerDeviationY, level);
+        }
     }
     else //EnemyTurn
     {
-        
-
+        std::cout << actors.at("mushroom")->sprite()->pos_x << std::endl << actors.at("mushroom")->sprite()->pos_y << std::endl;
+        actors.at("mushroom")->sprite()->pos_x += 32;
+        actors.at("mushroom")->sprite()->pos_y += 32;
+        tilesetter->exchangeTile(actors.at("mushroom")->sprite()->position(), mushroomDeviationX, mushroomDeviationY, level);
 
          actors.at("player")->setMovementPoints(10);
     }
 
 
-
     //switch level when pressing P
-    if (IsKeyPressed(KEY_P))
+    if (IsKeyPressed(KEY_P) && level != 2)
     {
         level++;
     }
 
 
-
+    //TODO run through for each loop and call exchangeTile() on every object
+    //tilesetter->exchangeTile(actors.at("boar")->sprite()->position(), level); //-> this makes the game crash, cuz boar pos != tiles pos
     //actors.at("boar")->placeEnemyAtRandomLocation();
 
     //TODO make boar run in a straight line x-move points when player turn is over
     //Make sure boars position is compatible with tilesetter tile positions
 
     //exchange tiles on players position when preperation phase is over
-    if (actors.at("player")->getIsPlayerPlaced())
-    {
-        tilesetter->exchangeTile(actors.at("player")->sprite()->position(), level);
 
-        //TODO run through for each loop and call exchangeTile() on every object
-        //tilesetter->exchangeTile(actors.at("boar")->sprite()->position(), level); //-> this makes the game crash, cuz boar pos != tiles pos
-    }
-
-    if (IsKeyPressed(KEY_R) && actors.at("player")->getMovementPoints() == 0)
-    {
-        actors.at("player")->setMovementPoints(10);
-    }
 }
 
 void game::scenes::GameScene::Draw() {

@@ -18,7 +18,7 @@ namespace game::core {
 		void drawTilemap(int specificLevel);
 
 		//if the tile the player stands on is a wheat-tile, it gets exchanged to a destroyed-wheat-tile
-		void exchangeTile(Vector2 playerPosition, int specificLevel);
+		void exchangeTile(Vector2 actorPosition, int deviationX, int deviationY, int specificLevel);
 
 		//get number of wheat tiles
 		int getNumberOfWheat(int level);

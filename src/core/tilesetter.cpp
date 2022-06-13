@@ -60,7 +60,7 @@ void game::core::Tilesetter::drawTilemap(int specificLevel) {
 }
 
 
-void game::core::Tilesetter::exchangeTile(Vector2 playerPosition, int specificLevel) {
+void game::core::Tilesetter::exchangeTile(Vector2 actorPosition, int deviationX, int deviationY, int specificLevel) {
 
 	std::string level;
 
@@ -79,9 +79,9 @@ void game::core::Tilesetter::exchangeTile(Vector2 playerPosition, int specificLe
 	}
 
 	//if the tile the player stands on is of type wheat (0-9) make it of id 11 (destroyed-wheat-tile)
-	if (tilemaps.getLevelTilemaps().at(level)[tileLocation.find({playerPosition.x - 18, playerPosition.y + 32})->second] < 10)
+	if (tilemaps.getLevelTilemaps().at(level)[tileLocation.find({ actorPosition.x - deviationX, actorPosition.y + deviationY})->second] < 10)
 	{
-		tilemaps.setLevelTilemaps(level, tileLocation, playerPosition.x, playerPosition.y);
+		tilemaps.setLevelTilemaps(level, tileLocation, actorPosition.x, actorPosition.y, deviationX, deviationY);
 	}
 }
 

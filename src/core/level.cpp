@@ -37,6 +37,6 @@ std::map < std::string, std::vector<int>> game::core::Level::getLevelTilemaps() 
 	return tilemaps;
 }
 
-void game::core::Level::setLevelTilemaps(std::string level, std::map<std::vector<float>, int> tileLocation, float playerPositionX, float playerPositionY) {
-	tilemaps.at(level)[tileLocation.find({ playerPositionX - 18, playerPositionY + 32 })->second] = 11;
+void game::core::Level::setLevelTilemaps(std::string level, std::map<std::vector<float>, int> tileLocation, float actorPositionX, float actorPositionY, float deviationX, float deviationY) {
+	tilemaps.at(level)[tileLocation.find({ actorPositionX - deviationX, actorPositionY + deviationY })->second] = 11;
 }

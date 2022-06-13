@@ -10,7 +10,7 @@ namespace game::core {
 	public:
 		Level();
 		std::map<std::string, std::vector<int>> getLevelTilemaps();
-		void setLevelTilemaps(std::string level, std::map<std::vector<float>, int> tileLocation, float playerPositionX, float playerPositionY);
+		void setLevelTilemaps(std::string level, std::map<std::vector<float>, int> tileLocation, float actorPositionX, float actorPositioY, float deviationX, float deviationY);
 
 	private:
 		std::map<std::string, std::vector<int>> tilemaps;
