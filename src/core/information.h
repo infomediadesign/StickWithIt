@@ -4,6 +4,8 @@
 //game
 const int gameHeight = 360;
 const int gameWidth = 640;
+//y = -16
+//x = -14
 
 //tilesetter
 const int tilesetHeight = 7;
@@ -31,3 +33,13 @@ const int boarSteps = 8;
 const int boarSpeed = 6;
 const int boarStartpositionX = 0;
 const int boarStartpositionY = 0;
+
+//mushroom tileset
+static const char* const mushroomTexturePath = "assets/graphics/enemies/mushroom/mushroom_walking_animation_front.png";
+const int mushroomFrameWidth = 26;
+const int mushroomFrameHeight = 28;
+const int mushroomRow = 1;
+const int mushroomSteps = 7;
+const int mushroomSpeed = 6;
+const int mushroomStartpositionX = 16 + 3; //16 to get center of tile, 3 (is half of 32-26) to deny misplacement
+const int mushroomStartpositionY = 16 + 2 - 8; //-8 to get sprites "feet" to the center

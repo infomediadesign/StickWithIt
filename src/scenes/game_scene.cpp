@@ -9,14 +9,15 @@
 #include "scenes.h"
 #include "renderer.h"
 #include "player.h"
-#include "information.h"
 #include "boar.h"
+#include "mushroom.h"
 
 using namespace std::string_literals;
 
 game::scenes::GameScene::GameScene() {
     actors.insert(std::make_pair("player", std::make_unique<game::core::Player>()));
     actors.insert(std::make_pair("boar", std::make_unique<game::core::Boar>()));
+    actors.insert(std::make_pair("mushroom", std::make_unique<game::core::Mushroom>()));
 }
 
 game::scenes::GameScene::~GameScene() {
@@ -26,14 +27,28 @@ void game::scenes::GameScene::Update() {
     if (IsKeyPressed(KEY_ESCAPE))
         game::core::Store::stage->switchToNewScene("pause"s, std::make_unique<PauseScene>());
 
+    if (actors.at("player")->getMovementPoints() != 0) //PlayerTurn
+    {
+        //move player dependant on input
+        actors.at("player")->handleMovement(level);
+    }
+    else //EnemyTurn
+    {
+        
+
+
+         actors.at("player")->setMovementPoints(10);
+    }
+
+
+
     //switch level when pressing P
     if (IsKeyPressed(KEY_P))
     {
         level++;
     }
 
-    //move player dependant on input
-    actors.at("player")->handleMovement(level);
+
 
     //actors.at("boar")->placeEnemyAtRandomLocation();
 
