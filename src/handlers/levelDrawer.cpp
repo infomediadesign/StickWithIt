@@ -30,13 +30,13 @@ void handlers::LevelDrawer::drawLevel(int level) {
 	{
 		for (int x = 0; x < 20; x++)
 		{
-			DrawTextureRec(levelTexture, gridIDs.at(levelData.at(i)), {static_cast<float>(x * 32), static_cast<float>(y * 32)}, WHITE);
+			DrawTextureRec(levelTexture, gridIDs.at(levelData.at(i)), { static_cast<float>(x * 32), static_cast<float>(y * 32) }, WHITE);
 			i++;
 		}
 	}
 }
 
-void handlers::LevelDrawer::exchangeTile(Vector2 position) 
+void handlers::LevelDrawer::exchangeTile(Vector2 position)
 {
 
 	if (levelData[static_cast<int64_t>(position.x / 32 + position.y * 20 / 32)] <= 9)
@@ -103,9 +103,9 @@ void handlers::LevelDrawer::returnGridByID()
 	int id = 1;
 
 	// change x and y depending on tilesheet size
-	for (int y = 0; y < 7; y++) 
+	for (int y = 0; y < 7; y++)
 	{
-		for (int x = 0; x < 10; x++) 
+		for (int x = 0; x < 10; x++)
 		{
 			gridIDs.insert(std::pair<int, Rectangle>(id, { static_cast<float>(x * 32), static_cast<float>(y * 32), static_cast<float>(32), static_cast<float>(32) }));
 			id++;

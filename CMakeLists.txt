@@ -1,5 +1,5 @@
-cmake_minimum_required (VERSION 3.11)
+﻿cmake_minimum_required (VERSION 3.11)
 
-project(StickWithIt)
+project(stickwithit)
 
 add_subdirectory ("src")
