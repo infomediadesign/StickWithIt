@@ -19,6 +19,8 @@ namespace handlers {
 
 		void exchangeTile(Vector2 position);
 
+		bool checkCollision(Vector2 position);
+
 	private:
 
 		void returnTexture(int level);

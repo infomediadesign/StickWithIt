@@ -45,6 +45,13 @@ void handlers::LevelDrawer::exchangeTile(Vector2 position)
 	}
 }
 
+bool handlers::LevelDrawer::checkCollision(Vector2 position)
+{
+
+	//@TODO
+	return false;
+}
+
 void handlers::LevelDrawer::returnTexture(int level)
 {
 
