@@ -8,8 +8,8 @@
 
 //scenes
 
-#include "scenes/gameScene.h"
-#include "scenes/menuScene.h"
+#include "scenes/game_scene.h"
+#include "scenes/menu_scene.h"
 
 int main() {
 

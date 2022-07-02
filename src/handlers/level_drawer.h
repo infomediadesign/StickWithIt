@@ -6,6 +6,7 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <set>
 
 namespace handlers {
 	class LevelDrawer {
@@ -19,7 +20,8 @@ namespace handlers {
 
 		void exchangeTile(Vector2 position);
 
-		bool checkCollision(Vector2 position);
+		//@TODO
+		//std::set<Vector2> returnCollisionLayer(int level);
 
 	private:
 

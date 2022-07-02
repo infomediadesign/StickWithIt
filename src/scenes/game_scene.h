@@ -4,7 +4,7 @@
 
 //handlers
 
-#include "../handlers/levelDrawer.h"
+#include "../handlers/level_drawer.h"
 
 namespace scenes
 {
@@ -29,5 +29,8 @@ namespace scenes
 		int level = 1;
 
 		std::unique_ptr<handlers::LevelDrawer> levelDrawer = std::make_unique<handlers::LevelDrawer>();
+
+		//Ein set, das sämtliche Positionen vonn allen kollidierbaren Tiles(und Spielern) enthält
+		//std::set<Vector2> colidablePositions;
 	};
 }

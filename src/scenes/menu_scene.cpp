@@ -1,4 +1,4 @@
-#include "menuScene.h"
+#include "menu_scene.h"
 
 scenes::MenuScene::MenuScene()
 {

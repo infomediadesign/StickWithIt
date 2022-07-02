@@ -1,7 +1,7 @@
 #include "object.h"
 
-objects::Object::Object(Texture2D texture, Vector2 position, int lives, int attackDamage, int movePoints)
-	: mTexture(texture), mPosition(position), mLives(lives), mAttackDamage(attackDamage), mMovePoints(movePoints)
+objects::Object::Object(Texture2D texture, int lives, int attackDamage, int movePoints)
+	: mTexture(texture), mLives(lives), mAttackDamage(attackDamage), mMovePoints(movePoints)
 {
 
 
