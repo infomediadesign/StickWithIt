@@ -7,7 +7,6 @@
 #include <iostream>
 #include <vector>
 #include <memory>
-#include <set>
 
 #include "../handlers/animation_handler.h"
 
@@ -48,11 +47,13 @@ namespace objects
 
 	protected:
 
-		// checks if future position of an object would collide
-		bool checkWillCollide(std::set<Vector2> positionsOfColliders, Vector2 futurePosition);
+		//// checks if future position of an object would collide
+		bool checkWouldCollide(std::vector<Vector2> positionsOfColliders, Vector2 futurePosition);
 
 		// sprite details
 		Texture2D mTexture;
+		int mSpritesheetWidth;
+		int mSpritesheetHeight;
 		int mColumns;
 		int mRows;
 		int mPlaybackSpeed;
@@ -67,7 +68,7 @@ namespace objects
 		int mMovePoints;
 
 		// initial position
-		Vector2 mPosition = { 0.0, 0.0 };
-		Vector2 mFuturePosition = { 0.0, 0.0 };
+		Vector2 mPosition;
+		Vector2 mFuturePosition;
 	};
 }

@@ -32,5 +32,7 @@ namespace scenes
 
 		//Ein set, das sämtliche Positionen vonn allen kollidierbaren Tiles(und Spielern) enthält
 		//std::set<Vector2> colidablePositions;
+
+		//Vector mit NPCs und Vector mit PCs
 	};
 }

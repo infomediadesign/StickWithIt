@@ -16,16 +16,19 @@ namespace objects
 
 	public:
 
-		AnimationHandler(Texture2D texture, int columns, int rows, int playbackSpeed, Vector2 offset);
-
-		~AnimationHandler();
+		AnimationHandler(Texture2D texture, int spritesheetWidth, int spritesheetHeight, int columns, int rows, int playbackSpeed, Vector2 actorPosition, Vector2 offset);
 
 		void animate(int animation);
 
 		enum Animation
 		{
-			eIdle,
+
 			eDeath,
+
+			eIdleUp,
+			eIdleDown,
+			eIdleRight,
+			eIdleLeft,
 
 			eWalkUp,
 			eWalkDown,
@@ -37,5 +40,19 @@ namespace objects
 			eAttackRight,
 			eAttackLeft
 		};
+
+	private:
+
+		bool mAnimationCompleted = false;
+
+		Vector2 mActorPosition;
+
+		Texture2D mTexture;
+		int mSpriteSheetWidth;
+		int mSpriteSheetHeight;
+		int mColumns;
+		int mRows;
+		int mPlaybackSpeed;
+		Vector2 mOffset;
 	};
 }

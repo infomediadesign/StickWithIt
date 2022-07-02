@@ -16,6 +16,7 @@ void scenes::GameScene::Update()
 {
 
 	levelDrawer->drawLevel(level);
+
 	levelDrawer->exchangeTile({ 128, 128 });
 }
 

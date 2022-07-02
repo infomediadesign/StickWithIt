@@ -23,6 +23,10 @@ namespace handlers {
 		//@TODO
 		//std::set<Vector2> returnCollisionLayer(int level);
 
+		//Vector2 returnStartingPointsEnemy(int level);
+
+		//Vector2 returnStartingPointPlayer(int level);
+
 	private:
 
 		void returnTexture(int level);
