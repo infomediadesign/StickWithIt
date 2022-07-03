@@ -36,7 +36,7 @@ void handlers::LevelDrawer::drawLevel(int level) {
 	}
 }
 
-void handlers::LevelDrawer::exchangeTile(Vector2 position)
+void handlers::LevelDrawer::exchangeTile(const Vector2& position)
 {
 
 	if (levelData[static_cast<int64_t>(position.x / 32 + position.y * 20 / 32)] <= 9)

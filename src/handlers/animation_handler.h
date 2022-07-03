@@ -16,7 +16,7 @@ namespace objects
 
 	public:
 
-		AnimationHandler(Texture2D texture, int spritesheetWidth, int spritesheetHeight, int columns, int rows, int playbackSpeed, Vector2 actorPosition, Vector2 offset);
+		AnimationHandler(Texture2D texture, int spritesheetWidth, int spritesheetHeight, int columns, int rows, int playbackSpeed, Vector2 position, Vector2 offset);
 
 		void animate(int animation);
 

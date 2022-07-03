@@ -7,6 +7,7 @@
 #include <iostream>
 #include <vector>
 #include <memory>
+#include <tuple>
 
 #include "../handlers/animation_handler.h"
 
@@ -18,20 +19,36 @@ namespace objects
 
 	public:
 
-		virtual ~Object();
+		Object(
+			Texture2D texture,
+			int spritesheetWidth,
+			int spritesheetHeight,
+			Vector2 offset,
+			int columns,
+			int rows,
+			int playbackSpeed,
+			int lives,
+			int attackDamage,
+			int movePoints,
+			Vector2 position,
+			Vector2 futurePosition,
+			AnimationHandler* animationHandler
+		);
+
+		// pure virtual class must have defined destructor
+		virtual ~Object() = 0;
 
 		//position for enemy will be all border-tiles
-		//position for helper will be a manually chosen tile
-		//position for player depends on ritual tile
+		//position for player and helpers depends on ritual tile
 		virtual bool spawn(Vector2 position) = 0;
 
 		//moves dependant on input in playerObject
 		//calls pathfinding method in nonPlayerObject
 		//calls checkCollision before actually move object (repeat as long as checkCollision() == true);
 		//moves depending on input and collision 
-		virtual void move(std::set<Vector2> positionsOfColliders) = 0;
+		virtual void move(std::vector<Vector2> positionsOfColliders) = 0;
 
-		virtual int attack() = 0;
+		virtual std::tuple<int, std::vector<Vector2>> attack() = 0;
 
 		//state machine, animate different rectangle, speed modifyable by iterating float. If x = 1 play frame y, then x += 0.2
 		//If x = 2 play frame z. If last frame, reset frame iterator
@@ -39,7 +56,7 @@ namespace objects
 		virtual void animate() = 0;
 
 		//if hp = 0: player dies -> menu, helper dies -> respawn in x turns, enemy -> just dead lol
-		virtual void getDamage(int incomingDamage) = 0;
+		virtual void getDamage(std::tuple<int, Vector2> incomingDamageAndPositions);
 
 		int getLives(); void setLives(int lives);
 
@@ -54,13 +71,10 @@ namespace objects
 		Texture2D mTexture;
 		int mSpritesheetWidth;
 		int mSpritesheetHeight;
+		Vector2 mOffset;
 		int mColumns;
 		int mRows;
 		int mPlaybackSpeed;
-		Vector2 mOffset;
-
-		// animation handler
-		AnimationHandler* mAnimationHandler;
 
 		// basic stats
 		int mLives;
@@ -70,5 +84,8 @@ namespace objects
 		// initial position
 		Vector2 mPosition;
 		Vector2 mFuturePosition;
+
+		// animation handler
+		AnimationHandler* mAnimationHandler;
 	};
 }

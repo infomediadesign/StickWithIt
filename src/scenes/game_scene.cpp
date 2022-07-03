@@ -4,6 +4,8 @@ scenes::GameScene::GameScene()
 {
 
 	std::cout << "GameScene called." << std::endl;
+
+	playerObjects.push_back(std::make_unique<objects::Scarecrow>());
 }
 
 scenes::GameScene::~GameScene()

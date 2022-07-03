@@ -18,14 +18,14 @@ namespace handlers {
 
 		void drawLevel(int level);
 
-		void exchangeTile(Vector2 position);
+		void exchangeTile(const Vector2& position);
 
 		//@TODO
 		//std::set<Vector2> returnCollisionLayer(int level);
 
-		//Vector2 returnStartingPointsEnemy(int level);
+		//Vector2 returnSpawnableBorderTiles(int level);
 
-		//Vector2 returnStartingPointPlayer(int level);
+		//Vector2 returnSpawnableRitualTiiles(int level);
 
 	private:
 

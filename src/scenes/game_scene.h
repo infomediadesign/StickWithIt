@@ -6,6 +6,10 @@
 
 #include "../handlers/level_drawer.h"
 
+//objects
+
+#include "../objects/player_characters/scarecrow.h"
+
 namespace scenes
 {
 
@@ -34,5 +38,6 @@ namespace scenes
 		//std::set<Vector2> colidablePositions;
 
 		//Vector mit NPCs und Vector mit PCs
+		std::vector<std::unique_ptr<objects::PlayerCharacter>> playerObjects;
 	};
 }
