@@ -16,6 +16,19 @@ scenes::GameScene::~GameScene()
 
 void scenes::GameScene::Update()
 {
+	int uselessvariable = 0;
+
+	std::tuple<int, std::vector<Vector2>> attackfield = { 1, {{0, 0}, {20, 20}} };
+
+	//playerObjects[0]->getDamage(attackfield);
+
+	//if (playerObjects[0]->getIsAlive() == false)
+	//{
+	//	std::cout << "actor has died";
+	//	std::cin >> uselessvariable;
+	//}
+
+	std::cout << playerObjects[0]->getLives() << std::endl;
 
 	levelDrawer->drawLevel(level);
 

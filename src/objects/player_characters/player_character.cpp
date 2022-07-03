@@ -1,14 +1,5 @@
 #include "player_character.h"
 
-objects::PlayerCharacter::PlayerCharacter(Texture2D texture, int spritesheetWidth, int spritesheetHeight, Vector2 offset, int columns, int rows, int playbackSpeed,
-	int lives, int attackDamage, int movePoints, Vector2 position, Vector2 futurePosition, AnimationHandler* animationHandler, int actionPoints)
-	: Object(texture, spritesheetWidth, spritesheetHeight, offset, columns, rows, playbackSpeed, lives, attackDamage, movePoints, position, futurePosition, animationHandler),
-	mActionPoints(actionPoints)
-{
-
-
-}
-
 objects::PlayerCharacter::~PlayerCharacter()
 {
 
@@ -37,4 +28,10 @@ void objects::PlayerCharacter::setActionPoints(int actionPoints)
 {
 
 	mActionPoints = actionPoints;
+}
+
+int objects::PlayerCharacter::getIsAlive()
+{
+
+	return isAlive;
 }

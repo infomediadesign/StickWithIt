@@ -11,28 +11,11 @@ namespace objects
 
 	public:
 
-		PlayerCharacter(
-			Texture2D texture,
-			int spritesheetWidth,
-			int spritesheetHeight,
-			Vector2 offset,
-			int columns,
-			int rows,
-			int playbackSpeed,
-			int lives,
-			int attackDamage,
-			int movePoints,
-			Vector2 position,
-			Vector2 futurePosition,
-			AnimationHandler* mAnimationHandler,
-			int actionPoints
-			);
-
 		// pure virtual class must have defined destructor
 		virtual ~PlayerCharacter() = 0;
 
 		//später bei npc Klasse nicht mehr virtual
-		virtual bool spawn(Vector2 position) = 0;
+		virtual void spawn(Vector2 position) = 0;
 
 		//später bei npc Klasse nicht mehr virtual + private Funktion fürs Pathfinding?
 		virtual void move(std::vector<Vector2> positionsOfColliders) = 0;
@@ -45,11 +28,13 @@ namespace objects
 
 		int getActionPoints(); void setActionPoints(int actionPoints);
 
-		//check in gamescene if any playerobject isAlive == false, only scarecrow could be false
-		bool isAlive = true;
+		int getIsAlive();
  
 	protected:
 
-		int mActionPoints;
+		//check in gamescene if any playerobject isAlive == false, only scarecrow could be false
+		bool isAlive = true;
+
+		int mActionPoints{};
 	};
 }

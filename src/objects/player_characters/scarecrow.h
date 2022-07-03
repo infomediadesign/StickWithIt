@@ -14,7 +14,7 @@ namespace objects
 
 		~Scarecrow() override;
 
-		bool spawn(Vector2 position) override;
+		void spawn(Vector2 position) override;
 
 		void move(std::vector<Vector2> positionsOfColliders) override;
 

@@ -1,14 +1,5 @@
 #include "object.h"
 
-objects::Object::Object(Texture2D texture, int spritesheetWidth, int spritesheetHeight, Vector2 offset, int columns, int rows, int playbackSpeed,
-	int lives, int attackDamage, int movePoints, Vector2 position, Vector2 futurePosition, AnimationHandler* animationHandler)
-	: mTexture(texture), mSpritesheetWidth(spritesheetWidth), mSpritesheetHeight(spritesheetHeight), mOffset(offset), mColumns(columns), mRows(rows), mPlaybackSpeed(playbackSpeed),
-	mLives(lives), mAttackDamage(attackDamage), mMovePoints(movePoints), mPosition(position), mFuturePosition(futurePosition), mAnimationHandler(animationHandler)
-{
-
-
-}
-
 objects::Object::~Object()
 {
 
@@ -20,15 +11,10 @@ objects::Object::~Object()
 }
 
 
-void objects::Object::getDamage(std::tuple<int, Vector2> incomingDamageAndPositions)
+void objects::Object::getDamage(std::tuple<int, std::vector<Vector2>> incomingDamageAndPositions)
 {
 
-	mLives -= std::get<0>(incomingDamageAndPositions);
 
-	if (mLives < 0)
-	{
-		delete this;
-	}
 }
 
 int objects::Object::getLives()
