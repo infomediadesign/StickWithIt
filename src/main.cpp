@@ -44,13 +44,7 @@ int main() {
 
         activeScene->Update();
 
-        BeginDrawing();
-
-        ClearBackground(WHITE);
-
         activeScene->Draw();
-
-        EndDrawing();
     }
 
     CloseWindow();

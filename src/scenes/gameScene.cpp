@@ -22,7 +22,14 @@ void scenes::GameScene::Update()
 void scenes::GameScene::Draw()
 {
 
+	BeginDrawing();
+
+	ClearBackground(WHITE);
+	//draw below here
+
 	DrawText("Willkommen in der Gameszene", 20, 20, 40, SKYBLUE);
+
+	EndDrawing();
 }
 
 int scenes::GameScene::changeScene()
