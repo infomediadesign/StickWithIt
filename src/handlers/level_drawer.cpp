@@ -1,4 +1,4 @@
-#include "levelDrawer.h"
+#include "level_drawer.h"
 
 handlers::LevelDrawer::LevelDrawer()
 	: levelTexture(LoadTexture("assets/graphics/other/logo.png")) // preload placeholder to be unloaded so tilemap of random level can be loaded safely
@@ -36,7 +36,7 @@ void handlers::LevelDrawer::drawLevel(int level) {
 	}
 }
 
-void handlers::LevelDrawer::exchangeTile(Vector2 position)
+void handlers::LevelDrawer::exchangeTile(const Vector2& position)
 {
 
 	if (levelData[static_cast<int64_t>(position.x / 32 + position.y * 20 / 32)] <= 9)

@@ -1,4 +1,4 @@
-#include "menuScene.h"
+#include "menu_scene.h"
 
 scenes::MenuScene::MenuScene()
 {
@@ -21,14 +21,7 @@ void scenes::MenuScene::Update()
 void scenes::MenuScene::Draw()
 {
 
-	BeginDrawing();
-
-	ClearBackground(WHITE);
-	//draw below here
-
 	DrawText("Willkommen in der Menueszene", 20, 20, 40, DARKPURPLE);
-
-	EndDrawing();
 }
 
 int scenes::MenuScene::changeScene()

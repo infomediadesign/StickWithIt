@@ -8,8 +8,8 @@
 
 //scenes
 
-#include "scenes/gameScene.h"
-#include "scenes/menuScene.h"
+#include "scenes/game_scene.h"
+#include "scenes/menu_scene.h"
 
 int main() {
 
@@ -19,12 +19,6 @@ int main() {
 
     std::unique_ptr<scenes::Scene> activeScene = std::make_unique<scenes::MenuScene>();
 
-    enum eScenes
-    {
-        eMenuScene = 1,
-        eGameScene = 2
-    };
-
     while (!WindowShouldClose())
     {
 
@@ -33,18 +27,24 @@ int main() {
         switch (activeScene->changeScene())
         {
 
-        case eMenuScene:
+        case scenes::Scene::eScenes::eMenuScene:
             activeScene = std::make_unique<scenes::MenuScene>();
             break;
 
-        case eGameScene:
+        case scenes::Scene::eScenes::eGameScene:
             activeScene = std::make_unique<scenes::GameScene>();
             break;
         }
 
         activeScene->Update();
 
+        BeginDrawing();
+
+        ClearBackground(WHITE);
+
         activeScene->Draw();
+
+        EndDrawing();
     }
 
     CloseWindow();

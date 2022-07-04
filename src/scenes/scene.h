@@ -21,8 +21,6 @@ namespace scenes
 
 		virtual int changeScene() = 0;
 
-	protected:
-
 		enum eScenes
 		{
 			eMenuScene = 1,

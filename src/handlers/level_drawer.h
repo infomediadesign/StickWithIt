@@ -6,6 +6,7 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <set>
 
 namespace handlers {
 	class LevelDrawer {
@@ -17,7 +18,15 @@ namespace handlers {
 
 		void drawLevel(int level);
 
-		void exchangeTile(Vector2 position);
+		void exchangeTile(const Vector2& position);
+		
+		//@TODO statt drawLevel(int level) -> drawLayerX(int leveL);
+
+		//std::set<Vector2> returnCollisionLayer(int level);
+
+		//Vector2 returnSpawnableBorderTiles(int level);
+
+		//Vector2 returnSpawnableRitualTiiles(int level);
 
 	private:
 
