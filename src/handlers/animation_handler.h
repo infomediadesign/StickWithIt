@@ -15,9 +15,12 @@ namespace objects
 
 	public:
 
-		AnimationHandler(Texture2D texture, int spritesheetWidth, int spritesheetHeight, int columns, int rows, int playbackSpeed, Vector2 position, Vector2 offset);
+		AnimationHandler(Texture2D texture, int spritesheetWidth, int spritesheetHeight, int columns, int rows, int playbackSpeed, 
+			Vector2 position, Vector2 offset, std::vector<int> actualFramesPerRow);
 
 		void setPosition(Vector2 position);
+			
+		bool isAnimationCompleted();
 
 		void animate(Vector2 position, int animation);
 
@@ -44,7 +47,9 @@ namespace objects
 
 	private:
 
-		bool mAnimationCompleted = false;
+		bool mIsAnimationCompleted = false;
+
+		int currentFrame = 0;
 
 		Vector2 mPosition;
 
@@ -55,5 +60,7 @@ namespace objects
 		int mRows;
 		int mPlaybackSpeed;
 		Vector2 mOffset;
+
+		std::vector<int> mActualFramesPerRow;
 	};
 }

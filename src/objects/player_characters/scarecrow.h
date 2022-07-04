@@ -18,8 +18,8 @@ namespace objects
 
 		void move(std::vector<Vector2> positionsOfColliders) override;
 
-		std::tuple<int, std::vector<Vector2>> attack() override;
+		std::vector<int> attack() override;
 
-		void getDamage(std::tuple<int, std::vector<Vector2>> incomingDamageAndPositions) override;
+		void getDamage(std::vector<int> incomingDamageAndPositions) override;
 	};
 }

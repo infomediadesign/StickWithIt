@@ -32,10 +32,10 @@ namespace objects
 		//moves depending on input and collision 
 		virtual void move(std::vector<Vector2> positionsOfColliders) = 0;
 
-		virtual std::tuple<int, std::vector<Vector2>> attack() = 0;
+		virtual std::vector<int> attack() = 0;
 
 		//if hp = 0: player dies -> menu, helper dies -> respawn in x turns, enemy -> just dead lol
-		virtual void getDamage(std::tuple<int, std::vector<Vector2>> incomingDamageAndPositions);
+		virtual void getDamage(std::vector<int> incomingDamageAndPositions);
 
 		int getLives(); void setLives(int lives);
 
@@ -54,6 +54,7 @@ namespace objects
 		int mColumns{};
 		int mRows{};
 		int mPlaybackSpeed{};
+		std::vector<int> mActualFramesPerRow{};
 
 		// basic stats
 		int mLives{};

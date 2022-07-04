@@ -30,6 +30,8 @@ namespace scenes
 
 	private:
 
+		void addHelper();
+
 		int level = 1;
 
 		std::unique_ptr<handlers::LevelDrawer> levelDrawer = std::make_unique<handlers::LevelDrawer>();
@@ -38,6 +40,9 @@ namespace scenes
 		//std::set<Vector2> colidablePositions;
 
 		//Vector mit NPCs und Vector mit PCs
+
+		int numberOfPlayerCharacters = 1;
+
 		std::vector<std::unique_ptr<objects::PlayerCharacter>> playerObjects;
 	};
 }

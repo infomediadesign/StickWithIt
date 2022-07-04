@@ -21,10 +21,10 @@ namespace objects
 		virtual void move(std::vector<Vector2> positionsOfColliders) = 0;
 
 		//generalisiert für Helfer, muss in scarecrow Klasse überschrieben werden
-		virtual std::tuple<int, std::vector<Vector2>> attack() = 0;
+		virtual std::vector<int> attack();
 
 		//getDamage for all helpers, for player theres another function in scarecrowh.h
-		virtual void getDamage(std::tuple<int, std::vector<Vector2>> incomingDamageAndPositions);
+		virtual void getDamage(std::vector<int> incomingDamageAndPositions);
 
 		int getActionPoints(); void setActionPoints(int actionPoints);
 

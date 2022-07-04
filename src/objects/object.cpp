@@ -6,12 +6,10 @@ objects::Object::~Object()
 	delete mAnimationHandler;
 
 	UnloadTexture(mTexture);
-
-	std::cout << "Object deleted.";
 }
 
 
-void objects::Object::getDamage(std::tuple<int, std::vector<Vector2>> incomingDamageAndPositions)
+void objects::Object::getDamage(std::vector<int> incomingDamageAndPositions)
 {
 
 

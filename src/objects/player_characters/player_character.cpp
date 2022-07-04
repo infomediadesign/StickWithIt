@@ -6,16 +6,16 @@ objects::PlayerCharacter::~PlayerCharacter()
 
 }
 
-void objects::PlayerCharacter::getDamage(std::tuple<int, std::vector<Vector2>> incomingDamageAndPositions)
+std::vector<int> objects::PlayerCharacter::attack()
 {
 
-	mLives -= std::get<0>(incomingDamageAndPositions);
+	return std::vector<int>();
+}
 
-	if (mLives < 0)
-	{
-		std::cout << "Helper has died." << std::endl;
-		delete this;
-	}
+void objects::PlayerCharacter::getDamage(std::vector<int> incomingDamageAndPositions)
+{
+
+
 }
 
 int objects::PlayerCharacter::getActionPoints()

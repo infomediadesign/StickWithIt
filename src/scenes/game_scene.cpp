@@ -16,19 +16,29 @@ scenes::GameScene::~GameScene()
 
 void scenes::GameScene::Update()
 {
-	int uselessvariable = 0;
 
-	std::tuple<int, std::vector<Vector2>> attackfield = { 1, {{0, 0}, {20, 20}} };
+	//damage progress for playercharacters + swtich to menu when player is dead
+	if (playerObjects[0]->getIsAlive())
+	{
 
-	//playerObjects[0]->getDamage(attackfield);
+		for (int currentPlayer = 0; currentPlayer < numberOfPlayerCharacters; currentPlayer++)
+		{
 
-	//if (playerObjects[0]->getIsAlive() == false)
-	//{
-	//	std::cout << "actor has died";
-	//	std::cin >> uselessvariable;
-	//}
+			playerObjects[currentPlayer]->getDamage({ 1, 0, 1, 0, 0 });
 
-	std::cout << playerObjects[0]->getLives() << std::endl;
+			std::cout << playerObjects[currentPlayer]->getLives() << std::endl;
+
+			if (currentPlayer > 0)
+			{
+				
+				if (playerObjects[currentPlayer]->getLives() <= 0)
+				{
+
+					playerObjects.erase(playerObjects.begin() + currentPlayer);
+				}
+			}
+		}
+	}
 
 	levelDrawer->drawLevel(level);
 
@@ -50,11 +60,20 @@ void scenes::GameScene::Draw()
 
 int scenes::GameScene::changeScene()
 {
-	if (IsKeyPressed(KEY_F2)) {
+	if (IsKeyPressed(KEY_F2) || !playerObjects[0]->getIsAlive()) {
 		return eMenuScene;
 	}
 	else
 	{
 		return 0;
 	}
+}
+
+void scenes::GameScene::addHelper()
+{
+
+	//...
+
+	//playerObjects.push_back(chosen character)
+	//umberOfPlayerCharacters++;
 }
