@@ -13,7 +13,12 @@ add_executable(${PROJECT_NAME} main.cpp   "scenes/scene.h" "scenes/scene.cpp" "s
 "objects/object.h" "objects/object.cpp" "handlers/combat_handler.h" "handlers/combat_handler.cpp" 
 "handlers/level_handler.h" "handlers/level_handler.cpp" "handlers/collision_handler.h" "handlers/collision_handler.cpp" "objects/player_characters/scarecrow.h" 
 "objects/player_characters/scarecrow.cpp" "objects/player_characters/player_character.h" "objects/player_characters/player_character.cpp" 
-"handlers/animation_handler.h" "handlers/animation_handler.cpp")
+"handlers/animation_handler.h" "handlers/animation_handler.cpp"
+#Silas
+
+#Levin
+
+)
 
 # Add config.h.in file
 configure_file(config.h.in config.h)
