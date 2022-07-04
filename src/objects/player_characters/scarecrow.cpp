@@ -6,23 +6,26 @@ objects::Scarecrow::Scarecrow()
 	mTexture = LoadTexture("assets/graphics/player/scarecrow_animations.png");
 	mSpritesheetWidth = 729;
 	mSpritesheetHeight = 639;
-	mColumns = 8;
-	mRows = 9;
-	mPlaybackSpeed = 5;
-	mPosition = { 0, 0 };
+	mColumns = 9;
+	mRows = 8;
+	mPlaybackSpeed = 8;
+	mPosition = { 128, 128 };
 	mFuturePosition = { 0, 0 };
-	mOffset = { 40, 47 };
+	mOffset = { 40 , 47 };
 	mActualFramesPerRow = {
 		9, 9, 9, 9,
 		5, 5, 5, 5
 	};
+	mCurrentAnimation = AnimationHandler::Animation::eIdleDown;
 	
 	mLives = 10;
 	mAttackDamage = 1;
 	mMovePoints = 10;
+	mCanFly = false;
 	mActionPoints = 10;
 
-	mAnimationHandler = new AnimationHandler(mTexture, mSpritesheetWidth, mSpritesheetHeight, mColumns, mRows, mPlaybackSpeed, mPosition, mOffset, mActualFramesPerRow);
+	mAnimationHandler = new AnimationHandler(mTexture, mSpritesheetWidth, mSpritesheetHeight, mColumns, mRows, 
+		mPlaybackSpeed, mPosition, mOffset, mActualFramesPerRow, mCurrentAnimation);
 
 	std::cout << "Scarecrow called.";
 }
@@ -30,7 +33,7 @@ objects::Scarecrow::Scarecrow()
 objects::Scarecrow::~Scarecrow()
 {
 
-	std::cout << "Scarecrow deleted.";
+	std::cout << "Scarecrow deleted." << std::endl;
 }
 
 void objects::Scarecrow::spawn(Vector2 position)
@@ -42,7 +45,7 @@ void objects::Scarecrow::spawn(Vector2 position)
 void objects::Scarecrow::move(std::vector<Vector2> positionsOfColliders)
 {
 
-
+	mAnimationHandler->animate(mPosition);
 }
 
 std::vector<int> objects::Scarecrow::attack()

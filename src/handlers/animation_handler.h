@@ -16,13 +16,13 @@ namespace objects
 	public:
 
 		AnimationHandler(Texture2D texture, int spritesheetWidth, int spritesheetHeight, int columns, int rows, int playbackSpeed, 
-			Vector2 position, Vector2 offset, std::vector<int> actualFramesPerRow);
+			Vector2 position, Vector2 offset, std::vector<int> actualFramesPerRow, int currentAnimation);
 
-		void setPosition(Vector2 position);
-			
 		bool isAnimationCompleted();
 
-		void animate(Vector2 position, int animation);
+		void animate(Vector2 position);
+
+		void changeAnimation(int animation);
 
 		enum Animation
 		{
@@ -49,7 +49,13 @@ namespace objects
 
 		bool mIsAnimationCompleted = false;
 
-		int currentFrame = 0;
+		int mCurrentFrame = 0;
+
+		int mStandartPlaybackSpeed = 1;
+
+		int mCurrentAnimation;
+
+		const int mHalfTileSize = 16;
 
 		Vector2 mPosition;
 

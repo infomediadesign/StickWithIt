@@ -1,18 +1,11 @@
 #include "animation_handler.h"
 
-objects::AnimationHandler::AnimationHandler(Texture2D texture, int spritesheetWidth, int spritesheetHeight, int columns, int rows, int playbackSpeed,
-	Vector2 actorPosition, Vector2 offset, std::vector<int> actualFramesPerRow)
+
+objects::AnimationHandler::AnimationHandler(Texture2D texture, int spritesheetWidth, int spritesheetHeight, int columns, int rows, int playbackSpeed, 
+	Vector2 position, Vector2 offset, std::vector<int> actualFramesPerRow, int currentAnimation)
 	: mTexture(texture), mSpriteSheetWidth(spritesheetWidth), mSpriteSheetHeight(spritesheetHeight), mColumns(columns), mRows(rows),
-	mPlaybackSpeed(playbackSpeed), mPosition(actorPosition), mOffset(offset), mActualFramesPerRow(actualFramesPerRow)
+	mPlaybackSpeed(playbackSpeed), mPosition(position), mOffset(offset), mActualFramesPerRow(actualFramesPerRow), mCurrentAnimation(currentAnimation)
 {
-
-
-}
-
-void objects::AnimationHandler::setPosition(Vector2 position)
-{
-
-	mPosition = position;
 }
 
 bool objects::AnimationHandler::isAnimationCompleted()
@@ -21,26 +14,47 @@ bool objects::AnimationHandler::isAnimationCompleted()
 	return mIsAnimationCompleted;
 }
 
-
-void objects::AnimationHandler::animate(Vector2 position, int animation)
+void objects::AnimationHandler::animate(Vector2 position)
 {
 
-	switch (animation)
+	//plays next frame depending on speed
+	if (mStandartPlaybackSpeed == mPlaybackSpeed)
+	{
+		mCurrentFrame++;
+		mStandartPlaybackSpeed = 1;
+	}
+
+	switch (mCurrentAnimation)
 	{
 	case eIdleDown:
-		DrawTextureRec(mTexture, 
-			{ 
-			static_cast<float>(currentFrame) * mSpriteSheetWidth / mColumns, 
-			static_cast<float>(currentFrame) * mSpriteSheetHeight / mRows, 
-			static_cast<float>(currentFrame + 1) * mSpriteSheetWidth / mColumns 
-			static_cast<float>(currentFrame + 1) * mSpriteSheetHeight / mRows,
-			});
 
-		currentFrame++;
-		if (currentFrame == mActualFramesPerRow[0] - 1)
+		DrawTextureRec(mTexture,
+			{
+			static_cast<float>(mCurrentFrame) * mSpriteSheetWidth / mColumns,
+			static_cast<float>(mSpriteSheetHeight) / mRows,
+			static_cast<float>(mSpriteSheetWidth) / mColumns - 1, //-1 pixel so we dont actually start with first pixel of following frame
+			static_cast<float>(mSpriteSheetHeight) / mRows - 1
+			},
 		{
+		mPosition.x - mOffset.x + mHalfTileSize, mPosition.y - mOffset.y + mHalfTileSize
+		},
+			WHITE);
+
+		if (mCurrentFrame == mActualFramesPerRow[0] - 1)
+		{
+
 			mIsAnimationCompleted = true;
 		}
+
 		break;
+
 	}
+
+	mStandartPlaybackSpeed++;
+}
+
+void objects::AnimationHandler::changeAnimation(int animation)
+{
+
+	mCurrentAnimation = animation;
 }

@@ -16,17 +16,23 @@ scenes::GameScene::~GameScene()
 
 void scenes::GameScene::Update()
 {
+	//So umbauen dass die Schleife erst durchgelaufen wird, sofern überhaupt ein Gegner mal angegriffen hat.
+
+
+	levelDrawer->drawLevel(level);
+
+	levelDrawer->exchangeTile({ 128, 128 });
 
 	//damage progress for playercharacters + swtich to menu when player is dead
 	if (playerObjects[0]->getIsAlive())
 	{
 
+		playerObjects[0]->move({ {0, 0} });
+
 		for (int currentPlayer = 0; currentPlayer < numberOfPlayerCharacters; currentPlayer++)
 		{
 
-			playerObjects[currentPlayer]->getDamage({ 1, 0, 1, 0, 0 });
-
-			std::cout << playerObjects[currentPlayer]->getLives() << std::endl;
+			playerObjects[currentPlayer]->getDamage({ 1, 0, 1, 0, 1 });
 
 			if (currentPlayer > 0)
 			{
@@ -39,10 +45,6 @@ void scenes::GameScene::Update()
 			}
 		}
 	}
-
-	levelDrawer->drawLevel(level);
-
-	levelDrawer->exchangeTile({ 128, 128 });
 }
 
 void scenes::GameScene::Draw()

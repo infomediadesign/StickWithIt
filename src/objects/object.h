@@ -53,13 +53,16 @@ namespace objects
 		Vector2 mOffset{};
 		int mColumns{};
 		int mRows{};
+		//higher is lesser frames per second
 		int mPlaybackSpeed{};
 		std::vector<int> mActualFramesPerRow{};
+		int mCurrentAnimation{};
 
 		// basic stats
 		int mLives{};
 		int mAttackDamage{};
 		int mMovePoints{};
+		bool mCanFly{};
 
 		// initial position
 		Vector2 mPosition{};

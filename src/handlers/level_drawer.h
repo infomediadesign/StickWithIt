@@ -19,8 +19,9 @@ namespace handlers {
 		void drawLevel(int level);
 
 		void exchangeTile(const Vector2& position);
+		
+		//@TODO statt drawLevel(int level) -> drawLayerX(int leveL);
 
-		//@TODO
 		//std::set<Vector2> returnCollisionLayer(int level);
 
 		//Vector2 returnSpawnableBorderTiles(int level);
