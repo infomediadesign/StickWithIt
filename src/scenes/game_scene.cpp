@@ -18,7 +18,7 @@ void scenes::GameScene::Update()
 {
 	//So umbauen dass die Schleife erst durchgelaufen wird, sofern überhaupt ein Gegner mal angegriffen hat.
 
-
+	//draw layer 1, 2, 3, 4
 	levelDrawer->drawLevel(level);
 
 	levelDrawer->exchangeTile({ 128, 128 });
@@ -55,6 +55,7 @@ void scenes::GameScene::Draw()
 
 int scenes::GameScene::changeScene()
 {
+
 	if (IsKeyPressed(KEY_F2) || !playerObjects[0]->getIsAlive()) {
 		return eMenuScene;
 	}

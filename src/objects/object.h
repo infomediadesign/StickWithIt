@@ -10,6 +10,7 @@
 #include <tuple>
 
 #include "../handlers/animation_handler.h"
+#include "../handlers/collision_handler.h"
 
 namespace objects
 {
@@ -41,10 +42,19 @@ namespace objects
 
 		int getMovePoints(); void setMovePoints(int movementPoints);
 
+		int getWeapon(); void setWeapon(int weapon);
+
+		enum Weapons
+		{
+			eScythe = 1,
+			eSpade,
+			eHoe
+		};
+
 	protected:
 
 		//// checks if future position of an object would collide
-		bool checkWouldCollide(std::vector<Vector2> positionsOfColliders, Vector2 futurePosition);
+		bool checkWouldCollide(Vector2 futurePosition);
 
 		// sprite details
 		Texture2D mTexture{};
@@ -68,7 +78,10 @@ namespace objects
 		Vector2 mPosition{};
 		Vector2 mFuturePosition{};
 
-		// animation handler
+		// handler
 		AnimationHandler* mAnimationHandler{};
+		CollisionHandler* mCollisionHandler{};
+
+		int mActiveWeapon{};
 	};
 }

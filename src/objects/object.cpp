@@ -42,23 +42,18 @@ void objects::Object::setMovePoints(int movePoints)
 	mMovePoints = movePoints;
 }
 
-bool objects::Object::checkWouldCollide(std::vector<Vector2> positionsOfColliders, Vector2 futurePosition)
+int objects::Object::getWeapon()
 {
-
-	//if future position would be on a tile 
-	for (int i = 0; i < positionsOfColliders.size(); i++)
-	{
-
-		if (positionsOfColliders[i].x == futurePosition.x && positionsOfColliders[i].y == futurePosition.y)
-		{
-
-			std::cout << "Es gab eine Kollision." << std::endl;
-			return true;
-		}
-	}
-
-	std::cout << "Es gab keine Kollision." << std::endl;
-
-	return false;
+	return mActiveWeapon;
 }
 
+void objects::Object::setWeapon(int weapon)
+{
+
+	mActiveWeapon = weapon;
+}
+
+bool objects::Object::checkWouldCollide(Vector2 futurePosition)
+{
+	return false;
+}
