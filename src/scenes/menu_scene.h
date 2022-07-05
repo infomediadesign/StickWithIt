@@ -16,11 +16,11 @@ namespace scenes
 
 		~MenuScene() override;
 
-		virtual void Update() override;
+		void Update() override;
 
-		virtual void Draw() override;
+		void Draw() override;
 
-		virtual int changeScene() override;
+		int changeScene() override;
 
 	private:
 
