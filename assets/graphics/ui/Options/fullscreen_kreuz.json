@@ -1,0 +1,29 @@
+{ "frames": {
+   "Einzelteile Ui Options.aseprite": {
+    "frame": { "x": 0, "y": 0, "w": 173, "h": 32 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 223, "y": 171, "w": 173, "h": 32 },
+    "sourceSize": { "w": 640, "h": 360 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.2.35-x64",
+  "format": "RGBA8888",
+  "size": { "w": 173, "h": 32 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Ton" },
+   { "name": "Fullscreen" },
+   { "name": "Fullscreen", "group": "Fullscreen", "opacity": 255, "blendMode": "normal" },
+   { "name": "Kreuz", "group": "Fullscreen", "opacity": 255, "blendMode": "normal" },
+   { "name": "Schrift", "group": "Fullscreen", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}
