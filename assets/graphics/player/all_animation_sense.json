@@ -1,0 +1,25 @@
+{ "frames": {
+   "all_animation_sense.aseprite": {
+    "frame": { "x": 0, "y": 0, "w": 2000, "h": 1120 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 2000, "h": 1120 },
+    "sourceSize": { "w": 2000, "h": 1120 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.2.35-x64",
+  "format": "RGBA8888",
+  "size": { "w": 2000, "h": 1120 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Layer 1", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}
