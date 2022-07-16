@@ -1,0 +1,50 @@
+{ "frames": {
+   "Button animation 0.aseprite": {
+    "frame": { "x": 1, "y": 1, "w": 128, "h": 48 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 48, "w": 128, "h": 48 },
+    "sourceSize": { "w": 128, "h": 128 },
+    "duration": 100
+   },
+   "Button animation 1.aseprite": {
+    "frame": { "x": 131, "y": 1, "w": 128, "h": 48 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 48, "w": 128, "h": 48 },
+    "sourceSize": { "w": 128, "h": 128 },
+    "duration": 100
+   },
+   "Button animation 2.aseprite": {
+    "frame": { "x": 261, "y": 1, "w": 128, "h": 48 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 48, "w": 128, "h": 48 },
+    "sourceSize": { "w": 128, "h": 128 },
+    "duration": 100
+   },
+   "Button animation 3.aseprite": {
+    "frame": { "x": 391, "y": 1, "w": 128, "h": 48 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 48, "w": 128, "h": 48 },
+    "sourceSize": { "w": 128, "h": 128 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.2.35-x64",
+  "format": "RGBA8888",
+  "size": { "w": 520, "h": 50 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Background", "opacity": 255, "blendMode": "normal" },
+   { "name": "Linien", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}
