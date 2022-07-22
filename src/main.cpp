@@ -13,7 +13,7 @@
 
 int main() {
 
-    InitWindow(Game::ScreenWidth, Game::ScreenHeight, Game::PROJECT_NAME);
+    InitWindow(game::SCREEN_WIDTH, game::SCREEN_HEIGHT, game::PROJECT_NAME);
 
     SetTargetFPS(60);
 

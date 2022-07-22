@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-add_executable(${PROJECT_NAME} main.cpp   "scenes/scene.h" "scenes/scene.cpp" "scenes/game_scene.h" "scenes/game_scene.cpp" 
+add_executable(${PROJECT_NAME} main.cpp  "scenes/scene.h" "scenes/scene.cpp" "scenes/game_scene.h" "scenes/game_scene.cpp" 
 "scenes/menu_scene.h" "scenes/menu_scene.cpp" "handlers/level_drawer.h" "handlers/level_drawer.cpp" 
 "objects/object.h" "objects/object.cpp" "handlers/combat_handler.h" "handlers/combat_handler.cpp" 
 "handlers/level_handler.h" "handlers/level_handler.cpp" "handlers/collision_handler.h" "handlers/collision_handler.cpp" "objects/player_characters/scarecrow.h" 
@@ -18,13 +18,7 @@ add_executable(${PROJECT_NAME} main.cpp   "scenes/scene.h" "scenes/scene.cpp" "s
 
 #Levin
 
-)
-
-# Add config.h.in file
-configure_file(config.h.in config.h)
-target_include_directories(${PROJECT_NAME} PUBLIC
-        "${PROJECT_BINARY_DIR}"
-        )
+ "config.h" "extras/typedefs.h")
 
 #  Link to Raylib
 target_link_libraries(${PROJECT_NAME} raylib)
