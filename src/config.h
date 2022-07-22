@@ -5,7 +5,7 @@
 namespace game {
     inline constexpr const char* PROJECT_NAME = "Stick With It";
     inline constexpr const char* PROJECT_VERSION = "0.1";
-    inline const std::unique_ptr<Image> ICON = std::make_unique<Image>(LoadImage("assets/graphics/extras/icon.png"));
+    inline const Image ICON = LoadImage("assets/graphics/extras/icon.png");
 
     inline constexpr const int SCREEN_WIDTH = 640;
     inline constexpr const int SCREEN_HEIGHT = 360;

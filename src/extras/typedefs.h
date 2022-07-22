@@ -13,5 +13,5 @@ namespace type
 	std::vector<int> Vec_Int;
 	std::vector<std::vector<int>> Vec_Vec_Int;
 
-	std::map<int, std::pair<int, int>> Map_ID_Position
+	std::map<int, std::pair<int, int>> Map_ID_Position;
 }

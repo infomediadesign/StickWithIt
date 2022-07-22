@@ -1,53 +1,44 @@
-﻿#include <cstdlib>
-#include <iostream>
-#include <raylib.h>
-#include <vector>
-#include <memory>
-
-#include "config.h"
-
-//scenes
-
-#include "scenes/game_scene.h"
-#include "scenes/menu_scene.h"
+﻿#include "config.h"
+#include "extras/headers.h"
+#include "extras/typedefs.h"
+#include "scenes/scenes.h"
 
 int main() {
 
+    // Init game
     InitWindow(game::SCREEN_WIDTH, game::SCREEN_HEIGHT, game::PROJECT_NAME);
+    SetWindowIcon(game::ICON);
+    SetTargetFPS(game::FRAMERATE);
 
-    SetTargetFPS(60);
+    // Init starting scene
+    std::unique_ptr<scenes::> activeScene = std::make_unique<scenes::MenuScene>();
 
-    std::unique_ptr<scenes::Scene> activeScene = std::make_unique<scenes::MenuScene>();
-
+    // Game loop starts here
     while (!WindowShouldClose())
     {
-
-        //start scene handling here
-
-        switch (activeScene->changeScene())
+        // Scenes know when to change to which scene
+        switch (activeScene->ChangeScene())
         {
-
-        case scenes::Scene::eScenes::eMenuScene:
+        case scenes::VirtualScene::eScenes::eMenuScene:
             activeScene = std::make_unique<scenes::MenuScene>();
             break;
-
-        case scenes::Scene::eScenes::eGameScene:
+        case scenes::VirtualScene::eScenes::eGameScene:
             activeScene = std::make_unique<scenes::GameScene>();
             break;
         }
 
+        // Update active scene
         activeScene->Update();
 
+        // Clear Background and draw scene
         BeginDrawing();
-
-        ClearBackground(WHITE);
-
-        activeScene->Draw();
-
+        {
+            ClearBackground(WHITE);
+            activeScene->Draw();
+        }
         EndDrawing();
     }
 
+    // Deinit game
     CloseWindow();
-
-    return EXIT_SUCCESS;
 }
