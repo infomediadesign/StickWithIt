@@ -3,6 +3,7 @@
 #include "extras/typedefs.h"
 #include "scenes/scenes.h"
 
+
 int main() {
 
     // Init game
@@ -11,18 +12,18 @@ int main() {
     SetTargetFPS(game::FRAMERATE);
 
     // Init starting scene
-    std::unique_ptr<scenes::> activeScene = std::make_unique<scenes::MenuScene>();
+    std::unique_ptr<scenes::Scene> activeScene = std::make_unique<scenes::MenuScene>();
 
     // Game loop starts here
     while (!WindowShouldClose())
     {
-        // Scenes know when to change to which scene
+        // Scenes know when to change to what scene
         switch (activeScene->ChangeScene())
         {
-        case scenes::VirtualScene::eScenes::eMenuScene:
+        case scenes::Scene::eMenuScene:
             activeScene = std::make_unique<scenes::MenuScene>();
             break;
-        case scenes::VirtualScene::eScenes::eGameScene:
+        case scenes::Scene::eGameScene:
             activeScene = std::make_unique<scenes::GameScene>();
             break;
         }

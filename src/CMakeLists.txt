@@ -18,7 +18,7 @@ add_executable(${PROJECT_NAME} main.cpp
 
 #Levin
 
- "config.h" "extras/typedefs.h" "scenes/scene.h" "scenes/scene.cpp")
+ "config.h" "extras/typedefs.h" "scenes/scene.h" "scenes/scene.cpp" "scenes/game_scene.h" "scenes/game_scene.cpp" "scenes/menu_scene.h" "scenes/menu_scene.cpp")
 
 #  Link to Raylib
 target_link_libraries(${PROJECT_NAME} raylib)

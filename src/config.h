@@ -2,7 +2,8 @@
 
 #include "extras/headers.h"
 
-namespace game {
+namespace game 
+{
     inline constexpr const char* PROJECT_NAME = "Stick With It";
     inline constexpr const char* PROJECT_VERSION = "0.1";
     inline const Image ICON = LoadImage("assets/graphics/extras/icon.png");
