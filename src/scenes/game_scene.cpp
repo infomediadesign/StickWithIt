@@ -7,8 +7,10 @@ scenes::GameScene::GameScene()
 }
 
 
-scenes::GameScene::~GameScene() { 
-	std::cout << "Game scene deleted!" << std::endl; }
+scenes::GameScene::~GameScene()
+{ 
+	std::cout << "Game scene deleted!" << std::endl; 
+}
 
 
 // Update current scene here

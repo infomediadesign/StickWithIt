@@ -6,6 +6,7 @@ scenes::MenuScene::MenuScene()
 	std::cout << "Menu scene called!" << std::endl;
 }
 
+
 scenes::MenuScene::~MenuScene() {
 	std::cout << "Menu scene deleted!" << std::endl; }
 
