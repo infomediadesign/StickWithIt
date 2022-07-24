@@ -1,12 +1,13 @@
-#include "virtual_player_character.h"
+#include "pc.h"
 
-objects::VirtualPlayerCharacter::~VirtualPlayerCharacter() {
+
+objects::PC::~PC() {
 }
 
-void objects::VirtualPlayerCharacter::Attack()
+
+type::Pair_Damage_Vec_Position objects::PC::Attack()
 {
-	// sets positionsofattacks
-	// sets attackdamage
+	type::Pair_Damage_Vec_Position damagePlusPositions;
 
 	// make algorithm out of this
 	if (_animationPlayer->GetIsAnimationOver())
@@ -15,23 +16,23 @@ void objects::VirtualPlayerCharacter::Attack()
 		{
 			if (_activeWeapon == eNoWeapon) {
 				_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackUp);
-				_positionsOfAttacks = { {_position.first + 0, _position.second - 1} };
-				_damageOfAttack = _attackDamage;
+				damagePlusPositions.second = {{_position.first + 0, _position.second - 1}};
+				damagePlusPositions.first = _attackDamage;
 			}
 			if (_activeWeapon == eScythe) {
 				_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackUp);
-				_positionsOfAttacks = { {_position.first + 0, _position.second - 1}, {_position.first + 0, _position.second - 2} , {_position.first - 1, _position.second - 2} };
-				_damageOfAttack = _attackDamage;
+				damagePlusPositions.second = { {_position.first + 0, _position.second - 1}, {_position.first + 0, _position.second - 2} , {_position.first - 1, _position.second - 2} };
+				damagePlusPositions.first = _attackDamage;
 			}
 			if (_activeWeapon == eShovel) {
 				_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackUp2);
-				_positionsOfAttacks = { {_position.first + 0, _position.second - 1}, {_position.first - 1, _position.second - 2} , {_position.first + 0, _position.second - 3} };
-				_damageOfAttack = _attackDamage;
+				damagePlusPositions.second = { {_position.first + 0, _position.second - 1}, {_position.first - 1, _position.second - 2} , {_position.first + 0, _position.second - 3} };
+				damagePlusPositions.first = _attackDamage;
 			}
 			if (_activeWeapon == eHoe) {
 				_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackUp3);
-				_positionsOfAttacks = { {_position.first - 1, _position.second - 1}, {_position.first + 0, _position.second - 1} , {_position.first + 1, _position.second - 1} };
-				_damageOfAttack = _attackDamage;
+				damagePlusPositions.second = { {_position.first - 1, _position.second - 1}, {_position.first + 0, _position.second - 1} , {_position.first + 1, _position.second - 1} };
+				damagePlusPositions.first = _attackDamage;
 			}
 			_hasAttacked = true;
 		}
@@ -39,23 +40,23 @@ void objects::VirtualPlayerCharacter::Attack()
 		{
 			if (_activeWeapon == eNoWeapon) {
 				_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackDown);
-				_positionsOfAttacks = { {_position.first + 0, _position.second + 1} };
-				_damageOfAttack = _attackDamage;
+				damagePlusPositions.second = { {_position.first + 0, _position.second + 1} };
+				damagePlusPositions.first = _attackDamage;
 			}
 			if (_activeWeapon == eScythe) {
 				_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackDown);
-				_positionsOfAttacks = { {_position.first + 0, _position.second + 1}, {_position.first + 0, _position.second + 2} , {_position.first + 1, _position.second + 2} };
-				_damageOfAttack = _attackDamage;
+				damagePlusPositions.second = { {_position.first + 0, _position.second + 1}, {_position.first + 0, _position.second + 2} , {_position.first + 1, _position.second + 2} };
+				damagePlusPositions.first = _attackDamage;
 			}
 			if (_activeWeapon == eShovel) {
 				_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackDown2);
-				_positionsOfAttacks = { {_position.first + 0, _position.second + 1}, {_position.first + 1, _position.second + 2} , {_position.first + 0, _position.second + 3} };
-				_damageOfAttack = _attackDamage;
+				damagePlusPositions.second = { {_position.first + 0, _position.second + 1}, {_position.first + 1, _position.second + 2} , {_position.first + 0, _position.second + 3} };
+				damagePlusPositions.first = _attackDamage;
 			}
 			if (_activeWeapon == eHoe) {
 				_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackDown3);
-				_positionsOfAttacks = { {_position.first + 1, _position.second + 1}, {_position.first + 0, _position.second + 1} , {_position.first - 1, _position.second + 1} };
-				_damageOfAttack = _attackDamage;
+				damagePlusPositions.second = { {_position.first + 1, _position.second + 1}, {_position.first + 0, _position.second + 1} , {_position.first - 1, _position.second + 1} };
+				damagePlusPositions.first = _attackDamage;
 			}
 			_hasAttacked = true;
 		}
@@ -63,23 +64,23 @@ void objects::VirtualPlayerCharacter::Attack()
 		{
 			if (_activeWeapon == eNoWeapon) {
 				_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackRight);
-				_positionsOfAttacks = { {_position.first + 1, _position.second + 0} };
-				_damageOfAttack = _attackDamage;
+				damagePlusPositions.second = { {_position.first + 1, _position.second + 0} };
+				damagePlusPositions.first = _attackDamage;
 			}
 			if (_activeWeapon == eScythe) {
 				_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackRight);
-				_positionsOfAttacks = { {_position.first + 1, _position.second + 0}, {_position.first + 2, _position.second + 0} , {_position.first + 2, _position.second - 1} };
-				_damageOfAttack = _attackDamage;
+				damagePlusPositions.second = { {_position.first + 1, _position.second + 0}, {_position.first + 2, _position.second + 0} , {_position.first + 2, _position.second - 1} };
+				damagePlusPositions.first = _attackDamage;
 			}
 			if (_activeWeapon == eShovel) {
 				_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackRight2);
-				_positionsOfAttacks = { {_position.first + 1, _position.second + 0}, {_position.first + 2, _position.second - 1} , {_position.first + 3, _position.second + 0} };
-				_damageOfAttack = _attackDamage;
+				damagePlusPositions.second = { {_position.first + 1, _position.second + 0}, {_position.first + 2, _position.second - 1} , {_position.first + 3, _position.second + 0} };
+				damagePlusPositions.first = _attackDamage;
 			}
 			if (_activeWeapon == eHoe) {
 				_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackRight3);
-				_positionsOfAttacks = { {_position.first + 1, _position.second - 1}, {_position.first + 1, _position.second + 0} , {_position.first + 1, _position.second + 1} };
-				_damageOfAttack = _attackDamage;
+				damagePlusPositions.second = { {_position.first + 1, _position.second - 1}, {_position.first + 1, _position.second + 0} , {_position.first + 1, _position.second + 1} };
+				damagePlusPositions.first = _attackDamage;
 			}
 			_hasAttacked = true;
 		}
@@ -87,37 +88,38 @@ void objects::VirtualPlayerCharacter::Attack()
 		{
 			if (_activeWeapon == eNoWeapon) {
 				_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackLeft);
-				_positionsOfAttacks = { {_position.first - 1, _position.second + 0} };
-				_damageOfAttack = _attackDamage;
+				damagePlusPositions.second = { {_position.first - 1, _position.second + 0} };
+				damagePlusPositions.first = _attackDamage;
 			}
 			if (_activeWeapon == eScythe) {
 				_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackLeft);
-				_positionsOfAttacks = { {_position.first - 1, _position.second + 0}, {_position.first - 2, _position.second + 0} , {_position.first - 2, _position.second + 1} };
-				_damageOfAttack = _attackDamage;
+				damagePlusPositions.second= { {_position.first - 1, _position.second + 0}, {_position.first - 2, _position.second + 0} , {_position.first - 2, _position.second + 1} };
+				damagePlusPositions.first = _attackDamage;
 			}
 			if (_activeWeapon == eShovel) {
 				_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackLeft);
-				_positionsOfAttacks = { {_position.first - 1, _position.second + 0}, {_position.first - 2, _position.second + 1} , {_position.first - 3, _position.second + 0} };
-				_damageOfAttack = _attackDamage;
+				damagePlusPositions.second = { {_position.first - 1, _position.second + 0}, {_position.first - 2, _position.second + 1} , {_position.first - 3, _position.second + 0} };
+				damagePlusPositions.first = _attackDamage;
 			}
 			if (_activeWeapon == eHoe) {
 				_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackLeft);
-				_positionsOfAttacks = { {_position.first - 1, _position.second + 1}, {_position.first - 1, _position.second + 0} , {_position.first - 1, _position.second - 1} };
-				_damageOfAttack = _attackDamage;
+				damagePlusPositions.second = { {_position.first - 1, _position.second + 1}, {_position.first - 1, _position.second + 0} , {_position.first - 1, _position.second - 1} };
+				damagePlusPositions.first = _attackDamage;
 			}
 			_hasAttacked = true;
 		}
 	}
 }
 
-void objects::VirtualPlayerCharacter::Spawn(type::VectorPositions spawnLayer, type::VectorPositions collisionPositions)
+
+void objects::PC::Spawn(type::Vec_Position spawnLayer, type::Vec_Ptr_Position collisionPositions)
 {
 	for (auto& possibleSpawn : spawnLayer) {
 
 		bool checkIfPositionIsAvailable = true;
 
 		for (auto& collisionPosition : collisionPositions) {
-			if (possibleSpawn == collisionPosition)
+			if (possibleSpawn.first == *collisionPosition.first && possibleSpawn.second == *collisionPosition.second)
 				checkIfPositionIsAvailable = false;
 		}
 
@@ -129,7 +131,8 @@ void objects::VirtualPlayerCharacter::Spawn(type::VectorPositions spawnLayer, ty
 	}
 }
 
-void objects::VirtualPlayerCharacter::Move(type::VectorPositions collisionLayer)
+
+void objects::PC::Move(type::Vec_Ptr_Position collisionLayer)
 {
 	if (_isActive == true)
 	{
@@ -158,14 +161,14 @@ void objects::VirtualPlayerCharacter::Move(type::VectorPositions collisionLayer)
 			}
 
 			// Check if position would be on border
-			if (futurePosition.first < 0 + 1 || futurePosition.first > data::cTilesPerRow - 2)
+			if (futurePosition.first < 0 + 1 || futurePosition.first > game::TILES_PER_ROW - 2)
 				futurePosition.first = _position.first;
-			if (futurePosition.second < 0 + 1 || futurePosition.second > data::cTilesPerColumn - 2)
+			if (futurePosition.second < 0 + 1 || futurePosition.second > game::TILES_PER_COLUMN - 2)
 				futurePosition.second = _position.second;
 
 			// Check if positition would be on collision
 			for (auto& collisionPosition : collisionLayer)
-				if (futurePosition == collisionPosition)
+				if (futurePosition.first == *collisionPosition.first && futurePosition.second == *collisionPosition.second)
 					futurePosition = _position;
 
 			// If theres neither collision or border, move the object
@@ -178,36 +181,50 @@ void objects::VirtualPlayerCharacter::Move(type::VectorPositions collisionLayer)
 	}
 }
 
-void objects::VirtualPlayerCharacter::Animate()
+
+void objects::PC::Animate()
 {
-	if (_isActive == true)
-		_animationPlayer->SetWantedSpeed(_wantedSpeed - 2);
-	else
-		_animationPlayer->SetWantedSpeed(_wantedSpeed);
+	if (_isActive == true && _speedIsAdjusted == false)
+	{
+		_wantedSpeed += 2;
+		_speedIsAdjusted = true;
+	}
+	else if (_isActive == false)
+	{
+		_wantedSpeed -= 2;
+		_speedIsAdjusted = false;
+	}
+
 
 	_animationPlayer->Animate();
 }
 
-bool objects::VirtualPlayerCharacter::GetIsActive() {
+
+bool objects::PC::GetIsActive() {
 	return _isActive;
 }
 
-void objects::VirtualPlayerCharacter::SetIsActive(bool isActive) {
+
+void objects::PC::SetIsActive(bool isActive) {
 	_isActive = isActive;
 }
 
-int objects::VirtualPlayerCharacter::GetActionPoints() {
+
+int objects::PC::GetActionPoints() {
 	return _actionPoints;
 }
 
-void objects::VirtualPlayerCharacter::SetActionPoints(int actionPoints) {
+
+void objects::PC::SetActionPoints(int actionPoints) {
 	_actionPoints = actionPoints;
 }
 
-int objects::VirtualPlayerCharacter::GetActiveWeapon() {
+
+int objects::PC::GetActiveWeapon() {
 	return _activeWeapon;
 }
 
-void objects::VirtualPlayerCharacter::SetActiveWeapon(int weapon) {
+
+void objects::PC::SetActiveWeapon(int weapon) {
 	_activeWeapon = weapon;
 }

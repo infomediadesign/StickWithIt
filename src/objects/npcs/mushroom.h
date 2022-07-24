@@ -1,13 +1,14 @@
 #pragma once
 
-#include "../../extras/headers.h"
-#include "virtual_non_player_character.h"
+#include "../npc.h"
 
-namespace objects {
-	class Mushroom : public VirtualNonPlayerCharacter {
+namespace objects
+{
+	class Mushroom : public NPC 
+	{
 	public:
-		Mushroom();
 
+		Mushroom();
 		~Mushroom() override;
 	};
 }

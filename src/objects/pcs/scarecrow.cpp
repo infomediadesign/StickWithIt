@@ -16,13 +16,13 @@ objects::Scarecrow::Scarecrow()
 	_activeWeapon = eScythe;
 
 	// Default sprite data 
-	_texture = std::make_shared<Texture2D>(LoadTextureFromImage(*data::cTextureScarecrow));
+	_texture = LoadTextureFromImage(textures::SCARECROW);
 	_textureColumns = 25;
 	_textureRows = 14;
 	_textureWidth = 2000;
 	_textureHeight = 1120;
 	_wantedSpeed = 6;
-	_textureOffset = { 40 - data::cHalfTileSize, 45 - data::cHalfTileSize }; // The position of objects feet - distance from tile corner to tile mid
+	_textureOffset = { 40 - game::HALF_TILE_SIZE, 45 - game::HALF_TILE_SIZE }; // The position of objects feet - distance from tile corner to tile mid
 	_framesPerRow = {
 		15, 15, 15, 15,
 		9, 9, 9, 9,
@@ -31,8 +31,8 @@ objects::Scarecrow::Scarecrow()
 	};
 
 	// Animation player to tell object what animation to play
-	_animationPlayer = std::make_unique<handlers::AnimationPlayer>(&_position, _texture, _textureColumns, _textureRows, _textureWidth, _textureHeight,
-		_wantedSpeed, _textureOffset, _framesPerRow);
+	_animationPlayer = std::make_unique<handlers::AnimationPlayer>(&_position, &_texture, _textureColumns, _textureRows, _textureWidth, _textureHeight,
+		&_wantedSpeed, _textureOffset, _framesPerRow);
 }
 
 objects::Scarecrow::~Scarecrow() {

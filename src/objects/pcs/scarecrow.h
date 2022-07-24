@@ -1,11 +1,14 @@
 #pragma once
 
-#include "../../extras/headers.h"
-#include "virtual_player_character.h"
+#include "../pc.h"
 
-namespace objects {
-	class Scarecrow : public VirtualPlayerCharacter {
+
+namespace objects 
+{
+	class Scarecrow : public PC 
+	{
 	public:
+
 		Scarecrow();
 		~Scarecrow() override;
 	};

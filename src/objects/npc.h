@@ -1,24 +1,32 @@
 #pragma once
 
-#include "../../extras/headers.h"
-#include "../virtual_object.h"
-#include "../../handlers/pathfinder.h"
+#include "object.h"
+#include "../handlers/pathfinder.h"
 
-namespace objects {
-	class VirtualNonPlayerCharacter : public VirtualObject {
+
+namespace objects
+{
+	class NPC : public Object
+	{
 	public:
-		virtual ~VirtualNonPlayerCharacter() = 0;
+
+		virtual ~NPC() = 0;
+
 
 		// If an object is in reach of another enemy object, it attacks...
-		void Attack() override;
+		type::Pair_Damage_Vec_Position Attack() override;
 
-		void Spawn(type::VectorPositions spawnLayer, type::VectorPositions collisionPositions) override;
+
+		void Spawn(type::Vec_Position spawnLayer, type::Vec_Ptr_Position collisionPositions) override;
+
 
 		// Walk dependant on input or the path found, take collisions into account
-		void Move(type::VectorPositions collisionLayer) override;
+		void Move(type::Vec_Ptr_Position collisionLayer) override;
+
 
 	protected:
+
 		// Pathfinder object to find path in Walk();
-		std::unique_ptr<handlers::Pathfinder> _pathfinder = nullptr;
+		std::unique_ptr<handlers::Pathfinder> _pathfinder = {};
 	};
 }

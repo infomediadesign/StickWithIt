@@ -1,17 +1,20 @@
 #include "animation_player.h"
 
-handlers::AnimationPlayer::AnimationPlayer(type::Position* position, std::shared_ptr<Texture2D>& texture, int& textureColumns, int& textureRows,
-    int& textureWidth, int& textureHeight, int& wantedSpeed, type::Position& textureOffset, type::VectorInt& framesPerRow)
+
+handlers::AnimationPlayer::AnimationPlayer(type::Ptr_Position position, Texture2D* texture, int textureColumns, int textureRows, int textureWidth, int textureHeight,
+    int* wantedSpeed, type::Position textureOffset, type::Vec_Int framesPerRow)
     : _position(position), _texture(texture), _textureColumns(textureColumns), _textureRows(textureRows),
     _textureWidth(textureWidth), _textureHeight(textureHeight), _wantedSpeed(wantedSpeed), _textureOffset(textureOffset), _framesPerRow(framesPerRow)
 {
     std::cout << "Animation player created!" << std::endl;
 }
 
+
 handlers::AnimationPlayer::~AnimationPlayer()
 {
     std::cout << "Animation player deleted!" << std::endl;
 }
+
 
 // When we input a new animation:
 void handlers::AnimationPlayer::SetCurrentAnimation(int animation) {
@@ -20,26 +23,27 @@ void handlers::AnimationPlayer::SetCurrentAnimation(int animation) {
     _isAnimationOver = false;
 }
 
+
 bool handlers::AnimationPlayer::GetIsAnimationOver() {
     return _isAnimationOver;
 }
+
 
 void handlers::AnimationPlayer::SetIsObjectScareCrow(bool isObjectScarecrow)
 {
     _isObjectScarecrow = isObjectScarecrow;
 }
 
+
 void handlers::AnimationPlayer::MakeTransparent() {
     _color = { 255, 255, 255, 150 };
 }
 
-void handlers::AnimationPlayer::MakeUnTransparent() {
+
+void handlers::AnimationPlayer::MakeUntransparent() {
     _color = { 255, 255, 255, 255 };
 }
 
-void handlers::AnimationPlayer::SetWantedSpeed(int wantedSpeed) {
-    _wantedSpeed = wantedSpeed;
-}
 
 void handlers::AnimationPlayer::Animate()
 {
@@ -55,23 +59,25 @@ void handlers::AnimationPlayer::Animate()
         || _currentAnimation == eWalkRight
         || _currentAnimation == eWalkLeft)
     {
+
         // If the current frame is smaller than the last frame of the row (row starts at 1 and current frame at 0):
         // Draw rectangle of texture dependant of current animation and frame
         // Draws the same frame as long as we haven't reached wanted speed
         if (_currentFrame < _framesPerRow[_currentAnimation])
         {
+
             DrawTextureRec(*_texture,
                 { static_cast<float>(_textureWidth) / _textureColumns * _currentFrame,
                 static_cast<float>(_textureHeight) / _textureRows * _currentAnimation,
                 static_cast<float>(_textureWidth) / _textureColumns,
                 static_cast<float>(_textureHeight) / _textureRows },
-                { static_cast<float>(_position->first * data::cTilesize) - _textureOffset.first,
-                static_cast<float>(_position->second * data::cTilesize) - _textureOffset.second },
+                { static_cast<float>(*_position.first * game::TILE_SIZE) - _textureOffset.first,
+                static_cast<float>(*_position.second * game::TILE_SIZE) - _textureOffset.second },
                 _color);
 
             // Once specific number of updates have happened:
             // Reset speed iterator and show next frame
-            if (_speedIterator >= _wantedSpeed)
+            if (_speedIterator >= *_wantedSpeed)
             {
                 _currentFrame++;
                 _speedIterator = 0;
@@ -79,6 +85,7 @@ void handlers::AnimationPlayer::Animate()
             else
                 _speedIterator += GetFrameTime() * _standartSpeed;
         }
+
 
         // When specific frames of following animations have been played, make the animation cancable
         if (_currentFrame > _numberOfFramesToNotCancel
@@ -99,6 +106,7 @@ void handlers::AnimationPlayer::Animate()
             _isAnimationOver = false;
             _currentFrame--;
         }
+
 
         // If a full animation hast been played it will switch to the dependant idle animation
         // Idle animations are also cancable but without the need of playing specific frames first

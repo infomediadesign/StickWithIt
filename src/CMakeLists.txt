@@ -11,10 +11,12 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 add_executable(${PROJECT_NAME} main.cpp 
 #Silas
 "config.h" "extras/typedefs.h" "scenes/scene.h" "scenes/scene.cpp" "scenes/game_scene.h" "scenes/game_scene.cpp" "scenes/menu_scene.h" "scenes/menu_scene.cpp" 
-"handlers/animation_player.h" "handlers/animation_player.cpp" "handlers/level_handler.h" "handlers/level_handler.cpp" 
+"handlers/animation_player.h" "handlers/animation_player.cpp" "handlers/level_handler.h" "handlers/level_handler.cpp" "handlers/pathfinder.h" "handlers/pathfinder.cpp" 
+"objects/objects.h" "objects/object.h" "objects/object.cpp" "objects/npc.h" "objects/pc.h" "objects/npc.cpp" "objects/pc.cpp" "objects/npcs/mushroom.h" "objects/npcs/mushroom.cpp" 
+"objects/pcs/scarecrow.h" "objects/pcs/scarecrow.cpp" "objects/npcs/bird.h" "objects/npcs/bird.cpp" "objects/pcs/fly.h" "objects/pcs/fly.cpp" "handlers/pathfinder_test.h"
 #Levin
 
- "handlers/pathfinder.h" "handlers/pathfinder.cpp" "objects/objects.h" "objects/object.h" "objects/object.cpp" "objects/npc.h" "objects/pc.h" "objects/npc.cpp" "objects/pc.cpp" "objects/npcs/mushroom.h" "objects/npcs/mushroom.cpp" "objects/pcs/scarecrow.h" "objects/pcs/scarecrow.cpp" "objects/npcs/bird.h" "objects/npcs/bird.cpp" "objects/pcs/fly.h" "objects/pcs/fly.cpp")
+  "extras/textures.h")
 
 #  Link to Raylib
 target_link_libraries(${PROJECT_NAME} raylib)

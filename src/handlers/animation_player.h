@@ -5,31 +5,41 @@
 #include "../extras/typedefs.h"
 
 
-namespace handlers {
-	class AnimationPlayer {
+namespace handlers 
+{
+	class AnimationPlayer 
+	{
 	public:
-		AnimationPlayer(type::Position* position, std::shared_ptr<Texture2D>& texture, int& textureColumns, int& textureRows, int& textureWidth, int& textureHeight,
-			int& wantedSpeed, type::Position& textureOffset, type::VectorInt& framesPerRow);
 
+		AnimationPlayer(type::Ptr_Position position, Texture2D* texture, int textureColumns, int textureRows, int textureWidth, int textureHeight,
+			int* wantedSpeed, type::Position textureOffset, type::Vec_Int framesPerRow);
 		~AnimationPlayer();
+
 
 		// Draws the current animation
 		void Animate();
 
+
 		// changes the current animation to wanted animation
 		void SetCurrentAnimation(int animation);
+
 
 		// Getter and Setter
 		bool GetIsAnimationOver();
 
+
+
 		// Call this in constructor of scarecrow
+		// This enables the animation player to keep playing the last frame of scarecrows death
 		void SetIsObjectScareCrow(bool isObjectScarecrow);
 
-		void MakeTransparent(); void MakeUnTransparent();
-		void SetWantedSpeed(int wantedSpeed);
+
+		void MakeTransparent(); void MakeUntransparent();
+
 
 		// Lists all possible animations (scarecrow has 1 death and 8 attack animations more)
-		enum eAnimations {
+		enum animations
+		{
 			eIdleUp, eIdleDown, eIdleRight, eIdleLeft,
 			eWalkUp, eWalkDown, eWalkRight, eWalkLeft,
 			eAttackUp, eAttackDown, eAttackRight, eAttackLeft,
@@ -38,17 +48,22 @@ namespace handlers {
 			eAttackUp3, eAttackDown3, eAttackRight3, eAttackLeft3
 		};
 
+
 	private:
+
 		// Generic sprite data
-		type::Position* _position = nullptr;
-		std::shared_ptr<Texture2D> _texture = nullptr;
-		int _textureColumns = 0;
-		int _textureRows = 0;
-		int _textureWidth = 0;
-		int _textureHeight = 0;
-		int _wantedSpeed = 0;
+		// This will change in the lifetime of an object
+		type::Ptr_Position _position = {};
+		int* _wantedSpeed = {};
+		// This wont't change
+		Texture2D* _texture = {};
+		int _textureColumns = {};
+		int _textureRows = {};
+		int _textureWidth = {};
+		int _textureHeight = {};
 		type::Position _textureOffset = {};
-		type::VectorInt _framesPerRow = {};
+		type::Vec_Int _framesPerRow = {};
+
 
 		// Holds data of current animation state
 		int _currentAnimation = eIdleDown;

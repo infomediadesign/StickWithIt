@@ -1,13 +1,13 @@
-#include "virtual_non_player_character.h"
+#include "npc.h"
 
-objects::VirtualNonPlayerCharacter::~VirtualNonPlayerCharacter() {
+objects::NPC::~NPC() {
 }
 
-void objects::VirtualNonPlayerCharacter::Attack()
+type::Pair_Damage_Vec_Position objects::NPC::Attack()
 {
 }
 
-void objects::VirtualNonPlayerCharacter::Spawn(type::VectorPositions spawnLayer, type::VectorPositions collisionPositions)
+void objects::NPC::Spawn(type::Vec_Position spawnLayer, type::Vec_Ptr_Position collisionPositions)
 {
 	unsigned int seed = static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count());
 
@@ -19,7 +19,7 @@ void objects::VirtualNonPlayerCharacter::Spawn(type::VectorPositions spawnLayer,
 
 		// Check if there is no collision on spawnable tile
 		for (auto& collisionPosition : collisionPositions) {
-			if (collisionPosition == possibleSpawn)
+			if (*collisionPosition.first == possibleSpawn.first && *collisionPosition.second == possibleSpawn.second)
 				checkIfPositionIsAvailable = false;
 		}
 
@@ -41,6 +41,6 @@ void objects::VirtualNonPlayerCharacter::Spawn(type::VectorPositions spawnLayer,
 		_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eIdleUp);
 }
 
-void objects::VirtualNonPlayerCharacter::Move(type::VectorPositions collisionLayer)
+void objects::NPC::Move(type::Vec_Ptr_Position collisionLayer)
 {
 }

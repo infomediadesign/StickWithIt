@@ -1,80 +1,89 @@
-#include "virtual_object.h"
+#include "object.h"
 
-objects::VirtualObject::~VirtualObject() {
-	UnloadTexture(*_texture);
-}
 
-void objects::VirtualObject::GetDamage(int damage, type::VectorPositions positions)
+objects::Object::~Object()
 {
+	UnloadTexture(_texture);
 }
 
-void objects::VirtualObject::Animate() {
+void objects::Object::GetDamage(type::Pair_Damage_Vec_Position damageAndPositions)
+{
+
+}
+
+
+void objects::Object::Animate() 
+{
 	_animationPlayer->Animate();
 }
 
-bool objects::VirtualObject::GetHasAttacked()
+
+bool objects::Object::GetHasAttacked()
 {
 	return _hasAttacked;
 }
 
-void objects::VirtualObject::SetHasAttacked(bool hasAttacked) {
+
+void objects::Object::SetHasAttacked(bool hasAttacked) {
 	_hasAttacked = hasAttacked;
 }
 
-bool objects::VirtualObject::GetHasMoved() {
+
+bool objects::Object::GetHasMoved() {
 	return _hasMoved;
 }
 
-void objects::VirtualObject::SetHasMoved(bool hasMoved) {
+
+void objects::Object::SetHasMoved(bool hasMoved) {
 	_hasMoved = hasMoved;
 }
 
-int objects::VirtualObject::GetLives() {
+
+int objects::Object::GetLives() {
 	return _lives;
 }
 
-void objects::VirtualObject::SetLives(int lives) {
+
+void objects::Object::SetLives(int lives) {
 	_lives = lives;
 }
 
-int objects::VirtualObject::GetMovePoints() {
+
+int objects::Object::GetMovePoints() {
 	return _movePoints;
 }
 
-void objects::VirtualObject::SetMovePoints(int movePoints) {
+
+void objects::Object::SetMovePoints(int movePoints) {
 	_movePoints = movePoints;
 }
 
-bool objects::VirtualObject::GetIsAlive() {
+
+bool objects::Object::GetIsAlive() {
 	return _isAlive;
 }
 
-void objects::VirtualObject::SetIsAlive(bool isAlive) {
+
+void objects::Object::SetIsAlive(bool isAlive) {
 	_isAlive = isAlive;
 }
 
-bool objects::VirtualObject::GetCanFly() {
+
+bool objects::Object::GetCanFly() {
 	return _canFly;
 }
 
-void objects::VirtualObject::setCanFly(bool canFly) {
+
+void objects::Object::setCanFly(bool canFly) {
 	_canFly = canFly;
 }
 
-type::VectorPositions objects::VirtualObject::GetPositionsOfAttacks()
-{
-	return _positionsOfAttacks;
-}
 
-int objects::VirtualObject::GetDamageOfAttack()
-{
-	return _damageOfAttack;
-}
-
-type::Position* objects::VirtualObject::GetPosition() {
+type::Position* objects::Object::GetPosition() {
 	return &_position;
 }
 
-void objects::VirtualObject::SetPosition(type::Position position) {
+
+void objects::Object::SetPosition(type::Position position) {
 	_position = position;
 }

@@ -39,6 +39,8 @@ int main() {
         EndDrawing();
     }
 
+    UnloadImage(game::ICON);
+
     // Deinit game
     CloseWindow();
 }

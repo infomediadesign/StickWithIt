@@ -13,13 +13,13 @@ objects::Mushroom::Mushroom()
 	_position = { 0, 0 };
 
 	// Default sprite data 
-	_texture = std::make_shared<Texture2D>(LoadTextureFromImage(*data::cTextureMushroom));
+	_texture = LoadTextureFromImage(textures::MUSHROOM);
 	_textureColumns = 8;
 	_textureRows = 13;
 	_textureWidth = 640;
 	_textureHeight = 1040;
 	_wantedSpeed = 15;
-	_textureOffset = { 40 - data::cHalfTileSize, 48 - data::cHalfTileSize }; // The position of objects feet - distance from tile corner to tile mid
+	_textureOffset = { 40 - game::HALF_TILE_SIZE, 48 - game::HALF_TILE_SIZE }; // The position of objects feet - distance from tile corner to tile mid
 	_framesPerRow = {
 		8, 8, 8, 8,
 		8, 8, 8, 8,
@@ -28,8 +28,8 @@ objects::Mushroom::Mushroom()
 	};
 
 	// Animation player to tell object what animation to play
-	_animationPlayer = std::make_unique<handlers::AnimationPlayer>(&_position, _texture, _textureColumns, _textureRows, _textureWidth, _textureHeight,
-		_wantedSpeed, _textureOffset, _framesPerRow);
+	_animationPlayer = std::make_unique<handlers::AnimationPlayer>(&_position, &_texture,_textureColumns, _textureRows, _textureWidth, _textureHeight,
+		&_wantedSpeed, _textureOffset, _framesPerRow);
 
 	// Pathfinder object to find path in Walk();
 	_pathfinder = nullptr;
