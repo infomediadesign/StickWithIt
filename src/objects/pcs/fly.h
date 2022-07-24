@@ -1,10 +1,15 @@
 #pragma once
 
-#include "../../extras/headers.h"
-#include "virtual_player_character.h"
+#include "../pc.h"
 
-namespace objects {
-	class Fly : public VirtualPlayerCharacter {
 
+namespace objects
+{
+	class Fly : public PC
+	{
+	public:
+
+		Fly();
+		~Fly() override;
 	};
 }

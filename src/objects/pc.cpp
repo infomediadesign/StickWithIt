@@ -35,6 +35,7 @@ type::Pair_Damage_Vec_Position objects::PC::Attack()
 				damagePlusPositions.first = _attackDamage;
 			}
 			_hasAttacked = true;
+			return damagePlusPositions;
 		}
 		if (IsKeyPressed(KEY_DOWN))
 		{
@@ -59,6 +60,7 @@ type::Pair_Damage_Vec_Position objects::PC::Attack()
 				damagePlusPositions.first = _attackDamage;
 			}
 			_hasAttacked = true;
+			return damagePlusPositions;
 		}
 		if (IsKeyPressed(KEY_RIGHT))
 		{
@@ -83,6 +85,7 @@ type::Pair_Damage_Vec_Position objects::PC::Attack()
 				damagePlusPositions.first = _attackDamage;
 			}
 			_hasAttacked = true;
+			return damagePlusPositions;
 		}
 		if (IsKeyPressed(KEY_LEFT))
 		{
@@ -107,19 +110,20 @@ type::Pair_Damage_Vec_Position objects::PC::Attack()
 				damagePlusPositions.first = _attackDamage;
 			}
 			_hasAttacked = true;
+			return damagePlusPositions;
 		}
 	}
 }
 
 
-void objects::PC::Spawn(type::Vec_Position spawnLayer, type::Vec_Ptr_Position collisionPositions)
+void objects::PC::Spawn(type::Vec_Position spawnLayer, type::Vec_Position* collisionPositions)
 {
 	for (auto& possibleSpawn : spawnLayer) {
 
 		bool checkIfPositionIsAvailable = true;
 
-		for (auto& collisionPosition : collisionPositions) {
-			if (possibleSpawn.first == *collisionPosition.first && possibleSpawn.second == *collisionPosition.second)
+		for (auto& collisionPosition : *collisionPositions) {
+			if (collisionPosition == possibleSpawn)
 				checkIfPositionIsAvailable = false;
 		}
 
@@ -132,7 +136,7 @@ void objects::PC::Spawn(type::Vec_Position spawnLayer, type::Vec_Ptr_Position co
 }
 
 
-void objects::PC::Move(type::Vec_Ptr_Position collisionLayer)
+void objects::PC::Move(type::Vec_Position* collisionLayer)
 {
 	if (_isActive == true)
 	{
@@ -167,8 +171,8 @@ void objects::PC::Move(type::Vec_Ptr_Position collisionLayer)
 				futurePosition.second = _position.second;
 
 			// Check if positition would be on collision
-			for (auto& collisionPosition : collisionLayer)
-				if (futurePosition.first == *collisionPosition.first && futurePosition.second == *collisionPosition.second)
+			for (auto& collisionPosition : *collisionLayer)
+				if (collisionPosition == futurePosition)
 					futurePosition = _position;
 
 			// If theres neither collision or border, move the object
@@ -189,7 +193,7 @@ void objects::PC::Animate()
 		_wantedSpeed += 2;
 		_speedIsAdjusted = true;
 	}
-	else if (_isActive == false)
+	else if (_isActive == false && _speedIsAdjusted == true)
 	{
 		_wantedSpeed -= 2;
 		_speedIsAdjusted = false;

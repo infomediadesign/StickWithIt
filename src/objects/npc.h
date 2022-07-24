@@ -17,11 +17,11 @@ namespace objects
 		type::Pair_Damage_Vec_Position Attack() override;
 
 
-		void Spawn(type::Vec_Position spawnLayer, type::Vec_Ptr_Position collisionPositions) override;
+		void Spawn(type::Vec_Position spawnLayer, type::Vec_Position* collisionPositions) override;
 
 
 		// Walk dependant on input or the path found, take collisions into account
-		void Move(type::Vec_Ptr_Position collisionLayer) override;
+		void Move(type::Vec_Position* collisionLayer) override;
 
 
 	protected:

@@ -19,8 +19,8 @@ namespace handlers
         void DrawAir();
 
 
-        type::Vec_Ptr_Position GetCollisionsGround();
-        type::Vec_Ptr_Position GetCollisionsSky();
+        type::Vec_Position GetCollisionsGround();
+        type::Vec_Position GetCollisionsSky();
 
 
         type::Vec_Position GetSpawnsGround();

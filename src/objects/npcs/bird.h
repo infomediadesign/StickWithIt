@@ -1,10 +1,14 @@
 #pragma once
 
-#include "../../extras/headers.h"
-#include "virtual_non_player_character.h"
+#include "../npc.h"
 
-namespace objects {
-	class Bird : VirtualNonPlayerCharacter {
+namespace objects
+{
+	class Bird : public NPC
+	{
+	public:
 
+		Bird();
+		~Bird() override;
 	};
 }

@@ -1,7 +1,7 @@
 #include "animation_player.h"
 
 
-handlers::AnimationPlayer::AnimationPlayer(type::Ptr_Position position, Texture2D* texture, int textureColumns, int textureRows, int textureWidth, int textureHeight,
+handlers::AnimationPlayer::AnimationPlayer(type::Position* position, Texture2D* texture, int textureColumns, int textureRows, int textureWidth, int textureHeight,
     int* wantedSpeed, type::Position textureOffset, type::Vec_Int framesPerRow)
     : _position(position), _texture(texture), _textureColumns(textureColumns), _textureRows(textureRows),
     _textureWidth(textureWidth), _textureHeight(textureHeight), _wantedSpeed(wantedSpeed), _textureOffset(textureOffset), _framesPerRow(framesPerRow)
@@ -71,8 +71,8 @@ void handlers::AnimationPlayer::Animate()
                 static_cast<float>(_textureHeight) / _textureRows * _currentAnimation,
                 static_cast<float>(_textureWidth) / _textureColumns,
                 static_cast<float>(_textureHeight) / _textureRows },
-                { static_cast<float>(*_position.first * game::TILE_SIZE) - _textureOffset.first,
-                static_cast<float>(*_position.second * game::TILE_SIZE) - _textureOffset.second },
+                { static_cast<float>(_position->first * game::TILE_SIZE) - _textureOffset.first,
+                static_cast<float>(_position->second * game::TILE_SIZE) - _textureOffset.second },
                 _color);
 
             // Once specific number of updates have happened:

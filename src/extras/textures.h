@@ -3,7 +3,7 @@
 
 namespace textures
 {
-	const Image SCARECROW = LoadImage("assets/graphics/pcs/scarecrow_animations.png");
+	inline const Image SCARECROW = LoadImage("assets/graphics/pcs/scarecrow_animations.png");
 	
-	const Image MUSHROOM = LoadImage("assets/graphics/npcs/mushroom_animations.png");
+	inline const Image MUSHROOM = LoadImage("assets/graphics/npcs/mushroom_animations.png");
 }

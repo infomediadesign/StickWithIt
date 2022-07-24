@@ -23,7 +23,13 @@ void scenes::GameScene::Update()
 // Draw current scene here
 void scenes::GameScene::Draw()
 {
+	_levelDrawer->DrawGround();
+	{
 
+	}
+	_levelDrawer->DrawAir();
+
+	//Draw UI here...
 }
 
 

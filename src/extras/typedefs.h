@@ -5,10 +5,8 @@
 namespace type
 {
 	typedef std::pair<int, int> Position;
-	typedef std::pair<int*, int*> Ptr_Position;
-
 	typedef std::vector<std::pair<int, int>> Vec_Position;
-	typedef std::vector<std::pair<int*, int*>> Vec_Ptr_Position;
+	typedef std::vector<std::pair<int, int>*> Vec_Ptr_Position;
 
 	typedef std::vector<int> Vec_Int;
 	typedef std::vector<std::vector<int>> Vec_Vec_Int;

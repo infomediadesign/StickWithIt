@@ -3,11 +3,14 @@
 objects::NPC::~NPC() {
 }
 
+
 type::Pair_Damage_Vec_Position objects::NPC::Attack()
 {
+	return type::Pair_Damage_Vec_Position();
 }
 
-void objects::NPC::Spawn(type::Vec_Position spawnLayer, type::Vec_Ptr_Position collisionPositions)
+
+void objects::NPC::Spawn(type::Vec_Position spawnLayer, type::Vec_Position* collisionPositions)
 {
 	unsigned int seed = static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count());
 
@@ -18,8 +21,8 @@ void objects::NPC::Spawn(type::Vec_Position spawnLayer, type::Vec_Ptr_Position c
 		bool checkIfPositionIsAvailable = true;
 
 		// Check if there is no collision on spawnable tile
-		for (auto& collisionPosition : collisionPositions) {
-			if (*collisionPosition.first == possibleSpawn.first && *collisionPosition.second == possibleSpawn.second)
+		for (auto& collisionPosition : *collisionPositions) {
+			if (collisionPosition == possibleSpawn)
 				checkIfPositionIsAvailable = false;
 		}
 
@@ -41,6 +44,6 @@ void objects::NPC::Spawn(type::Vec_Position spawnLayer, type::Vec_Ptr_Position c
 		_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eIdleUp);
 }
 
-void objects::NPC::Move(type::Vec_Ptr_Position collisionLayer)
+void objects::NPC::Move(type::Vec_Position* collisionLayer)
 {
 }

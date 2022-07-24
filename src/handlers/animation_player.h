@@ -11,7 +11,7 @@ namespace handlers
 	{
 	public:
 
-		AnimationPlayer(type::Ptr_Position position, Texture2D* texture, int textureColumns, int textureRows, int textureWidth, int textureHeight,
+		AnimationPlayer(type::Position* position, Texture2D* texture, int textureColumns, int textureRows, int textureWidth, int textureHeight,
 			int* wantedSpeed, type::Position textureOffset, type::Vec_Int framesPerRow);
 		~AnimationPlayer();
 
@@ -53,7 +53,7 @@ namespace handlers
 
 		// Generic sprite data
 		// This will change in the lifetime of an object
-		type::Ptr_Position _position = {};
+		type::Position* _position = {};
 		int* _wantedSpeed = {};
 		// This wont't change
 		Texture2D* _texture = {};

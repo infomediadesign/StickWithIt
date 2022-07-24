@@ -20,9 +20,9 @@ handlers::LevelHandler::~LevelHandler() {
 	UnloadTexture(_texture);
 }
 
-type::Vec_Ptr_Position handlers::LevelHandler::GetCollisionsGround()
+type::Vec_Position handlers::LevelHandler::GetCollisionsGround()
 {
-	type::Vec_Ptr_Position collisionPositions = {};
+	type::Vec_Position collisionPositions = {};
 	int iterator = 0;
 
 	// Return ritual positions of current level
@@ -31,7 +31,9 @@ type::Vec_Ptr_Position handlers::LevelHandler::GetCollisionsGround()
 		{
 			if (_vecDataAllLevel[*_currentLevel][eCollisionLayer][iterator] == eCollisionTiles
 				|| _vecDataAllLevel[*_currentLevel][eCollisionLayer][iterator] == eCollisionOnlyGroundTile)
-				collisionPositions.push_back({ &x, &y });
+			{
+				collisionPositions.push_back({ x, y });
+			}
 
 			iterator++;
 		}
@@ -39,9 +41,9 @@ type::Vec_Ptr_Position handlers::LevelHandler::GetCollisionsGround()
 	return collisionPositions;
 }
 
-type::Vec_Ptr_Position handlers::LevelHandler::GetCollisionsSky()
+type::Vec_Position handlers::LevelHandler::GetCollisionsSky()
 {
-	type::Vec_Ptr_Position collisionPositions = {};
+	type::Vec_Position collisionPositions = {};
 	int iterator = 0;
 
 	// Return ritual positions of current level
@@ -49,7 +51,7 @@ type::Vec_Ptr_Position handlers::LevelHandler::GetCollisionsSky()
 		for (int x = 0; x < game::TILES_PER_COLUMN; x++)
 		{
 			if (_vecDataAllLevel[*_currentLevel][eCollisionLayer][iterator] == eCollisionTiles)
-				collisionPositions.push_back({ &x, &y });
+				collisionPositions.push_back({ x, y });
 
 			iterator++;
 		}
@@ -112,7 +114,7 @@ void handlers::LevelHandler::DrawAnyLayer(int layer)
 {
 	int iterator = 0;
 	for (int y = 0; y < game::TILES_PER_COLUMN; y++) {
-		for (int x = 0; x < game::TILES_PER_COLUMN; x++)
+		for (int x = 0; x < game::TILES_PER_ROW; x++)
 		{
 			// If tile is not 0: draw it
 			if (_vecDataAllLevel[*_currentLevel][layer][iterator] != 0)
