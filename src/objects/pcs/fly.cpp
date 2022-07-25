@@ -20,9 +20,9 @@ objects::Fly::Fly()
 	_textureColumns = 11;
 	_textureRows = 13;
 	_textureWidth = 1056;
-	_textureHeight = 1056;
+	_textureHeight = 1248;
 	_wantedSpeed = 6;
-	_textureOffset = { 47 - game::HALF_TILE_SIZE, 47 - game::HALF_TILE_SIZE }; // The position of objects feet - distance from tile corner to tile mid
+	_textureOffset = { 47 - game::HALF_TILE_SIZE, 58 - game::HALF_TILE_SIZE }; // The position of objects feet - distance from tile corner to tile mid
 	_framesPerRow = {
 		6, 6, 6, 6,
 		6, 6, 6, 6,

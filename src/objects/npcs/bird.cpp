@@ -19,7 +19,7 @@ _textureRows = 13;
 _textureWidth = 768;
 _textureHeight = 1248;
 _wantedSpeed = 8;
-_textureOffset = { 40 - game::HALF_TILE_SIZE, 48 - game::HALF_TILE_SIZE }; // The position of objects feet - distance from tile corner to tile mid
+_textureOffset = { 48 - game::HALF_TILE_SIZE, 48 - game::HALF_TILE_SIZE }; // The position of objects feet - distance from tile corner to tile mid
 _framesPerRow = {
 	8, 8, 8, 8,
 	8, 8, 8, 8,

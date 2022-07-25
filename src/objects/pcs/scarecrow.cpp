@@ -22,7 +22,7 @@ objects::Scarecrow::Scarecrow()
 	_textureWidth = 2000;
 	_textureHeight = 1120;
 	_wantedSpeed = 6;
-	_textureOffset = { 40 - game::HALF_TILE_SIZE, 45 - game::HALF_TILE_SIZE }; // The position of objects feet - distance from tile corner to tile mid
+	_textureOffset = { 40 - game::HALF_TILE_SIZE, 46 - game::HALF_TILE_SIZE }; // The position of objects feet - distance from tile corner to tile mid
 	_framesPerRow = {
 		15, 15, 15, 15,
 		9, 9, 9, 9,

@@ -6,8 +6,11 @@ scenes::GameScene::GameScene()
 	std::cout << "Game scene called!" << std::endl;
 
 	AddObject(eScarecrow);
+	AddObject(eFly);
 	AddObject(eBird);
 	AddObject(eMushroom);
+
+	_activePlayer = _players[0];
 }
 
 

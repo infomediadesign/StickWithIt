@@ -40,11 +40,11 @@ void objects::NPC::Spawn(type::Vec_Position spawnLayer, type::Vec_Position colli
 	// Set animation dependant on where the enemy spawned
 	if (_position.first == 0)
 		_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eIdleRight);
-	else
+	else if (_position.first == 19)
 		_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eIdleLeft);
 	if (_position.second == 0)
 		_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eIdleDown);
-	else
+	else if (_position.second == 11)
 		_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eIdleUp);
 }
 
