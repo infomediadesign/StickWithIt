@@ -87,3 +87,7 @@ type::Position* objects::Object::GetPosition() {
 void objects::Object::SetPosition(type::Position position) {
 	_position = position;
 }
+
+void objects::Object::SetIsPreperationPhase(bool* isPreperationPhase){
+	_isPreperationPhase = isPreperationPhase;
+}

@@ -10,7 +10,7 @@ scenes::GameScene::GameScene()
 	AddObject(eBird);
 	AddObject(eMushroom);
 
-	_activePlayer = _players[0];
+	_activePlayer = _players[eScarecrow];
 }
 
 
@@ -23,7 +23,19 @@ scenes::GameScene::~GameScene()
 // Update current scene here
 void scenes::GameScene::Update()
 {
+	if (IsKeyPressed(KEY_P))
+		_isPreperationPhase = false;
+
 	_activePlayer->Move(_levelHandler->GetCollisionsGround(), _collisionsObjects);
+
+	// Manages invisibility and non-tile-destroying, as well as infinite moves while preperation phase
+	if (_isPreperationPhase == false && _activePlayer->GetHasMoved() && _activePlayer->GetCanFly() == false)
+	{
+		_levelHandler->DestroyWheat(*_activePlayer->GetPosition());
+		_activePlayer->SetHasMoved(false);
+	}
+
+	SwitchActivePlayer();
 }
 
 
@@ -63,21 +75,53 @@ int scenes::GameScene::ChangeScene()
 	return 0;
 }
 
+
 void scenes::GameScene::NextLevel()
 {
 	_currentLevel++;
 	_collisionsObjects = {};
+	_isPreperationPhase = true;
 }
+
 
 void scenes::GameScene::NextLevel(int level)
 {
 	_currentLevel = level;
 	_collisionsObjects = {};
+	_isPreperationPhase = true;
 }
+
 
 void scenes::GameScene::SwitchActivePlayer()
 {
+	if (IsKeyPressed(KEY_Q))
+	{
+		_activePlayer->SetIsActive(false);
+		_activePlayerIndex--;
+
+		if (_activePlayerIndex < 0)
+		{
+			// @TODO change this to 4th helper
+			_activePlayerIndex = eFly;
+		}
+		_activePlayer = _players[_activePlayerIndex];
+		_activePlayer->SetIsActive(true);
+	}
+	if (IsKeyPressed(KEY_E))
+	{
+		_activePlayer->SetIsActive(false);
+		_activePlayerIndex++;
+
+		if (_activePlayerIndex > 1)
+		{
+			// @TODO change this to 4th helper
+			_activePlayerIndex = eScarecrow;
+		}
+		_activePlayer = _players[_activePlayerIndex];
+		_activePlayer->SetIsActive(true);
+	}
 }
+
 
 void scenes::GameScene::AddObject(int object)
 {
@@ -86,12 +130,14 @@ void scenes::GameScene::AddObject(int object)
 	case eScarecrow:
 		_players.push_back(std::make_shared<objects::Scarecrow>());
 		_players.back()->Spawn(_levelHandler->GetSpawnsPC(), _levelHandler->GetCollisionsGround(), _collisionsObjects);
+		_players.back()->SetIsPreperationPhase(&_isPreperationPhase);
 		_collisionsObjects.push_back(_players.back()->GetPosition());
 		break;
 
 	case eFly:
 		_players.push_back(std::make_shared<objects::Fly>());
 		_players.back()->Spawn(_levelHandler->GetSpawnsPC(), _levelHandler->GetCollisionsSky(), _collisionsObjects);
+		_players.back()->SetIsPreperationPhase(&_isPreperationPhase);
 		_collisionsObjects.push_back(_players.back()->GetPosition());
 		break;
 
@@ -99,12 +145,14 @@ void scenes::GameScene::AddObject(int object)
 	case eBird:
 		_enemies.push_back(std::make_unique<objects::Bird>());
 		_enemies.back()->Spawn(_levelHandler->GetSpawnsSky(), _levelHandler->GetCollisionsSky(), _collisionsObjects);
+		_enemies.back()->SetIsPreperationPhase(&_isPreperationPhase);
 		_collisionsObjects.push_back(_enemies.back()->GetPosition());
 		break;
 
 	case eMushroom:
 		_enemies.push_back(std::make_unique<objects::Mushroom>());
 		_enemies.back()->Spawn(_levelHandler->GetSpawnsGround(), _levelHandler->GetCollisionsGround(), _collisionsObjects);
+		_enemies.back()->SetIsPreperationPhase(&_isPreperationPhase);
 		_collisionsObjects.push_back(_enemies.back()->GetPosition());
 		break;
 	}

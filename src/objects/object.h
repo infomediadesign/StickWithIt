@@ -45,6 +45,7 @@ namespace objects
 		bool GetIsAlive(); void SetIsAlive(bool isAlive);
 		bool GetCanFly(); void setCanFly(bool canFly);
 		type::Position* GetPosition(); void SetPosition(type::Position position);
+		void SetIsPreperationPhase(bool* isPreperationPhase);
 
 
 	protected:
@@ -55,7 +56,7 @@ namespace objects
 		int _attackDamage = {};
 		bool _isAlive = true;
 		bool _canFly = false;
-		bool _hasMoved = false;
+		bool _hasMoved = true;
 		bool _hasAttacked = false;
 		type::Position _position = {};
 
@@ -69,6 +70,9 @@ namespace objects
 		int _wantedSpeed = {};							// The higher the slower the animation
 		type::Position _textureOffset = {};
 		type::Vec_Int _framesPerRow = {};
+
+
+		bool* _isPreperationPhase = {};
 
 
 		// Animation player to tell object what animation to play

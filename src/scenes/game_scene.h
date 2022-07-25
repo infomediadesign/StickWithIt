@@ -26,7 +26,12 @@ namespace scenes
 		void NextLevel(int level);
 
 
+		bool _isPreperationPhase = true;
+
+
 		void SwitchActivePlayer();
+		int _activePlayerIndex = eScarecrow;
+
 		std::shared_ptr<objects::PC> _activePlayer = {};
 		std::vector<std::shared_ptr<objects::PC>> _players = {};
 		std::vector<std::unique_ptr<objects::NPC>> _enemies = {};

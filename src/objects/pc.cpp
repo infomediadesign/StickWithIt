@@ -188,7 +188,10 @@ void objects::PC::Move(type::Vec_Position collisionLayer, type::Vec_Ptr_Position
 			if (_position != futurePosition && _movePoints > 0) {
 				_position = futurePosition;
 				_hasMoved = true;
-				_movePoints--;
+				if (*_isPreperationPhase == false)
+				{
+					_movePoints--;
+				}
 			}
 		}
 	}
@@ -197,17 +200,10 @@ void objects::PC::Move(type::Vec_Position collisionLayer, type::Vec_Ptr_Position
 
 void objects::PC::Animate()
 {
-	if (_isActive == true && _speedIsAdjusted == false)
-	{
-		_wantedSpeed -= 2;
-		_speedIsAdjusted = true;
-	}
-	else if (_isActive == false && _speedIsAdjusted == true)
-	{
-		_wantedSpeed += 2;
-		_speedIsAdjusted = false;
-	}
-
+	if (*_isPreperationPhase)
+		_animationPlayer->MakeTransparent();
+	else
+		_animationPlayer->MakeUntransparent();
 
 	_animationPlayer->Animate();
 }
