@@ -26,19 +26,26 @@ namespace scenes
 		void NextLevel(int level);
 
 
-		std::unique_ptr<objects::PC> _activePlayer = {};
 		void SwitchActivePlayer();
-
-
+		std::shared_ptr<objects::PC> _activePlayer = {};
 		std::vector<std::shared_ptr<objects::PC>> _players = {};
-		std::vector<std::shared_ptr<objects::NPC>> _enemies = {};
+		std::vector<std::unique_ptr<objects::NPC>> _enemies = {};
 
 
-		// A collision layer includes all obstacles and objects
-		type::Vec_Ptr_Position _collisionLayerGround = {};
-		type::Vec_Ptr_Position _collisionLayerSky = {};
+		type::Vec_Ptr_Position _collisionsObjects = {};
 
 
-		std::unique_ptr<handlers::LevelHandler> _levelDrawer = std::make_unique<handlers::LevelHandler>(&_currentLevel);
+		void AddObject(int object);
+		enum
+		{
+			eScarecrow,
+			eFly,
+
+			eBird,
+			eMushroom
+		};
+
+
+		std::unique_ptr<handlers::LevelHandler> _levelHandler = std::make_unique<handlers::LevelHandler>(&_currentLevel);
 	};
 }

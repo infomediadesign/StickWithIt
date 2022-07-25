@@ -48,7 +48,7 @@ type::Vec_Position handlers::LevelHandler::GetCollisionsSky()
 
 	// Return ritual positions of current level
 	for (int y = 0; y < game::TILES_PER_COLUMN; y++) {
-		for (int x = 0; x < game::TILES_PER_COLUMN; x++)
+		for (int x = 0; x < game::TILES_PER_ROW; x++)
 		{
 			if (_vecDataAllLevel[*_currentLevel][eCollisionLayer][iterator] == eCollisionTiles)
 				collisionPositions.push_back({ x, y });
@@ -65,7 +65,7 @@ type::Vec_Position handlers::LevelHandler::GetSpawnsGround()
 	int iterator = 0;
 
 	for (int y = 0; y < game::TILES_PER_COLUMN; y++) {
-		for (int x = 0; x < game::TILES_PER_COLUMN; x++)
+		for (int x = 0; x < game::TILES_PER_ROW; x++)
 		{
 			if (_vecDataAllLevel[*_currentLevel][eSpawnLayer][iterator] == eSpawnGroundTile)
 				spawnGroundPositions.push_back({ x, y });
@@ -82,7 +82,7 @@ type::Vec_Position handlers::LevelHandler::GetSpawnsSky()
 	int iterator = 0;
 
 	for (int y = 0; y < game::TILES_PER_COLUMN; y++) {
-		for (int x = 0; x < game::TILES_PER_COLUMN; x++)
+		for (int x = 0; x < game::TILES_PER_ROW; x++)
 		{
 			if (_vecDataAllLevel[*_currentLevel][eSpawnLayer][iterator] == eSpawnSkyTile)
 				spawnSkyPositions.push_back({ x, y });
@@ -99,14 +99,15 @@ type::Vec_Position handlers::LevelHandler::GetSpawnsPC()
 	int iterator = 0;
 
 	for (int y = 0; y < game::TILES_PER_COLUMN; y++) {
-		for (int x = 0; x < game::TILES_PER_COLUMN; x++)
+		for (int x = 0; x < game::TILES_PER_ROW; x++)
 		{
-			if (_vecDataAllLevel[*_currentLevel][eSpawnLayer][iterator] == eRitualTile)
+			if (_vecDataAllLevel[*_currentLevel][eGroundLayer][iterator] == eRitualTile)
 				ritualPositions.push_back({ x, y });
 
 			iterator++;
 		}
 	}
+
 	return ritualPositions;
 }
 

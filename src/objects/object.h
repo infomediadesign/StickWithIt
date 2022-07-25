@@ -18,7 +18,7 @@ namespace objects
 
 		// Determines where the objects can spawn
 		// For player objects it's always same order but non player objects will spawn randomly
-		virtual void Spawn(type::Vec_Position spawnLayer, type::Vec_Position* collisionPositions) = 0;
+		virtual void Spawn(type::Vec_Position spawnLayer, type::Vec_Position collisionLayer, type::Vec_Ptr_Position collisionsObjects) = 0;
 
 
 		// If an object is in reach of another enemy object, it attacks...
@@ -34,7 +34,7 @@ namespace objects
 
 
 		// Walk dependant on input or the path found, take collisions into account
-		virtual void Move(type::Vec_Position* collisionLayer) = 0;
+		virtual void Move(type::Vec_Position collisionLayer, type::Vec_Ptr_Position collisionsObjects) = 0;
 
 
 		// Getters and Setters

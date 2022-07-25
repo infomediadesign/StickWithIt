@@ -116,16 +116,21 @@ type::Pair_Damage_Vec_Position objects::PC::Attack()
 }
 
 
-void objects::PC::Spawn(type::Vec_Position spawnLayer, type::Vec_Position* collisionPositions)
+void objects::PC::Spawn(type::Vec_Position spawnLayer, type::Vec_Position collisionLayer, type::Vec_Ptr_Position collisionsObjects)
 {
 	for (auto& possibleSpawn : spawnLayer) {
 
 		bool checkIfPositionIsAvailable = true;
 
-		for (auto& collisionPosition : *collisionPositions) {
-			if (collisionPosition == possibleSpawn)
+
+		for (auto& collisionPosition : collisionLayer) 
+			if (possibleSpawn == collisionPosition)
 				checkIfPositionIsAvailable = false;
-		}
+
+		for (auto& collisionPosition : collisionsObjects) 
+			if (possibleSpawn == *collisionPosition)
+				checkIfPositionIsAvailable = false;
+
 
 		if (checkIfPositionIsAvailable == true)
 		{
@@ -136,7 +141,7 @@ void objects::PC::Spawn(type::Vec_Position spawnLayer, type::Vec_Position* colli
 }
 
 
-void objects::PC::Move(type::Vec_Position* collisionLayer)
+void objects::PC::Move(type::Vec_Position collisionLayer, type::Vec_Ptr_Position collisionsObjects)
 {
 	if (_isActive == true)
 	{
@@ -171,8 +176,12 @@ void objects::PC::Move(type::Vec_Position* collisionLayer)
 				futurePosition.second = _position.second;
 
 			// Check if positition would be on collision
-			for (auto& collisionPosition : *collisionLayer)
-				if (collisionPosition == futurePosition)
+			for (auto& collisionPosition : collisionLayer)
+				if (futurePosition == collisionPosition)
+					futurePosition = _position;
+
+			for (auto& collisionPosition : collisionsObjects)
+				if (futurePosition == *collisionPosition)
 					futurePosition = _position;
 
 			// If theres neither collision or border, move the object
@@ -190,12 +199,12 @@ void objects::PC::Animate()
 {
 	if (_isActive == true && _speedIsAdjusted == false)
 	{
-		_wantedSpeed += 2;
+		_wantedSpeed -= 2;
 		_speedIsAdjusted = true;
 	}
 	else if (_isActive == false && _speedIsAdjusted == true)
 	{
-		_wantedSpeed -= 2;
+		_wantedSpeed += 2;
 		_speedIsAdjusted = false;
 	}
 

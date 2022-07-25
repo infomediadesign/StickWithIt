@@ -18,7 +18,7 @@ objects::Mushroom::Mushroom()
 	_textureRows = 13;
 	_textureWidth = 640;
 	_textureHeight = 1040;
-	_wantedSpeed = 15;
+	_wantedSpeed = 8;
 	_textureOffset = { 40 - game::HALF_TILE_SIZE, 48 - game::HALF_TILE_SIZE }; // The position of objects feet - distance from tile corner to tile mid
 	_framesPerRow = {
 		8, 8, 8, 8,
