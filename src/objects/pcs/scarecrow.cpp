@@ -4,10 +4,15 @@ objects::Scarecrow::Scarecrow()
 {
 	std::cout << "Scarecrow called!" << std::endl;
 
+	// Default max data
+	_initLives = 10;
+	_initMovePoints = 10;
+	_initActionPoints = 10;
+
 	// Default data
-	_lives = 10;
-	_movePoints = 10;
-	_actionPoints = 10;
+	_lives = _initLives;
+	_movePoints = _initMovePoints;
+	_actionPoints = _initActionPoints;
 	_attackDamage = 5;
 	_isAlive = true;
 	_canFly = false;

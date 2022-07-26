@@ -30,6 +30,7 @@ void scenes::GameScene::Update()
 		{
 			_isPreperationPhase = false;
 			_hasPreperationPhaseJustEnded = true;
+			ResetEnemiesStats();
 		}
 
 		// handle movement of players
@@ -63,7 +64,7 @@ void scenes::GameScene::Update()
 		{
 			sumOfMoveAndActionPoints += player->GetMovePoints() + player->GetActionPoints();
 		}
-		if (sumOfMoveAndActionPoints == 0)
+		if (sumOfMoveAndActionPoints == 0 || IsKeyPressed(KEY_BACKSPACE))
 		{
 			_isPlayerTurn = false;
 		}
@@ -73,8 +74,8 @@ void scenes::GameScene::Update()
 	}
 	else
 	{
-		std::cout << "Hello" << std::endl;
 		_isPlayerTurn = true;
+		ResetPlayersStats();
 	}
 }
 
@@ -164,6 +165,23 @@ void scenes::GameScene::SwitchActivePlayer()
 	}
 }
 
+
+void scenes::GameScene::ResetPlayersStats()
+{
+	for (auto& player : _players)
+	{
+		player->SetMovePoints(player->GetInitMovePoints());
+		player->SetActionPoints(player->GetActionPoints());
+	}
+}
+
+void scenes::GameScene::ResetEnemiesStats()
+{
+	for (auto& enemy : _enemies)
+	{
+		enemy->SetMovePoints(enemy->GetInitMovePoints());
+	}
+}
 
 void scenes::GameScene::AddObject(int object)
 {

@@ -27,6 +27,10 @@ void objects::Object::SetLives(int lives) {
 	_lives = lives;
 }
 
+int objects::Object::GetInitLives(){
+	return _initLives;
+}
+
 
 int objects::Object::GetMovePoints() {
 	return _movePoints;
@@ -35,6 +39,10 @@ int objects::Object::GetMovePoints() {
 
 void objects::Object::SetMovePoints(int movePoints) {
 	_movePoints = movePoints;
+}
+
+int objects::Object::GetInitMovePoints(){
+	return _initMovePoints;
 }
 
 

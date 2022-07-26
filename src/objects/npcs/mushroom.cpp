@@ -4,10 +4,13 @@ objects::Mushroom::Mushroom()
 {
 	std::cout << "Mushroom called!" << std::endl;
 
+	// Default max data
+	_initLives = 10;
+	_initMovePoints = 10;
+
 	// Default data
-	_lives = 10;
-	_movePoints = 2;
-	_attackDamage = 2;
+	_lives = _initLives;
+	_movePoints = _initMovePoints;
 	_isAlive = true;
 	_canFly = false;
 	_position = { 0, 0 };

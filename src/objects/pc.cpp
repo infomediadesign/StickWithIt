@@ -232,6 +232,11 @@ void objects::PC::SetActionPoints(int actionPoints) {
 	_actionPoints = actionPoints;
 }
 
+int objects::PC::GetInitActionPoints()
+{
+	return _initActionPoints;
+}
+
 
 int objects::PC::GetActiveWeapon() {
 	return _activeWeapon;

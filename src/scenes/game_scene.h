@@ -43,6 +43,10 @@ namespace scenes
 		type::Vec_Ptr_Position _playersPositions = {};
 
 
+		void ResetPlayersStats();
+		void ResetEnemiesStats();
+
+
 		void AddObject(int object);
 		enum
 		{

@@ -39,7 +39,9 @@ namespace objects
 
 		// Getters and Setters
 		int GetLives();	void SetLives(int lives);
+		int GetInitLives();
 		int GetMovePoints(); void SetMovePoints(int movePoints);
+		int GetInitMovePoints();
 		bool GetIsAlive(); void SetIsAlive(bool isAlive);
 		bool GetCanFly(); void setCanFly(bool canFly);
 		type::Position* GetPosition(); void SetPosition(type::Position position);
@@ -49,9 +51,9 @@ namespace objects
 	protected:
 
 		// Default data
-		int _lives = {};
-		int _movePoints = {};
-		int _attackDamage = {};
+		int _lives = {}; int _initLives = {};
+		int _movePoints = {}; int _initMovePoints = {};
+		int _attackDamage = {}; 
 		bool _isAlive = true;
 		bool _canFly = false;
 		type::Position _position = {};

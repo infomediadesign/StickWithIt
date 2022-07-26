@@ -30,6 +30,7 @@ namespace objects
 		// Getter and Setter
 		bool GetIsActive(); void SetIsActive(bool isActive);
 		int GetActionPoints(); void SetActionPoints(int actionPoints);
+		int GetInitActionPoints();
 		int GetActiveWeapon(); void SetActiveWeapon(int weapon);
 
 
@@ -46,8 +47,8 @@ namespace objects
 	protected:
 
 		// Additional player object data
-		int _activeWeapon = 0;
-		int _actionPoints = 0;
+		int _actionPoints = {}; int _initActionPoints = {};
+		int _activeWeapon = {};
 		bool _isActive = false;
 		bool _speedIsAdjusted = false;
 	};
