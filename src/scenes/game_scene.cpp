@@ -11,6 +11,8 @@ scenes::GameScene::GameScene()
 	AddObject(eMushroom);
 
 	_activePlayer = _players[eScarecrow];
+
+	_playersPositions.push_back(&_levelHandler->GetSpawnsPC()[3]);
 }
 
 
@@ -74,6 +76,15 @@ void scenes::GameScene::Update()
 	}
 	else
 	{
+		for (auto& enemy : _enemies)
+		{
+			if (enemy->GetCanFly())
+				enemy->Move(_levelHandler->GetCollisionsSky(), _collisionsObjects, _playersPositions, _levelHandler->GetSpawnsPC());
+			else
+				if (enemy->Move(_levelHandler->GetCollisionsGround(), _collisionsObjects, _playersPositions, _levelHandler->GetSpawnsPC()))
+					_levelHandler->DestroyWheat(*enemy->GetPosition());
+		}
+
 		_isPlayerTurn = true;
 		ResetPlayersStats();
 	}
@@ -123,6 +134,8 @@ void scenes::GameScene::NextLevel()
 	_collisionsObjects = {};
 	_isPreperationPhase = true;
 	_hasPreperationPhaseJustEnded = false;
+	for (auto& pos : _levelHandler->GetSpawnsPC())
+		_playersPositions.push_back(&pos);
 }
 
 
@@ -132,6 +145,8 @@ void scenes::GameScene::NextLevel(int level)
 	_collisionsObjects = {};
 	_isPreperationPhase = true;
 	_hasPreperationPhaseJustEnded = false;
+	for (auto& pos : _levelHandler->GetSpawnsPC())
+		_playersPositions.push_back(&pos);
 }
 
 
@@ -202,6 +217,7 @@ void scenes::GameScene::AddObject(int object)
 		_collisionsObjects.push_back(_players.back()->GetPosition());
 		_playersPositions.push_back(_players.back()->GetPosition());
 		break;
+
 
 
 	case eBird:

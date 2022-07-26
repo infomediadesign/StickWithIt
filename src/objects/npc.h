@@ -21,7 +21,7 @@ namespace objects
 
 
 		// Walk dependant on input or the path found, take collisions into account
-		bool Move(type::Vec_Position collisionLayer, type::Vec_Ptr_Position collisionsObjects) override;
+		bool Move(type::Vec_Position collisionLayer, type::Vec_Ptr_Position collisionsObjects, type::Vec_Ptr_Position playersPositions, type::Vec_Position ritualPositions) override;
 
 
 	protected:

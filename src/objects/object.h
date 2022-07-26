@@ -34,7 +34,8 @@ namespace objects
 
 
 		// Walk dependant on input or the path found, take collisions into account
-		virtual bool Move(type::Vec_Position collisionLayer, type::Vec_Ptr_Position collisionsObjects) = 0;
+		virtual bool Move(type::Vec_Position collisionLayer, type::Vec_Ptr_Position collisionsObjects);
+		virtual bool Move(type::Vec_Position collisionLayer, type::Vec_Ptr_Position collisionsObjects, type::Vec_Ptr_Position playersPositions, type::Vec_Position ritualPositions);
 
 
 		// Getters and Setters

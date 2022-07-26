@@ -17,6 +17,16 @@ void objects::Object::Animate()
 	_animationPlayer->Animate();
 }
 
+bool objects::Object::Move(type::Vec_Position collisionLayer, type::Vec_Ptr_Position collisionsObjects)
+{
+	return false;
+}
+
+bool objects::Object::Move(type::Vec_Position collisionLayer, type::Vec_Ptr_Position collisionsObjects, type::Vec_Ptr_Position _playersPositions, type::Vec_Position)
+{
+	return false;
+}
+
 
 int objects::Object::GetLives() {
 	return _lives;

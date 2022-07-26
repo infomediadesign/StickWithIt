@@ -48,7 +48,28 @@ void objects::NPC::Spawn(type::Vec_Position spawnLayer, type::Vec_Position colli
 		_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eIdleUp);
 }
 
-bool objects::NPC::Move(type::Vec_Position collisionLayer, type::Vec_Ptr_Position collisionsObjects)
+bool objects::NPC::Move(type::Vec_Position collisionLayer, type::Vec_Ptr_Position collisionsObjects, type::Vec_Ptr_Position playersPositions, type::Vec_Position ritualPositions)
 {
+	// This looks for the closest player character or ritual
+	std::pair<int, type::Position> distanceToPositionPlusDestination = { 100, {0,0} };
+
+	for (auto& pos : playersPositions)
+	{
+		if (static_cast<int>(sqrt((_position.first - pos->first) * (_position.first - pos->first) + (_position.second - pos->second) * (_position.second - pos->second)) < distanceToPositionPlusDestination.first))
+		{
+		distanceToPositionPlusDestination.first = static_cast<int>(sqrt((_position.first - pos->first) * (_position.first - pos->first) + (_position.second - pos->second) * (_position.second - pos->second)));
+		distanceToPositionPlusDestination.second = *pos;
+		}
+	}
+
+	for (auto& pos :ritualPositions)
+		if (static_cast<int>(sqrt((_position.first - pos.first) * (_position.first - pos.first) + (_position.second - pos.second) * (_position.second - pos.second)) < distanceToPositionPlusDestination.first))
+		{
+			distanceToPositionPlusDestination.first = static_cast<int>(sqrt((_position.first - pos.first) * (_position.first - pos.first) + (_position.second - pos.second) * (_position.second - pos.second)));
+			distanceToPositionPlusDestination.second = pos;
+		}
+
+	std::cout << distanceToPositionPlusDestination.second.first << " " << distanceToPositionPlusDestination.second.second << " " << distanceToPositionPlusDestination.first << std::endl;
+
 	return false;
 }
