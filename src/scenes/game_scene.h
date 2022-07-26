@@ -38,6 +38,7 @@ namespace scenes
 
 
 		type::Vec_Ptr_Position _collisionsObjects = {};
+		type::Vec_Ptr_Position _playersPositions = {};
 
 
 		void AddObject(int object);

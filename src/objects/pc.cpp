@@ -7,112 +7,114 @@ objects::PC::~PC() {
 
 type::Pair_Damage_Vec_Position objects::PC::Attack()
 {
-	type::Pair_Damage_Vec_Position damagePlusPositions;
-
-	// make algorithm out of this
-	if (_animationPlayer->GetIsAnimationOver())
+	if (_actionPoints > 0)
 	{
-		if (IsKeyPressed(KEY_UP))
+		type::Pair_Damage_Vec_Position damagePlusPositions;
+
+		// make algorithm out of this
+		if (_animationPlayer->GetIsAnimationOver())
 		{
-			if (_activeWeapon == eNoWeapon) {
-				_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackUp);
-				damagePlusPositions.second = {{_position.first + 0, _position.second - 1}};
-				damagePlusPositions.first = _attackDamage;
+			if (IsKeyPressed(KEY_UP))
+			{
+				if (_activeWeapon == eNoWeapon) {
+					_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackUp);
+					damagePlusPositions.second = { {_position.first + 0, _position.second - 1} };
+					damagePlusPositions.first = _attackDamage;
+				}
+				if (_activeWeapon == eScythe) {
+					_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackUp);
+					damagePlusPositions.second = { {_position.first + 0, _position.second - 1}, {_position.first + 0, _position.second - 2} , {_position.first - 1, _position.second - 2} };
+					damagePlusPositions.first = _attackDamage;
+				}
+				if (_activeWeapon == eShovel) {
+					_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackUp2);
+					damagePlusPositions.second = { {_position.first + 0, _position.second - 1}, {_position.first - 1, _position.second - 2} , {_position.first + 0, _position.second - 3} };
+					damagePlusPositions.first = _attackDamage;
+				}
+				if (_activeWeapon == eHoe) {
+					_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackUp3);
+					damagePlusPositions.second = { {_position.first - 1, _position.second - 1}, {_position.first + 0, _position.second - 1} , {_position.first + 1, _position.second - 1} };
+					damagePlusPositions.first = _attackDamage;
+				}
 			}
-			if (_activeWeapon == eScythe) {
-				_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackUp);
-				damagePlusPositions.second = { {_position.first + 0, _position.second - 1}, {_position.first + 0, _position.second - 2} , {_position.first - 1, _position.second - 2} };
-				damagePlusPositions.first = _attackDamage;
+			else if (IsKeyPressed(KEY_DOWN))
+			{
+				if (_activeWeapon == eNoWeapon) {
+					_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackDown);
+					damagePlusPositions.second = { {_position.first + 0, _position.second + 1} };
+					damagePlusPositions.first = _attackDamage;
+				}
+				if (_activeWeapon == eScythe) {
+					_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackDown);
+					damagePlusPositions.second = { {_position.first + 0, _position.second + 1}, {_position.first + 0, _position.second + 2} , {_position.first + 1, _position.second + 2} };
+					damagePlusPositions.first = _attackDamage;
+				}
+				if (_activeWeapon == eShovel) {
+					_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackDown2);
+					damagePlusPositions.second = { {_position.first + 0, _position.second + 1}, {_position.first + 1, _position.second + 2} , {_position.first + 0, _position.second + 3} };
+					damagePlusPositions.first = _attackDamage;
+				}
+				if (_activeWeapon == eHoe) {
+					_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackDown3);
+					damagePlusPositions.second = { {_position.first + 1, _position.second + 1}, {_position.first + 0, _position.second + 1} , {_position.first - 1, _position.second + 1} };
+					damagePlusPositions.first = _attackDamage;
+				}
 			}
-			if (_activeWeapon == eShovel) {
-				_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackUp2);
-				damagePlusPositions.second = { {_position.first + 0, _position.second - 1}, {_position.first - 1, _position.second - 2} , {_position.first + 0, _position.second - 3} };
-				damagePlusPositions.first = _attackDamage;
+			else if (IsKeyPressed(KEY_RIGHT))
+			{
+				if (_activeWeapon == eNoWeapon) {
+					_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackRight);
+					damagePlusPositions.second = { {_position.first + 1, _position.second + 0} };
+					damagePlusPositions.first = _attackDamage;
+				}
+				if (_activeWeapon == eScythe) {
+					_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackRight);
+					damagePlusPositions.second = { {_position.first + 1, _position.second + 0}, {_position.first + 2, _position.second + 0} , {_position.first + 2, _position.second - 1} };
+					damagePlusPositions.first = _attackDamage;
+				}
+				if (_activeWeapon == eShovel) {
+					_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackRight2);
+					damagePlusPositions.second = { {_position.first + 1, _position.second + 0}, {_position.first + 2, _position.second - 1} , {_position.first + 3, _position.second + 0} };
+					damagePlusPositions.first = _attackDamage;
+				}
+				if (_activeWeapon == eHoe) {
+					_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackRight3);
+					damagePlusPositions.second = { {_position.first + 1, _position.second - 1}, {_position.first + 1, _position.second + 0} , {_position.first + 1, _position.second + 1} };
+					damagePlusPositions.first = _attackDamage;
+				}
 			}
-			if (_activeWeapon == eHoe) {
-				_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackUp3);
-				damagePlusPositions.second = { {_position.first - 1, _position.second - 1}, {_position.first + 0, _position.second - 1} , {_position.first + 1, _position.second - 1} };
-				damagePlusPositions.first = _attackDamage;
+			else if (IsKeyPressed(KEY_LEFT))
+			{
+				if (_activeWeapon == eNoWeapon) {
+					_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackLeft);
+					damagePlusPositions.second = { {_position.first - 1, _position.second + 0} };
+					damagePlusPositions.first = _attackDamage;
+				}
+				if (_activeWeapon == eScythe) {
+					_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackLeft);
+					damagePlusPositions.second = { {_position.first - 1, _position.second + 0}, {_position.first - 2, _position.second + 0} , {_position.first - 2, _position.second + 1} };
+					damagePlusPositions.first = _attackDamage;
+				}
+				if (_activeWeapon == eShovel) {
+					_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackLeft);
+					damagePlusPositions.second = { {_position.first - 1, _position.second + 0}, {_position.first - 2, _position.second + 1} , {_position.first - 3, _position.second + 0} };
+					damagePlusPositions.first = _attackDamage;
+				}
+				if (_activeWeapon == eHoe) {
+					_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackLeft);
+					damagePlusPositions.second = { {_position.first - 1, _position.second + 1}, {_position.first - 1, _position.second + 0} , {_position.first - 1, _position.second - 1} };
+					damagePlusPositions.first = _attackDamage;
+				}
 			}
-			_hasAttacked = true;
+
+			if (!damagePlusPositions.second.empty())
+				_actionPoints--;
+
 			return damagePlusPositions;
 		}
-		if (IsKeyPressed(KEY_DOWN))
-		{
-			if (_activeWeapon == eNoWeapon) {
-				_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackDown);
-				damagePlusPositions.second = { {_position.first + 0, _position.second + 1} };
-				damagePlusPositions.first = _attackDamage;
-			}
-			if (_activeWeapon == eScythe) {
-				_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackDown);
-				damagePlusPositions.second = { {_position.first + 0, _position.second + 1}, {_position.first + 0, _position.second + 2} , {_position.first + 1, _position.second + 2} };
-				damagePlusPositions.first = _attackDamage;
-			}
-			if (_activeWeapon == eShovel) {
-				_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackDown2);
-				damagePlusPositions.second = { {_position.first + 0, _position.second + 1}, {_position.first + 1, _position.second + 2} , {_position.first + 0, _position.second + 3} };
-				damagePlusPositions.first = _attackDamage;
-			}
-			if (_activeWeapon == eHoe) {
-				_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackDown3);
-				damagePlusPositions.second = { {_position.first + 1, _position.second + 1}, {_position.first + 0, _position.second + 1} , {_position.first - 1, _position.second + 1} };
-				damagePlusPositions.first = _attackDamage;
-			}
-			_hasAttacked = true;
-			return damagePlusPositions;
-		}
-		if (IsKeyPressed(KEY_RIGHT))
-		{
-			if (_activeWeapon == eNoWeapon) {
-				_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackRight);
-				damagePlusPositions.second = { {_position.first + 1, _position.second + 0} };
-				damagePlusPositions.first = _attackDamage;
-			}
-			if (_activeWeapon == eScythe) {
-				_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackRight);
-				damagePlusPositions.second = { {_position.first + 1, _position.second + 0}, {_position.first + 2, _position.second + 0} , {_position.first + 2, _position.second - 1} };
-				damagePlusPositions.first = _attackDamage;
-			}
-			if (_activeWeapon == eShovel) {
-				_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackRight2);
-				damagePlusPositions.second = { {_position.first + 1, _position.second + 0}, {_position.first + 2, _position.second - 1} , {_position.first + 3, _position.second + 0} };
-				damagePlusPositions.first = _attackDamage;
-			}
-			if (_activeWeapon == eHoe) {
-				_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackRight3);
-				damagePlusPositions.second = { {_position.first + 1, _position.second - 1}, {_position.first + 1, _position.second + 0} , {_position.first + 1, _position.second + 1} };
-				damagePlusPositions.first = _attackDamage;
-			}
-			_hasAttacked = true;
-			return damagePlusPositions;
-		}
-		if (IsKeyPressed(KEY_LEFT))
-		{
-			if (_activeWeapon == eNoWeapon) {
-				_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackLeft);
-				damagePlusPositions.second = { {_position.first - 1, _position.second + 0} };
-				damagePlusPositions.first = _attackDamage;
-			}
-			if (_activeWeapon == eScythe) {
-				_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackLeft);
-				damagePlusPositions.second= { {_position.first - 1, _position.second + 0}, {_position.first - 2, _position.second + 0} , {_position.first - 2, _position.second + 1} };
-				damagePlusPositions.first = _attackDamage;
-			}
-			if (_activeWeapon == eShovel) {
-				_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackLeft);
-				damagePlusPositions.second = { {_position.first - 1, _position.second + 0}, {_position.first - 2, _position.second + 1} , {_position.first - 3, _position.second + 0} };
-				damagePlusPositions.first = _attackDamage;
-			}
-			if (_activeWeapon == eHoe) {
-				_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eAttackLeft);
-				damagePlusPositions.second = { {_position.first - 1, _position.second + 1}, {_position.first - 1, _position.second + 0} , {_position.first - 1, _position.second - 1} };
-				damagePlusPositions.first = _attackDamage;
-			}
-			_hasAttacked = true;
-			return damagePlusPositions;
-		}
+
 	}
+		return type::Pair_Damage_Vec_Position();
 }
 
 

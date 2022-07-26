@@ -38,6 +38,11 @@ void scenes::GameScene::Update()
 		_activePlayer->SetHasMoved(false);
 	}
 
+	if (_isPreperationPhase == false)
+	{
+		_levelHandler->DestroyWheat(_activePlayer->Attack().second);
+	}
+
 	SwitchActivePlayer();
 }
 
@@ -135,6 +140,7 @@ void scenes::GameScene::AddObject(int object)
 		_players.back()->Spawn(_levelHandler->GetSpawnsPC(), _levelHandler->GetCollisionsGround(), _collisionsObjects);
 		_players.back()->SetIsPreperationPhase(&_isPreperationPhase);
 		_collisionsObjects.push_back(_players.back()->GetPosition());
+		_playersPositions.push_back(_players.back()->GetPosition());
 		break;
 
 	case eFly:
@@ -142,6 +148,7 @@ void scenes::GameScene::AddObject(int object)
 		_players.back()->Spawn(_levelHandler->GetSpawnsPC(), _levelHandler->GetCollisionsSky(), _collisionsObjects);
 		_players.back()->SetIsPreperationPhase(&_isPreperationPhase);
 		_collisionsObjects.push_back(_players.back()->GetPosition());
+		_playersPositions.push_back(_players.back()->GetPosition());
 		break;
 
 

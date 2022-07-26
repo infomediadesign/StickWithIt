@@ -38,7 +38,6 @@ namespace objects
 
 
 		// Getters and Setters
-		bool GetHasAttacked(); void SetHasAttacked(bool hasAttacked);
 		bool GetHasMoved(); void SetHasMoved(bool hasMoved);
 		int GetLives();	void SetLives(int lives);
 		int GetMovePoints(); void SetMovePoints(int movePoints);
@@ -57,7 +56,6 @@ namespace objects
 		bool _isAlive = true;
 		bool _canFly = false;
 		bool _hasMoved = true;
-		bool _hasAttacked = false;
 		type::Position _position = {};
 
 
