@@ -18,27 +18,6 @@ void objects::Object::Animate()
 }
 
 
-bool objects::Object::GetHasAttacked()
-{
-	return _hasAttacked;
-}
-
-
-void objects::Object::SetHasAttacked(bool hasAttacked) {
-	_hasAttacked = hasAttacked;
-}
-
-
-bool objects::Object::GetHasMoved() {
-	return _hasMoved;
-}
-
-
-void objects::Object::SetHasMoved(bool hasMoved) {
-	_hasMoved = hasMoved;
-}
-
-
 int objects::Object::GetLives() {
 	return _lives;
 }

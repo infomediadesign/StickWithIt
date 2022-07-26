@@ -34,11 +34,10 @@ namespace objects
 
 
 		// Walk dependant on input or the path found, take collisions into account
-		virtual void Move(type::Vec_Position collisionLayer, type::Vec_Ptr_Position collisionsObjects) = 0;
+		virtual bool Move(type::Vec_Position collisionLayer, type::Vec_Ptr_Position collisionsObjects) = 0;
 
 
 		// Getters and Setters
-		bool GetHasMoved(); void SetHasMoved(bool hasMoved);
 		int GetLives();	void SetLives(int lives);
 		int GetMovePoints(); void SetMovePoints(int movePoints);
 		bool GetIsAlive(); void SetIsAlive(bool isAlive);
@@ -55,7 +54,6 @@ namespace objects
 		int _attackDamage = {};
 		bool _isAlive = true;
 		bool _canFly = false;
-		bool _hasMoved = true;
 		type::Position _position = {};
 
 

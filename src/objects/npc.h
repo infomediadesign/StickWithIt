@@ -21,7 +21,7 @@ namespace objects
 
 
 		// Walk dependant on input or the path found, take collisions into account
-		void Move(type::Vec_Position collisionLayer, type::Vec_Ptr_Position collisionsObjects) override;
+		bool Move(type::Vec_Position collisionLayer, type::Vec_Ptr_Position collisionsObjects) override;
 
 
 	protected:

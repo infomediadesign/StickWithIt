@@ -27,6 +27,8 @@ namespace scenes
 
 
 		bool _isPreperationPhase = true;
+		bool _hasPreperationPhaseJustEnded = false;
+		bool _isPlayerTurn = true;
 
 
 		void SwitchActivePlayer();

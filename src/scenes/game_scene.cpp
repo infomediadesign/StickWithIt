@@ -23,27 +23,59 @@ scenes::GameScene::~GameScene()
 // Update current scene here
 void scenes::GameScene::Update()
 {
-	if (IsKeyPressed(KEY_ENTER))
-		_isPreperationPhase = false;
+	if (_isPlayerTurn)
+	{
+		// switch to fighting phase
+		if (IsKeyPressed(KEY_ENTER))
+		{
+			_isPreperationPhase = false;
+			_hasPreperationPhaseJustEnded = true;
+		}
 
-	if (_activePlayer->GetCanFly())
-		_activePlayer->Move(_levelHandler->GetCollisionsSky(), _collisionsObjects);
+		// handle movement of players
+		if (_activePlayer->GetCanFly())
+			_activePlayer->Move(_levelHandler->GetCollisionsSky(), _collisionsObjects);
+		else
+			if (_activePlayer->Move(_levelHandler->GetCollisionsGround(), _collisionsObjects))
+				_levelHandler->DestroyWheat(*_activePlayer->GetPosition());
+
+		if (_isPreperationPhase == false)
+		{
+			// Destroy the wheat tile of every ground player when entering the preperation phase
+			if (_hasPreperationPhaseJustEnded)
+			{
+				for (auto& player : _players)
+				{
+					if (player->GetCanFly() == false)
+					{
+						_levelHandler->DestroyWheat(*player->GetPosition());
+					}
+					_hasPreperationPhaseJustEnded = false;
+				}
+			}
+
+			// Destroy the wheat the player attacks
+			_levelHandler->DestroyWheat(_activePlayer->Attack().second);
+		}
+
+		int sumOfMoveAndActionPoints = 0;
+		for (auto& player : _players)
+		{
+			sumOfMoveAndActionPoints += player->GetMovePoints() + player->GetActionPoints();
+		}
+		if (sumOfMoveAndActionPoints == 0)
+		{
+			_isPlayerTurn = false;
+		}
+
+		// switch through players
+		SwitchActivePlayer();
+	}
 	else
-		_activePlayer->Move(_levelHandler->GetCollisionsGround(), _collisionsObjects);
-
-	// Manages invisibility and non-tile-destroying, as well as infinite moves while preperation phase
-	if (_isPreperationPhase == false && _activePlayer->GetHasMoved() && _activePlayer->GetCanFly() == false)
 	{
-		_levelHandler->DestroyWheat(*_activePlayer->GetPosition());
-		_activePlayer->SetHasMoved(false);
+		std::cout << "Hello" << std::endl;
+		_isPlayerTurn = true;
 	}
-
-	if (_isPreperationPhase == false)
-	{
-		_levelHandler->DestroyWheat(_activePlayer->Attack().second);
-	}
-
-	SwitchActivePlayer();
 }
 
 
@@ -89,6 +121,7 @@ void scenes::GameScene::NextLevel()
 	_currentLevel++;
 	_collisionsObjects = {};
 	_isPreperationPhase = true;
+	_hasPreperationPhaseJustEnded = false;
 }
 
 
@@ -97,6 +130,7 @@ void scenes::GameScene::NextLevel(int level)
 	_currentLevel = level;
 	_collisionsObjects = {};
 	_isPreperationPhase = true;
+	_hasPreperationPhaseJustEnded = false;
 }
 
 

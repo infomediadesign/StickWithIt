@@ -48,6 +48,7 @@ void objects::NPC::Spawn(type::Vec_Position spawnLayer, type::Vec_Position colli
 		_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eIdleUp);
 }
 
-void objects::NPC::Move(type::Vec_Position collisionLayer, type::Vec_Ptr_Position collisionsObjects)
+bool objects::NPC::Move(type::Vec_Position collisionLayer, type::Vec_Ptr_Position collisionsObjects)
 {
+	return false;
 }

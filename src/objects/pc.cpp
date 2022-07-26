@@ -143,7 +143,7 @@ void objects::PC::Spawn(type::Vec_Position spawnLayer, type::Vec_Position collis
 }
 
 
-void objects::PC::Move(type::Vec_Position collisionLayer, type::Vec_Ptr_Position collisionsObjects)
+bool objects::PC::Move(type::Vec_Position collisionLayer, type::Vec_Ptr_Position collisionsObjects)
 {
 	if (_isActive == true)
 	{
@@ -189,14 +189,16 @@ void objects::PC::Move(type::Vec_Position collisionLayer, type::Vec_Ptr_Position
 			// If theres neither collision or border, move the object
 			if (_position != futurePosition && _movePoints > 0) {
 				_position = futurePosition;
-				_hasMoved = true;
 				if (*_isPreperationPhase == false)
 				{
 					_movePoints--;
+					return true;
 				}
 			}
 		}
 	}
+
+	return false;
 }
 
 
