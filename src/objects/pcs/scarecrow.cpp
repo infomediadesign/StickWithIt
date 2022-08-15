@@ -7,7 +7,7 @@ objects::Scarecrow::Scarecrow()
 	// Default max data
 	_initLives = 10;
 	_initMovePoints = 2;
-	_initActionPoints = 2;
+	_initActionPoints = 0;
 
 	// Default data
 	_lives = _initLives;

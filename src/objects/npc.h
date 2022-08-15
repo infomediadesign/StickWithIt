@@ -21,12 +21,12 @@ namespace objects
 
 
 		// Walk dependant on input or the path found, take collisions into account
-		bool Move(type::Vec_Position collisionLayer, type::Vec_Ptr_Position collisionsObjects, type::Vec_Ptr_Position playersPositions, type::Vec_Position ritualPositions) override;
+		bool Move(type::Vec_Position posDestinations, type::Vec_Position posCollisions) override;
 
 
 	protected:
 
 		// Pathfinder object to find path in Walk();
-		std::unique_ptr<handlers::Pathfinder> _pathfinder = {};
+		std::unique_ptr<handlers::Pathfinder> _pathfinder = std::make_unique<handlers::Pathfinder>();
 	};
 }

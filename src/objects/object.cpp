@@ -22,7 +22,7 @@ bool objects::Object::Move(type::Vec_Position collisionLayer, type::Vec_Ptr_Posi
 	return false;
 }
 
-bool objects::Object::Move(type::Vec_Position collisionLayer, type::Vec_Ptr_Position collisionsObjects, type::Vec_Ptr_Position _playersPositions, type::Vec_Position)
+bool objects::Object::Move(type::Vec_Position posDestinations, type::Vec_Position posCollisions)
 {
 	return false;
 }

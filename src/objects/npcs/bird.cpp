@@ -33,9 +33,6 @@ _framesPerRow = {
 // Animation player to tell object what animation to play
 _animationPlayer = std::make_unique<handlers::AnimationPlayer>(&_position, &_texture, _textureColumns, _textureRows, _textureWidth, _textureHeight,
 	&_wantedSpeed, _textureOffset, _framesPerRow);
-
-// Pathfinder object to find path in Walk();
-_pathfinder = nullptr;
 }
 
 objects::Bird::~Bird() {

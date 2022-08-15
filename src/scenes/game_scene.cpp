@@ -76,17 +76,23 @@ void scenes::GameScene::Update()
 	}
 	else
 	{
+		type::Vec_Position allCollisions = _levelHandler->GetSpawnsPC();
+		for (auto& player : _players)
+			allCollisions.push_back(*player->GetPosition());
+
 		for (auto& enemy : _enemies)
 		{
 			if (enemy->GetCanFly())
-				enemy->Move(_levelHandler->GetCollisionsSky(), _collisionsObjects, _playersPositions, _levelHandler->GetSpawnsPC());
+				enemy->Move(allCollisions, _levelHandler->GetCollisionsSky());
 			else
-				if (enemy->Move(_levelHandler->GetCollisionsGround(), _collisionsObjects, _playersPositions, _levelHandler->GetSpawnsPC()))
-					_levelHandler->DestroyWheat(*enemy->GetPosition());
+			{
+				enemy->Move(allCollisions, _levelHandler->GetCollisionsGround());
+				_levelHandler->DestroyWheat(*enemy->GetPosition());
+			}
 		}
 
-		_isPlayerTurn = true;
 		ResetPlayersStats();
+		_isPlayerTurn = true;
 	}
 }
 

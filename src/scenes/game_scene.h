@@ -41,7 +41,9 @@ namespace scenes
 
 		type::Vec_Ptr_Position _collisionsObjects = {};
 		type::Vec_Ptr_Position _playersPositions = {};
-
+		type::Vec_Position _enemyDestinations = {};
+		type::Vec_Position _allCollisionsSky = {};
+		type::Vec_Position _allCollisionsGround = {};
 
 		void ResetPlayersStats();
 		void ResetEnemiesStats();
