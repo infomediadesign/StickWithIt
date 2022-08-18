@@ -6,3 +6,8 @@
 // This is due to the fact that destructors will not be overridden in derived classes, but will instead be called in reverse order. 
 // As a result, for a pure virtual destructor, you must specify a destructor body.
 scenes::Scene::~Scene() {}
+
+int scenes::Scene::ChangeScene()
+{
+    return 0;
+}

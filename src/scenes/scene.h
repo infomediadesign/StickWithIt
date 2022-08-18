@@ -3,7 +3,6 @@
 #include "../extras/headers.h"
 #include "../extras/typedefs.h"
 
-
 namespace scenes 
 {
 	class Scene 
@@ -13,7 +12,7 @@ namespace scenes
 
 		virtual void Update() = 0;
 		virtual void Draw() = 0;
-		virtual int ChangeScene() = 0;
+		virtual int ChangeScene();
 
 		enum {
 			eMenuScene = 1,

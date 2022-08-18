@@ -25,135 +25,145 @@ scenes::GameScene::~GameScene()
 // Update current scene here
 void scenes::GameScene::Update()
 {
-	if (_isPlayerTurn)
+	if (_isPauseWindowOpen)
 	{
-		// switch to fighting phase
-		if (IsKeyPressed(KEY_ENTER))
+		_pauseWindow->Update();
+	}
+	else 
+	{
+		if (_isPlayerTurn)
 		{
-			_isPreperationPhase = false;
-			_hasPreperationPhaseJustEnded = true;
-			ResetEnemiesStats();
+			// switch to fighting phase
+			if (IsKeyPressed(KEY_ENTER))
+			{
+				_isPreperationPhase = false;
+				_hasPreperationPhaseJustEnded = true;
+				ResetEnemiesStats();
+			}
+
+			// handle movement of players
+			if (_activePlayer->GetCanFly())
+				_activePlayer->Move(_levelHandler->GetCollisionsSky(), _collisionsObjects);
+			else
+				if (_activePlayer->Move(_levelHandler->GetCollisionsGround(), _collisionsObjects))
+					_levelHandler->DestroyWheat(*_activePlayer->GetPosition());
+
+			if (_isPreperationPhase == false)
+			{
+				// Destroy the wheat tile of every ground player when entering the preperation phase
+				if (_hasPreperationPhaseJustEnded)
+				{
+					for (auto& player : _players)
+					{
+						if (player->GetCanFly() == false)
+						{
+							_levelHandler->DestroyWheat(*player->GetPosition());
+						}
+						_hasPreperationPhaseJustEnded = false;
+					}
+				}
+
+
+				type::Pair_Damage_Vec_Position attack = _activePlayer->Attack();
+				if (attack.second.empty() == false)
+				{
+					// Destroy the wheat the player attacks
+					_levelHandler->DestroyWheat(attack.second);
+
+					for (auto& enemy : _enemies)
+						enemy->GetDamage(attack);
+				}
+			}
+
+			int sumOfMoveAndActionPoints = 0;
+			for (auto& player : _players)
+			{
+				sumOfMoveAndActionPoints += player->GetMovePoints() + player->GetActionPoints();
+			}
+			if (sumOfMoveAndActionPoints == 0 || IsKeyPressed(KEY_BACKSPACE))
+			{
+				_isPlayerTurn = false;
+			}
+
+			// switch through players
+			SwitchActivePlayer();
+
+			for (int enemy = 0; enemy < _enemies.size(); enemy++)
+			{
+				if (_enemies[enemy]->GetLives() <= 0)
+					_enemies.erase(std::next(_enemies.begin(), enemy));
+			}
 		}
-
-		// handle movement of players
-		if (_activePlayer->GetCanFly())
-			_activePlayer->Move(_levelHandler->GetCollisionsSky(), _collisionsObjects);
 		else
-			if (_activePlayer->Move(_levelHandler->GetCollisionsGround(), _collisionsObjects))
-				_levelHandler->DestroyWheat(*_activePlayer->GetPosition());
-
-		if (_isPreperationPhase == false)
 		{
-			// Destroy the wheat tile of every ground player when entering the preperation phase
-			if (_hasPreperationPhaseJustEnded)
+			type::Vec_Position allCollisions = _levelHandler->GetSpawnsPC();
+			for (auto& player : _players)
+				allCollisions.push_back(*player->GetPosition());
+
+			for (auto& enemy : _enemies)
+			{
+				if (enemy->GetCanFly())
+					enemy->Move(allCollisions, _levelHandler->GetCollisionsSky());
+				else
+				{
+					enemy->Move(allCollisions, _levelHandler->GetCollisionsGround());
+					_levelHandler->DestroyWheat(*enemy->GetPosition());
+				}
+			}
+
+
+			for (int enemy = 0; enemy < _enemies.size(); enemy++)
+			{
+				for (auto& pos : _levelHandler->GetSpawnsPC())
+				{
+					if (*_enemies[enemy]->GetPosition() == pos)
+					{
+						_ritualLives--;
+						_enemies.erase(std::next(_enemies.begin(), enemy));
+						break;
+					}
+				}
+			}
+
+
+			for (auto& enemy : _enemies)
 			{
 				for (auto& player : _players)
 				{
-					if (player->GetCanFly() == false)
-					{
-						_levelHandler->DestroyWheat(*player->GetPosition());
-					}
-					_hasPreperationPhaseJustEnded = false;
+					if (enemy->GetPosition()->second + 1 == player->GetPosition()->second && enemy->GetPosition()->first + 0 == player->GetPosition()->second)
+						player->GetDamage(enemy->Attack(0));
+
+					else if (enemy->GetPosition()->second - 1 == player->GetPosition()->second && enemy->GetPosition()->first + 0 == player->GetPosition()->second)
+						player->GetDamage(enemy->Attack(1));
+
+					else if (enemy->GetPosition()->second + 0 == player->GetPosition()->second && enemy->GetPosition()->first + 1 == player->GetPosition()->second)
+						player->GetDamage(enemy->Attack(2));
+
+					else if (enemy->GetPosition()->second + 0 == player->GetPosition()->second && enemy->GetPosition()->first - 1 == player->GetPosition()->second)
+						player->GetDamage(enemy->Attack(3));
 				}
 			}
 
 
-			type::Pair_Damage_Vec_Position attack = _activePlayer->Attack();
-			if (attack.second.empty() == false)
+			srand(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count()));
+
+			switch (rand() % 2)
 			{
-			// Destroy the wheat the player attacks
-			_levelHandler->DestroyWheat(attack.second);
-			
-			for (auto& enemy : _enemies)
-				enemy->GetDamage(attack);
+			case 0:
+				AddObject(eMushroom);
+				break;
+			case 1:
+				AddObject(eBird);
+				break;
 			}
-		}
 
-		int sumOfMoveAndActionPoints = 0;
-		for (auto& player : _players)
-		{
-			sumOfMoveAndActionPoints += player->GetMovePoints() + player->GetActionPoints();
-		}
-		if (sumOfMoveAndActionPoints == 0 || IsKeyPressed(KEY_BACKSPACE))
-		{
-			_isPlayerTurn = false;
-		}
-
-		// switch through players
-		SwitchActivePlayer();
-
-		for (int enemy = 0; enemy < _enemies.size(); enemy++)
-		{
-			if (_enemies[enemy]->GetLives() <= 0)
-				_enemies.erase(std::next(_enemies.begin(), enemy));
+			ResetPlayersStats();
+			_isPlayerTurn = true;
 		}
 	}
-	else
-	{
-		type::Vec_Position allCollisions = _levelHandler->GetSpawnsPC();
-		for (auto& player : _players)
-			allCollisions.push_back(*player->GetPosition());
 
-		for (auto& enemy : _enemies)
-		{
-			if (enemy->GetCanFly())
-				enemy->Move(allCollisions, _levelHandler->GetCollisionsSky());
-			else
-			{
-				enemy->Move(allCollisions, _levelHandler->GetCollisionsGround());
-				_levelHandler->DestroyWheat(*enemy->GetPosition());
-			}
-		}
-
-
-		for (int enemy = 0; enemy < _enemies.size(); enemy++)
-		{
-			for (auto& pos : _levelHandler->GetSpawnsPC())
-			{
-				if (*_enemies[enemy]->GetPosition() == pos)
-				{
-					_ritualLives--;
-					_enemies.erase(std::next(_enemies.begin(), enemy));
-					break;
-				}
-			}
-		}
-
-
-		for (auto& enemy : _enemies)
-		{
-			for (auto& player : _players)
-			{
-				if (enemy->GetPosition()->second + 1 == player->GetPosition()->second && enemy->GetPosition()->first + 0 == player->GetPosition()->second)
-					player->GetDamage(enemy->Attack(0));
-
-				else if (enemy->GetPosition()->second - 1 == player->GetPosition()->second && enemy->GetPosition()->first + 0 == player->GetPosition()->second)
-					player->GetDamage(enemy->Attack(1));
-
-				else if (enemy->GetPosition()->second + 0 == player->GetPosition()->second && enemy->GetPosition()->first + 1 == player->GetPosition()->second)
-					player->GetDamage(enemy->Attack(2));
-
-				else if (enemy->GetPosition()->second + 0 == player->GetPosition()->second && enemy->GetPosition()->first - 1 == player->GetPosition()->second)
-					player->GetDamage(enemy->Attack(3));
-			}
-		}
-
-
-		srand(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count()));
-		
-		switch (rand() % 2)
-		{
-		case 0:
-			AddObject(eMushroom);
-			break;
-		case 1:
-			AddObject(eBird);
-			break;
-		}
-
-		ResetPlayersStats();
-		_isPlayerTurn = true;
-	}
+	if (IsKeyPressed(KEY_P))
+		_isPauseWindowOpen = !_isPauseWindowOpen;
 }
 
 
@@ -182,6 +192,12 @@ void scenes::GameScene::Draw()
 	DrawText(TextFormat("Ritual lives: %i", _ritualLives), 40, 140, 20, BLACK);
 	DrawText("Press backspace to end turn", 40, 165, 20, BLACK);
 	DrawFPS(5, game::SCREEN_HEIGHT - 20);
+
+	if (_isPauseWindowOpen)
+	{
+		DrawRectangle(0, 0, 640, 360, { 0, 0, 0, 80 });
+		_pauseWindow->Draw();
+	}
 }
 
 

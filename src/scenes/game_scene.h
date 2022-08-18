@@ -4,6 +4,7 @@
 #include "../objects/objects.h"
 #include "../handlers/level_handler.h"
 
+#include "windows/pause_window.h"
 
 namespace scenes 
 {
@@ -21,6 +22,10 @@ namespace scenes
 
 	private:
 
+		std::unique_ptr<scenes::windows::PauseWindow> _pauseWindow = std::make_unique<scenes::windows::PauseWindow>();
+		bool _isPauseWindowOpen = false;
+
+
 		int _currentLevel = 0;
 		int _ritualLives = 10;
 		void NextLevel();
@@ -35,6 +40,7 @@ namespace scenes
 		void SwitchActivePlayer();
 		int _activePlayerIndex = eScarecrow;
 
+
 		std::shared_ptr<objects::PC> _activePlayer = {};
 		std::vector<std::shared_ptr<objects::PC>> _players = {};
 		std::vector<std::unique_ptr<objects::NPC>> _enemies = {};
@@ -45,6 +51,7 @@ namespace scenes
 		type::Vec_Position _enemyDestinations = {};
 		type::Vec_Position _allCollisionsSky = {};
 		type::Vec_Position _allCollisionsGround = {};
+
 
 		void ResetPlayersStats();
 		void ResetEnemiesStats();
