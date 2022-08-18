@@ -22,7 +22,8 @@ namespace objects
 
 
 		// If an object is in reach of another enemy object, it attacks...
-		virtual type::Pair_Damage_Vec_Position Attack() = 0;
+		virtual type::Pair_Damage_Vec_Position Attack();
+		virtual type::Pair_Damage_Vec_Position Attack(int animation);
 
 
 		// ...and every enemy object checks if it is in the attacks range and if so it gets damaged

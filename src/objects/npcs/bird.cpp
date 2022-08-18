@@ -6,7 +6,7 @@ std::cout << "Bird called!" << std::endl;
 
 // Default max data
 _initLives = 10;
-_initMovePoints = 10;
+_initMovePoints = 2;
 
 // Default data
 _lives = _initLives;

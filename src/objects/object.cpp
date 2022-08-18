@@ -6,9 +6,48 @@ objects::Object::~Object()
 	UnloadTexture(_texture);
 }
 
+type::Pair_Damage_Vec_Position objects::Object::Attack()
+{
+	return type::Pair_Damage_Vec_Position();
+}
+
+type::Pair_Damage_Vec_Position objects::Object::Attack(int animation)
+{
+	if (animation == 0)
+	{
+		_animationPlayer->SetCurrentAnimation(8);
+		return { {_attackDamage},{{_position.first + 0, _position.second - 1}} };
+	}
+
+	if (animation == 1)
+	{
+		_animationPlayer->SetCurrentAnimation(9);
+		return { {_attackDamage},{{_position.first + 0, _position.second + 1}} };
+	}
+
+	if (animation == 2)
+	{
+		_animationPlayer->SetCurrentAnimation(10);
+		return { {_attackDamage},{{_position.first + 1, _position.second + 0}} };
+	}
+
+	if (animation == 3)
+	{
+		_animationPlayer->SetCurrentAnimation(11);
+		return { {_attackDamage},{{_position.first - 1, _position.second + 0}} };
+	}
+}
+
 void objects::Object::GetDamage(type::Pair_Damage_Vec_Position damageAndPositions)
 {
-
+	for (auto& position : damageAndPositions.second)
+	{
+		if (_position == position)
+		{
+			_lives -= damageAndPositions.first;
+		}
+	}
+			std::cout << "hello";
 }
 
 

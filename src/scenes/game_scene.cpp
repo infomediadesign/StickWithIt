@@ -57,8 +57,16 @@ void scenes::GameScene::Update()
 				}
 			}
 
+
+			type::Pair_Damage_Vec_Position attack = _activePlayer->Attack();
+			if (attack.second.empty() == false)
+			{
 			// Destroy the wheat the player attacks
-			_levelHandler->DestroyWheat(_activePlayer->Attack().second);
+			_levelHandler->DestroyWheat(attack.second);
+			
+			for (auto& enemy : _enemies)
+				enemy->GetDamage(attack);
+			}
 		}
 
 		int sumOfMoveAndActionPoints = 0;
@@ -73,6 +81,12 @@ void scenes::GameScene::Update()
 
 		// switch through players
 		SwitchActivePlayer();
+
+		for (int enemy = 0; enemy < _enemies.size(); enemy++)
+		{
+			if (_enemies[enemy]->GetLives() <= 0)
+				_enemies.erase(std::next(_enemies.begin(), enemy));
+		}
 	}
 	else
 	{
@@ -89,6 +103,52 @@ void scenes::GameScene::Update()
 				enemy->Move(allCollisions, _levelHandler->GetCollisionsGround());
 				_levelHandler->DestroyWheat(*enemy->GetPosition());
 			}
+		}
+
+
+		for (int enemy = 0; enemy < _enemies.size(); enemy++)
+		{
+			for (auto& pos : _levelHandler->GetSpawnsPC())
+			{
+				if (*_enemies[enemy]->GetPosition() == pos)
+				{
+					_ritualLives--;
+					_enemies.erase(std::next(_enemies.begin(), enemy));
+					break;
+				}
+			}
+		}
+
+
+		for (auto& enemy : _enemies)
+		{
+			for (auto& player : _players)
+			{
+				if (enemy->GetPosition()->second + 1 == player->GetPosition()->second && enemy->GetPosition()->first + 0 == player->GetPosition()->second)
+					player->GetDamage(enemy->Attack(0));
+
+				else if (enemy->GetPosition()->second - 1 == player->GetPosition()->second && enemy->GetPosition()->first + 0 == player->GetPosition()->second)
+					player->GetDamage(enemy->Attack(1));
+
+				else if (enemy->GetPosition()->second + 0 == player->GetPosition()->second && enemy->GetPosition()->first + 1 == player->GetPosition()->second)
+					player->GetDamage(enemy->Attack(2));
+
+				else if (enemy->GetPosition()->second + 0 == player->GetPosition()->second && enemy->GetPosition()->first - 1 == player->GetPosition()->second)
+					player->GetDamage(enemy->Attack(3));
+			}
+		}
+
+
+		srand(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count()));
+		
+		switch (rand() % 2)
+		{
+		case 0:
+			AddObject(eMushroom);
+			break;
+		case 1:
+			AddObject(eBird);
+			break;
 		}
 
 		ResetPlayersStats();
@@ -119,6 +179,8 @@ void scenes::GameScene::Draw()
 	DrawText(TextFormat("Lives: %i", _activePlayer->GetLives()), 40, 65, 20, BLACK);
 	DrawText(TextFormat("Moves: %i", _activePlayer->GetMovePoints()), 40, 90, 20, BLACK);
 	DrawText(TextFormat("Actions: %i", _activePlayer->GetActionPoints()), 40, 115, 20, BLACK);
+	DrawText(TextFormat("Ritual lives: %i", _ritualLives), 40, 140, 20, BLACK);
+	DrawText("Press backspace to end turn", 40, 165, 20, BLACK);
 	DrawFPS(5, game::SCREEN_HEIGHT - 20);
 }
 
@@ -127,7 +189,7 @@ void scenes::GameScene::Draw()
 int scenes::GameScene::ChangeScene()
 {
 	// Go to menu after player has died (or F2 is pressed for now)
-	if (IsKeyPressed(KEY_F2))
+	if (IsKeyPressed(KEY_F2) || _ritualLives <= 0 /*|| (_activePlayer->isScarecrow && _activePlayer->GetLives() <= 0)*/)
 		return eMenuScene;
 
 	return 0;
@@ -192,7 +254,7 @@ void scenes::GameScene::ResetPlayersStats()
 	for (auto& player : _players)
 	{
 		player->SetMovePoints(player->GetInitMovePoints());
-		player->SetActionPoints(player->GetActionPoints());
+		player->SetActionPoints(player->GetInitActionPoints());
 	}
 }
 

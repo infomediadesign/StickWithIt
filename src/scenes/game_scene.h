@@ -22,6 +22,7 @@ namespace scenes
 	private:
 
 		int _currentLevel = 0;
+		int _ritualLives = 10;
 		void NextLevel();
 		void NextLevel(int level);
 

@@ -4,12 +4,6 @@ objects::NPC::~NPC() {
 }
 
 
-type::Pair_Damage_Vec_Position objects::NPC::Attack()
-{
-	return type::Pair_Damage_Vec_Position();
-}
-
-
 void objects::NPC::Spawn(type::Vec_Position spawnLayer, type::Vec_Position collisionLayer, type::Vec_Ptr_Position collisionsObjects)
 {
 	unsigned int seed = static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count());
@@ -50,7 +44,15 @@ void objects::NPC::Spawn(type::Vec_Position spawnLayer, type::Vec_Position colli
 
 bool objects::NPC::Move(type::Vec_Position posDestinations, type::Vec_Position posCollisions)
 {
-	_position = _pathfinder->FindPath(_position, posDestinations, posCollisions).back();
+	// This will ERROR when the path is shorter than the movePoints
+	type::Vec_Position path = _pathfinder->FindPath(_position, posDestinations, posCollisions);
+
+	// Make the path long enough so we wont get out of vector range
+	while (path.size() < _movePoints)
+	{
+		path.push_back(_position);
+	}
+	_position = path.rbegin()[_movePoints - 1];
 
 	return false;
 }

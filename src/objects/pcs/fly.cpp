@@ -6,8 +6,8 @@ objects::Fly::Fly()
 
 	// Default max data
 	_initLives = 10;
-	_initMovePoints = 2;
-	_initActionPoints = 0;
+	_initMovePoints = 5;
+	_initActionPoints = 2;
 
 	// Default data
 	_lives = _initLives;
