@@ -52,7 +52,6 @@ namespace scenes::windows
 		std::shared_ptr<Tree> activeTree = scythe;
 
 		std::shared_ptr<Upgrade> activeUpgrade = nullptr;
-		std::shared_ptr<Upgrade> dummyUpgrade = std::make_shared<Upgrade>();
 
 		std::vector<std::shared_ptr<Tree>> trees = { scythe, pitchfork, shovel };
 		

@@ -2,6 +2,7 @@
 #include "extras/headers.h"
 #include "scenes/scenes.h"
 
+#include <fstream>
 #include <filesystem>
 
 int main() 
@@ -56,7 +57,6 @@ int main()
 
 
     UnloadImage(game::ICON);
-
 
     // Deinit game
     CloseWindow();

@@ -1,7 +1,13 @@
 #include "game_scene.h"
+#include <string>
 
 scenes::GameScene::GameScene() 
 {
+	std::string skillpointsToString;
+	std::ifstream savegameFile("savegame.txt");
+	while (std::getline(savegameFile, skillpointsToString))
+		currentSkillpoints = std::stoi(skillpointsToString);
+
 	std::cout << "Game scene called!" << std::endl;
 
 	AddObject(eScarecrow);
@@ -205,7 +211,16 @@ int scenes::GameScene::ChangeScene()
 {
 	// Go to menu after player has died (or F2 is pressed for now)
 	if (IsKeyPressed(KEY_F2) || _ritualLives <= 0 /*|| (_activePlayer->isScarecrow && _activePlayer->GetLives() <= 0)*/)
+	{
+		if (_levelHandler->GetNumberOfWheat() > 20)
+		{
+			std::ofstream savegameFile("savegame.txt");
+			savegameFile << _levelHandler->GetNumberOfWheat() / 2 + currentSkillpoints;
+			savegameFile.close();
+		}
+
 		return eMenuScene;
+	}
 
 	return 0;
 }

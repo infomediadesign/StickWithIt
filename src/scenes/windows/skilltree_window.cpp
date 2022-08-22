@@ -8,6 +8,12 @@ scenes::windows::SkilltreeWindow::SkilltreeWindow()
 {
 	initTrees();
 
+	std::string skillpointsString;
+
+	std::ifstream savegameFile("savegame.txt");
+	while (std::getline(savegameFile, skillpointsString))
+		skillpoints = std::stoi(skillpointsString);
+
 	// Maybe relevant for savegame but ignored for now
 	//std::fstream savegame;
 	//savegame.open("../../../../src/savegame.txt");
@@ -41,17 +47,11 @@ scenes::windows::SkilltreeWindow::SkilltreeWindow()
 	//	i++;
 	//}
 
-	//skillpoints = std::stoi(skillpointLine);
-
 	for (auto& tree : trees)
 		for (auto& upgrade : tree->upgrades)
 			for (auto& number : gamestate::gamestateUpgrades)
 				if (upgrade->upgradeNumber == number)
 					upgrade->locked = false;
-
-	dummyUpgrade->locked = false;
-
-	skillpoints = gamestate::skillpoints;
 
 	activeUpgrade = activeTree->upgrades[0];
 	activeUpgrade->isActive = true;
@@ -73,7 +73,9 @@ scenes::windows::SkilltreeWindow::~SkilltreeWindow()
 	for (auto& upgrade : shovel->upgrades)
 		UnloadTexture(upgrade->texture);
 
-	gamestate::skillpoints = skillpoints;
+	std::ofstream savegameFile("savegame.txt");
+	savegameFile << skillpoints;
+	savegameFile.close();
 
 	for (auto& tree : trees)
 		for (auto& upgrade : tree->upgrades)
@@ -125,7 +127,7 @@ void scenes::windows::SkilltreeWindow::Update()
 			activeUpgrade->isActive = false;
 			activeUpgrade = activeUpgrade->upgradeTop;
 		}
-		if (IsKeyPressed(KEY_DOWN) && activeUpgrade->upgradeDown != nullptr)
+		if (IsKeyPressed(KEY_DOWN) && activeUpgrade->upgradeDown != nullptr && activeUpgrade->upgradeDown->cost != -1)
 		{
 			activeUpgrade->isActive = false;
 			activeUpgrade = activeUpgrade->upgradeDown;
@@ -145,7 +147,7 @@ void scenes::windows::SkilltreeWindow::Update()
 	}
 
 	if ((IsKeyPressed(KEY_ENTER) || IsKeyPressed(KEY_SPACE)) && skillpoints >= activeUpgrade->cost && activeUpgrade->locked &&
-		activeUpgrade->upgradeDown->locked == false)
+		(activeUpgrade->upgradeDown->locked == false || activeUpgrade->upgradeDown->cost == -1))
 	{
 		activeUpgrade->locked = false;
 		skillpoints -= activeUpgrade->cost;
@@ -174,6 +176,7 @@ void scenes::windows::SkilltreeWindow::Draw()
 			if (upgrade->isActive)
 			{
 				DrawTexture(lock, upgrade->pos.first, upgrade->pos.second, LIGHTGRAY);
+				DrawText(TextFormat("Cost: %i", upgrade->cost), 65, 100, 10, BLACK);
 			}
 			
 			else
@@ -184,6 +187,9 @@ void scenes::windows::SkilltreeWindow::Draw()
 
 void scenes::windows::SkilltreeWindow::initTrees()
 {
+	std::shared_ptr<Upgrade> dummyUpgrade = std::make_shared<Upgrade>();
+	dummyUpgrade->cost = -1;
+
 	scythe->backgroundTexture = skilltreeScythe;
 
 	std::shared_ptr<Upgrade> upgrade1 = std::make_shared<Upgrade>();
@@ -263,6 +269,7 @@ void scenes::windows::SkilltreeWindow::initTrees()
 	upgrade6->pos = { 453, 132 };
 	upgrade6->texture = LoadTexture("assets/graphics/skilltree/shovel/clock.png");
 	upgrade6->upgradeNumber = 6;
+	
 
 	std::shared_ptr<Upgrade> upgrade7 = std::make_shared<Upgrade>();
 	upgrade7->cost = 100;

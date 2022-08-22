@@ -6,6 +6,8 @@
 
 #include "windows/pause_window.h"
 
+#include <fstream>
+
 namespace scenes 
 {
 	class GameScene : public Scene 
@@ -21,6 +23,8 @@ namespace scenes
 
 
 	private:
+
+		int currentSkillpoints = 0;
 
 		std::unique_ptr<scenes::windows::PauseWindow> _pauseWindow = std::make_unique<scenes::windows::PauseWindow>();
 		bool _isPauseWindowOpen = false;
