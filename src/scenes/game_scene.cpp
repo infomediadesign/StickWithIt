@@ -1,6 +1,5 @@
 #include "game_scene.h"
 
-
 scenes::GameScene::GameScene() 
 {
 	std::cout << "Game scene called!" << std::endl;
@@ -214,6 +213,8 @@ int scenes::GameScene::ChangeScene()
 
 void scenes::GameScene::NextLevel()
 {
+	
+
 	_currentLevel++;
 	_collisionsObjects = {};
 	_isPreperationPhase = true;
