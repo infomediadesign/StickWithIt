@@ -16,7 +16,7 @@ add_executable(${PROJECT_NAME} main.cpp
 "objects/pcs/scarecrow.h" "objects/pcs/scarecrow.cpp" "objects/npcs/bird.h" "objects/npcs/bird.cpp" "objects/pcs/fly.h" "objects/pcs/fly.cpp" 
 #Levin
 
-  "extras/textures.h" "scenes/windows/pause_window.h" "scenes/windows/pause_window.cpp" "scenes/windows/skilltree_window.h" "scenes/windows/skilltree_window.cpp" "scenes/windows/settings_window.cpp" "scenes/windows/settings_window.h")
+  "extras/textures.h" "scenes/windows/pause_window.h" "scenes/windows/pause_window.cpp" "scenes/windows/skilltree_window.h" "scenes/windows/skilltree_window.cpp" "scenes/windows/settings_window.cpp" "scenes/windows/settings_window.h" "gamestate.h")
 
 #  Link to Raylib
 target_link_libraries(${PROJECT_NAME} raylib)
