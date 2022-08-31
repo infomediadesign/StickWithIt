@@ -10,7 +10,7 @@ int main()
     std::cout << std::filesystem::current_path() << std::endl;
 
     // Init game
-    InitWindow(game::SCREEN_WIDTH, game::SCREEN_HEIGHT, game::PROJECT_NAME);
+    InitWindow(game::SCREEN_WIDTH*2, game::SCREEN_HEIGHT*2, game::PROJECT_NAME);
     SetWindowIcon(game::ICON);
     SetTargetFPS(game::FRAMERATE);
 
@@ -18,6 +18,9 @@ int main()
     // Init starting scene
     std::unique_ptr<scenes::Scene> activeScene = std::make_unique<scenes::MenuScene>();
 
+    Camera2D Screencamera{};
+
+    Screencamera.zoom = 2.0f;
 
     // Exit game bool
     bool resumeGame = true;
@@ -48,10 +51,11 @@ int main()
         BeginDrawing();
         {
             ClearBackground(WHITE);
+            BeginMode2D(Screencamera);
             activeScene->Draw();
         }
 
-
+        EndMode2D();
         EndDrawing();
     }
 
