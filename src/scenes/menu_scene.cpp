@@ -2,7 +2,7 @@
 
 
 scenes::MenuScene::MenuScene() 
-	: titlescreenTexture(LoadTexture("assets/graphics/backgrounds/farmhouse_titlescreen.png"))
+	: titlescreenTexture(LoadTexture("assets/graphics/backgrounds/menu_background.png"))
 {
 	std::cout << "Menu scene called!" << std::endl;
 }
