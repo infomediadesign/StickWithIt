@@ -1,23 +1,23 @@
 #include "settings_window.h"
 
 scenes::windows::SettingsWindow::SettingsWindow()
+	: SettingTexture(LoadTexture("assets/graphics/ui/Options/options_menu_sheet.png"))
 {
 }
 
 scenes::windows::SettingsWindow::~SettingsWindow()
 {
+	UnloadTexture(SettingTexture);
 }
 
 void scenes::windows::SettingsWindow::Update()
-{
+{	
+	if (IsKeyPressed(KEY_F)) {
+		ToggleFullscreen();
+	}
 }
 
 void scenes::windows::SettingsWindow::Draw()
 {
-	DrawText("Sound", 60, 50, 20, BLACK);
-	DrawText("Fullscreen", 60, 75, 20, BLACK);
-
-	if (IsKeyPressed(KEY_F)) {
-		ToggleFullscreen();
-	}
+	DrawTexture(SettingTexture, 172, 41, WHITE);
 }

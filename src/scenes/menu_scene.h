@@ -24,5 +24,7 @@ namespace scenes
 
 		std::unique_ptr<scenes::windows::SkilltreeWindow> _skilltreeWindow = std::make_unique<scenes::windows::SkilltreeWindow>();
 		bool _isSkilltreeWindowOpen = false;
+
+		Texture2D titlescreenTexture;
 	};
 }

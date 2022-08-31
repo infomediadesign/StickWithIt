@@ -2,13 +2,16 @@
 
 
 scenes::MenuScene::MenuScene() 
+	: titlescreenTexture(LoadTexture("assets/graphics/backgrounds/farmhouse_titlescreen.png"))
 {
 	std::cout << "Menu scene called!" << std::endl;
 }
 
 
 scenes::MenuScene::~MenuScene() {
-	std::cout << "Menu scene deleted!" << std::endl; }
+	std::cout << "Menu scene deleted!" << std::endl; 
+	UnloadTexture(titlescreenTexture);
+}
 
 
 void scenes::MenuScene::Update()
@@ -30,10 +33,12 @@ void scenes::MenuScene::Update()
 
 void scenes::MenuScene::Draw()
 {
-	DrawText("F1 to start game", 10, 10, 10, BLACK);
-	DrawText("F2 to open skilltree", 10, 25, 10, BLACK);
-	DrawText("F3 to open settings", 10, 40, 10, BLACK);
-	DrawText("F4 to exit game", 10, 54, 10, BLACK);
+	DrawTexture(titlescreenTexture, 0, 0, WHITE);
+
+	DrawText("F1 to start game", 10, 10, 10, WHITE);
+	DrawText("F2 to open skilltree", 10, 25, 10, WHITE);
+	DrawText("F3 to open settings", 10, 40, 10, WHITE);
+	DrawText("F4 to exit game", 10, 54, 10, WHITE);
 
 	if (_isSettingsWindowOpen)
 	{

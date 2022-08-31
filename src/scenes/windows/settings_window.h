@@ -13,5 +13,7 @@ namespace scenes::windows
 
 		void Update() override;
 		void Draw() override;
+
+		Texture2D SettingTexture;
 	};
 }
