@@ -23,7 +23,7 @@ namespace scenes
 
 
 	private:
-
+		int turns = 0;
 		int currentSkillpoints = 0;
 
 		std::unique_ptr<scenes::windows::PauseWindow> _pauseWindow = std::make_unique<scenes::windows::PauseWindow>();

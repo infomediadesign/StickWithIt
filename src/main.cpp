@@ -20,11 +20,11 @@ int main()
 
 
     // Exit game bool
-    bool exitGame = false;
+    bool resumeGame = true;
 
 
     // Game loop starts here
-    while (!WindowShouldClose() && !exitGame)
+    while (resumeGame && (!WindowShouldClose() || IsKeyPressed(KEY_ESCAPE)))
     {
         // Scenes know when to change to what scene
         switch (activeScene->ChangeScene())
@@ -36,7 +36,7 @@ int main()
             activeScene = std::make_unique<scenes::GameScene>();
             break;
         case -1:
-            exitGame = true;
+            resumeGame = false;
         }
 
 

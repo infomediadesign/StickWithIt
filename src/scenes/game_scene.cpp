@@ -149,17 +149,21 @@ void scenes::GameScene::Update()
 				}
 			}
 
+			turns++;
 
 			srand(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count()));
 
-			switch (rand() % 2)
+			if (turns <= 5)
 			{
-			case 0:
-				AddObject(eMushroom);
-				break;
-			case 1:
-				AddObject(eBird);
-				break;
+				switch (rand() % 2)
+				{
+				case 0:
+					AddObject(eMushroom);
+					break;
+				case 1:
+					AddObject(eBird);
+					break;
+				}
 			}
 
 			ResetPlayersStats();
@@ -169,6 +173,9 @@ void scenes::GameScene::Update()
 
 	if (IsKeyPressed(KEY_P))
 		_isPauseWindowOpen = !_isPauseWindowOpen;
+
+	if (_enemies.empty() && turns >= 5 && _levelHandler->GetNumberOfLevels() > _currentLevel)
+		NextLevel();
 }
 
 
@@ -182,10 +189,11 @@ void scenes::GameScene::Draw()
 			player->Animate();
 		}
 
-		for (auto& enemy : _enemies)
-		{
-			enemy->Animate();
-		}
+		if (!_enemies.empty())
+			for (auto& enemy : _enemies)
+			{
+				enemy->Animate();
+			}
 	}
 	_levelHandler->DrawAir();
 
@@ -228,25 +236,20 @@ int scenes::GameScene::ChangeScene()
 
 void scenes::GameScene::NextLevel()
 {
-	
-
+	turns = 0;
 	_currentLevel++;
-	_collisionsObjects = {};
+	_collisionsObjects.clear();
 	_isPreperationPhase = true;
 	_hasPreperationPhaseJustEnded = false;
-	for (auto& pos : _levelHandler->GetSpawnsPC())
-		_playersPositions.push_back(&pos);
 }
 
 
 void scenes::GameScene::NextLevel(int level)
 {
 	_currentLevel = level;
-	_collisionsObjects = {};
+	_collisionsObjects.clear();
 	_isPreperationPhase = true;
 	_hasPreperationPhaseJustEnded = false;
-	for (auto& pos : _levelHandler->GetSpawnsPC())
-		_playersPositions.push_back(&pos);
 }
 
 

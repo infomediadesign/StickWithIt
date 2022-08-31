@@ -148,6 +148,11 @@ int handlers::LevelHandler::GetNumberOfWheat()
 	return wheatCount;
 }
 
+int handlers::LevelHandler::GetNumberOfLevels()
+{
+	return _vecDataAllLevel.size();
+}
+
 void handlers::LevelHandler::DestroyWheat(type::Position position)
 {
 	if (position.first > 0 && position.first < game::TILES_PER_ROW
