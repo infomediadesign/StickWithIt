@@ -5,15 +5,21 @@
 #include <fstream>
 #include <filesystem>
 
-int main() 
+int main()
 {
     std::cout << std::filesystem::current_path() << std::endl;
 
     // Init game
-    InitWindow(game::SCREEN_WIDTH*2, game::SCREEN_HEIGHT*2, game::PROJECT_NAME);
+    InitWindow(game::SCREEN_WIDTH * 2, game::SCREEN_HEIGHT * 2, game::PROJECT_NAME);
     SetWindowIcon(game::ICON);
     SetTargetFPS(game::FRAMERATE);
 
+    InitAudioDevice();
+    Music music = LoadMusicStream("assets/audio/tracks/Ambience.mp3");
+    PlayMusicStream(music);
+
+    float timePlayed = 0.0f;
+    bool pause = false;
 
     // Init starting scene
     std::unique_ptr<scenes::Scene> activeScene = std::make_unique<scenes::MenuScene>();
@@ -29,6 +35,7 @@ int main()
     // Game loop starts here
     while (resumeGame && (!WindowShouldClose() || IsKeyPressed(KEY_ESCAPE)))
     {
+        UpdateMusicStream(music);
         // Scenes know when to change to what scene
         switch (activeScene->ChangeScene())
         {
@@ -42,10 +49,15 @@ int main()
             resumeGame = false;
         }
 
+        if (IsKeyPressed(KEY_M))
+        {
+            pause = !pause;
+            if (pause) PauseMusicStream(music);
+            else ResumeMusicStream(music);
+        }
 
         // Update active scene
         activeScene->Update();
-
 
         // Clear Background and draw scene
         BeginDrawing();
@@ -58,7 +70,6 @@ int main()
         EndMode2D();
         EndDrawing();
     }
-
 
     UnloadImage(game::ICON);
 

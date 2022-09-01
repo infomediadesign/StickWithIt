@@ -171,8 +171,14 @@ void scenes::GameScene::Update()
 		}
 	}
 
-	if (IsKeyPressed(KEY_P))
-		_isPauseWindowOpen = !_isPauseWindowOpen;
+	if (IsKeyPressed(KEY_ESCAPE))
+	{
+		_pauseWindow->SetISCurrentlyOpen(true);
+		_isPauseWindowOpen = true;
+	}
+
+	if (_pauseWindow->GetIsCurrentlyOpen() == false)
+		_isPauseWindowOpen = false;
 
 	if (_enemies.empty() && turns >= 5 && _levelHandler->GetNumberOfLevels() > _currentLevel)
 		NextLevel();

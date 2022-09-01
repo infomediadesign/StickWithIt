@@ -1,14 +1,15 @@
 #pragma once
 
 #include "scene.h"
+#include "button.h"
 
 #include "windows/settings_window.h"
 #include "windows/skilltree_window.h"
 
 
-namespace scenes 
+namespace scenes
 {
-	class MenuScene : public Scene 
+	class MenuScene : public Scene
 	{
 	public:
 		MenuScene();
@@ -24,6 +25,9 @@ namespace scenes
 
 		std::unique_ptr<scenes::windows::SkilltreeWindow> _skilltreeWindow = std::make_unique<scenes::windows::SkilltreeWindow>();
 		bool _isSkilltreeWindowOpen = false;
+
+		std::vector<Button*> buttons;
+		int active_button = 0;
 
 		Texture2D titlescreenTexture;
 	};
