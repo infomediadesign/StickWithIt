@@ -29,8 +29,7 @@ type::Vec_Position handlers::LevelHandler::GetCollisionsGround()
 	for (int y = 0; y < game::TILES_PER_COLUMN; y++) {
 		for (int x = 0; x < game::TILES_PER_ROW; x++)
 		{
-			if (_vecDataAllLevel[*_currentLevel][eCollisionLayer][iterator] == eCollisionTiles
-				|| _vecDataAllLevel[*_currentLevel][eCollisionLayer][iterator] == eCollisionOnlyGroundTile)
+			if (_vecDataAllLevel[*_currentLevel][collisions][iterator] == collisionGround)
 			{
 				collisionPositions.push_back({ x, y });
 			}
@@ -50,14 +49,17 @@ type::Vec_Position handlers::LevelHandler::GetCollisionsSky()
 	for (int y = 0; y < game::TILES_PER_COLUMN; y++) {
 		for (int x = 0; x < game::TILES_PER_ROW; x++)
 		{
-			if (_vecDataAllLevel[*_currentLevel][eCollisionLayer][iterator] == eCollisionTiles)
+			if (_vecDataAllLevel[*_currentLevel][collisions][iterator] == collisionAir)
+			{
 				collisionPositions.push_back({ x, y });
+			}
 
 			iterator++;
 		}
 	}
 	return collisionPositions;
 }
+
 
 type::Vec_Position handlers::LevelHandler::GetSpawnsGround()
 {
@@ -67,7 +69,7 @@ type::Vec_Position handlers::LevelHandler::GetSpawnsGround()
 	for (int y = 0; y < game::TILES_PER_COLUMN; y++) {
 		for (int x = 0; x < game::TILES_PER_ROW; x++)
 		{
-			if (_vecDataAllLevel[*_currentLevel][eSpawnLayer][iterator] == eSpawnGroundTile)
+			if (_vecDataAllLevel[*_currentLevel][spawns][iterator] == spawnGroundNPC)
 				spawnGroundPositions.push_back({ x, y });
 
 			iterator++;
@@ -84,7 +86,7 @@ type::Vec_Position handlers::LevelHandler::GetSpawnsSky()
 	for (int y = 0; y < game::TILES_PER_COLUMN; y++) {
 		for (int x = 0; x < game::TILES_PER_ROW; x++)
 		{
-			if (_vecDataAllLevel[*_currentLevel][eSpawnLayer][iterator] == eSpawnSkyTile)
+			if (_vecDataAllLevel[*_currentLevel][spawns][iterator] == spawnAirNPC)
 				spawnSkyPositions.push_back({ x, y });
 
 			iterator++;
@@ -101,7 +103,7 @@ type::Vec_Position handlers::LevelHandler::GetSpawnsPC()
 	for (int y = 0; y < game::TILES_PER_COLUMN; y++) {
 		for (int x = 0; x < game::TILES_PER_ROW; x++)
 		{
-			if (_vecDataAllLevel[*_currentLevel][eGroundLayer][iterator] == eRitualTile)
+			if (_vecDataAllLevel[*_currentLevel][spawns][iterator] == spawnPC)
 				ritualPositions.push_back({ x, y });
 
 			iterator++;
@@ -136,11 +138,9 @@ void handlers::LevelHandler::DrawAnyLayer(int layer)
 int handlers::LevelHandler::GetNumberOfWheat()
 {
 	int wheatCount = 0;
-	for (int tile : _vecDataAllLevel[*_currentLevel][eGroundLayer])
+	for (int tile : _vecDataAllLevel[*_currentLevel][ground])
 	{
-		if (tile == eWheat1Tile
-			|| tile == eWheat2Tile
-			|| tile == eWheat3Tile)
+		if (tile == wheat)
 		{
 			wheatCount++;
 		}
@@ -160,14 +160,8 @@ void handlers::LevelHandler::DestroyWheat(type::Position position)
 	{
 		int positionToIndex = position.first + position.second * game::TILES_PER_ROW;
 
-		if (_vecDataAllLevel[*_currentLevel][eGroundLayer][positionToIndex] == eWheat1Tile)
-			_vecDataAllLevel[*_currentLevel][eGroundLayer][positionToIndex] = eWheat2Tile;
-
-		else if (_vecDataAllLevel[*_currentLevel][eGroundLayer][positionToIndex] == eWheat2Tile)
-			_vecDataAllLevel[*_currentLevel][eGroundLayer][positionToIndex] = eWheat3Tile;
-
-		else if (_vecDataAllLevel[*_currentLevel][eGroundLayer][positionToIndex] == eWheat3Tile)
-			_vecDataAllLevel[*_currentLevel][eGroundLayer][positionToIndex] = eFieldTile;
+		if (_vecDataAllLevel[*_currentLevel][ground][positionToIndex] == wheat)
+			_vecDataAllLevel[*_currentLevel][ground][positionToIndex] = destroyedWheat;
 	}
 }
 
@@ -180,26 +174,19 @@ void handlers::LevelHandler::DestroyWheat(type::Vec_Position positions)
 		{
 			int positionToIndex = position.first + position.second * game::TILES_PER_ROW;
 
-			if (_vecDataAllLevel[*_currentLevel][eGroundLayer][positionToIndex] == eWheat1Tile)
-				_vecDataAllLevel[*_currentLevel][eGroundLayer][positionToIndex] = eWheat2Tile;
-
-			else if (_vecDataAllLevel[*_currentLevel][eGroundLayer][positionToIndex] == eWheat2Tile)
-				_vecDataAllLevel[*_currentLevel][eGroundLayer][positionToIndex] = eWheat3Tile;
-
-			else if (_vecDataAllLevel[*_currentLevel][eGroundLayer][positionToIndex] == eWheat3Tile)
-				_vecDataAllLevel[*_currentLevel][eGroundLayer][positionToIndex] = eFieldTile;
+			if (_vecDataAllLevel[*_currentLevel][ground][positionToIndex] == wheat)
+				_vecDataAllLevel[*_currentLevel][ground][positionToIndex] = destroyedWheat;
 		}
 	}
 }
 
 void handlers::LevelHandler::DrawGround()
 {
-	DrawAnyLayer(eGroundLayer);
-	DrawAnyLayer(eSpawnLayer);
-	DrawAnyLayer(eCollisionLayer);
+	DrawAnyLayer(ground);
+	DrawAnyLayer(decor_ground);
 }
 
 void handlers::LevelHandler::DrawAir()
 {
-	DrawAnyLayer(eSkyLayer);
+	DrawAnyLayer(decor_air);
 }

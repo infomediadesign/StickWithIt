@@ -19,6 +19,6 @@ namespace game
     inline constexpr const int TILES_PER_COLUMN = 12;
 
     // Must be adjusted to biggest tilesheet
-    inline constexpr const int TILESHEET_TILES_PER_ROW = 10;
-    inline constexpr const int TILESHEET_TILES_PER_COLUMN = 2;
+    inline constexpr const int TILESHEET_TILES_PER_ROW = 14;
+    inline constexpr const int TILESHEET_TILES_PER_COLUMN = 20;
 }

@@ -1,41 +1,8 @@
 ///////////////////////////////
-Show FPS:
-
-DrawFPS();
-Should be turned on and off in settings scene;
-
-DrawText(FormatText(GetFPS))); <- More possibilities to change colour etc
-
-///////////////////////////////
-Freeze game when open menu:
-
-1. Make a screenshot: LoadImageFromScreen();
-2. Stop all animate() and other update functions;
-3. while settings is not closed draw screenshot then settings;
-4. otherwise stop drawing settings and continue animate() and other update functions;
-
-///////////////////////////////
-Make animation player play correctly at any give framerate: 
-
-multiply the count to play next frame by GetFrameTime();
-
-///////////////////////////////
-Add every object to collision layer each frame
-
-///////////////////////////////
-Sort the objects by the distance to the ritual
-
-///////////////////////////////
-For each tile that would get damaged (player damages more than 1), call DamageWheat() one time.
-
-///////////////////////////////
-y-sorting
-
-///////////////////////////////
-Between each Spawn() we need to update the collision map so new spawned objects wont collide with the spawned ones from before
-
-///////////////////////////////
 Draw a symbol over active player, like in league
 
 ///////////////////////////////
-revise scarecrow idle animations (idle left head rotates wrong direction and head starts at position of idle down)
+close button for menu / skilltree (or just escape?)
+
+///////////////////////////////
+mark active player with symbol or whatsoever over it

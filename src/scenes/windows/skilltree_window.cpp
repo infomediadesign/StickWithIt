@@ -146,7 +146,7 @@ void scenes::windows::SkilltreeWindow::Update()
 		activeUpgrade->isActive = true;
 	}
 
-	if ((IsKeyPressed(KEY_ENTER) || IsKeyPressed(KEY_SPACE)) && skillpoints >= activeUpgrade->cost && activeUpgrade->locked &&
+	if ((IsKeyPressed(KEY_SPACE)) && skillpoints >= activeUpgrade->cost && activeUpgrade->locked &&
 		(activeUpgrade->upgradeDown->locked == false || activeUpgrade->upgradeDown->cost == -1))
 	{
 		activeUpgrade->locked = false;
