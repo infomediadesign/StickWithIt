@@ -18,6 +18,7 @@ namespace handlers
 
 		// Draws the current animation
 		void Animate();
+		void AnimateDeath();
 
 
 		// changes the current animation to wanted animation
@@ -68,6 +69,7 @@ namespace handlers
 		// Holds data of current animation state
 		int _currentAnimation = eIdleDown;
 		int _currentFrame = 0;
+		int _currentDeathFrame = 0;
 		float _speedIterator = 0;
 		int _standartSpeed = 100;
 		int _numberOfFramesToNotCancel = 0;

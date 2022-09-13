@@ -42,7 +42,7 @@ void scenes::GameScene::Update()
 		if (_isPlayerTurn)
 		{
 			// switch to fighting phase
-			if (IsKeyPressed(KEY_ENTER))
+			if (IsKeyPressed(KEY_P))
 			{
 				_isPreperationPhase = false;
 				_hasPreperationPhaseJustEnded = true;
@@ -58,7 +58,7 @@ void scenes::GameScene::Update()
 
 			if (_isPreperationPhase == false)
 			{
-				// Destroy the wheat tile of every ground player when entering the preperation phase
+				// Destroy the wheat tile of every ground player when leaving the preperation phase
 				if (_hasPreperationPhaseJustEnded)
 				{
 					for (auto& player : _players)
@@ -72,6 +72,7 @@ void scenes::GameScene::Update()
 				}
 
 
+				// If the player decides to attack, destroy wheat and ask every enemy if it was in attack range (and if, damage it)
 				type::Pair_Damage_Vec_Position attack = _activePlayer->Attack();
 				if (attack.second.empty() == false)
 				{
@@ -88,7 +89,7 @@ void scenes::GameScene::Update()
 			{
 				sumOfMoveAndActionPoints += player->GetMovePoints() + player->GetActionPoints();
 			}
-			if (sumOfMoveAndActionPoints == 0 || IsKeyPressed(KEY_BACKSPACE))
+			if (sumOfMoveAndActionPoints == 0 || (IsKeyPressed(KEY_BACKSPACE) && !_isPreperationPhase))
 			{
 				_isPlayerTurn = false;
 			}
@@ -99,7 +100,10 @@ void scenes::GameScene::Update()
 			for (int enemy = 0; enemy < _enemies.size(); enemy++)
 			{
 				if (_enemies[enemy]->GetLives() <= 0)
+				{
+					_deadObjects.push_back(_enemies[enemy]);
 					_enemies.erase(std::next(_enemies.begin(), enemy));
+				}
 			}
 		}
 		else
@@ -126,7 +130,7 @@ void scenes::GameScene::Update()
 				{
 					if (*_enemies[enemy]->GetPosition() == pos)
 					{
-						_ritualLives--;
+						_players[0]->SetLives(_players[0]->GetLives() - _enemies.at(enemy)->GetAttackDamage());
 						_enemies.erase(std::next(_enemies.begin(), enemy));
 						break;
 					}
@@ -138,16 +142,16 @@ void scenes::GameScene::Update()
 			{
 				for (auto& player : _players)
 				{
-					if (enemy->GetPosition()->second + 1 == player->GetPosition()->second && enemy->GetPosition()->first + 0 == player->GetPosition()->second)
+					if (enemy->GetPosition()->second + 1 == player->GetPosition()->second && enemy->GetPosition()->first + 0 == player->GetPosition()->first)
 						player->GetDamage(enemy->Attack(0));
 
-					else if (enemy->GetPosition()->second - 1 == player->GetPosition()->second && enemy->GetPosition()->first + 0 == player->GetPosition()->second)
+					else if (enemy->GetPosition()->second - 1 == player->GetPosition()->second && enemy->GetPosition()->first + 0 == player->GetPosition()->first)
 						player->GetDamage(enemy->Attack(1));
 
-					else if (enemy->GetPosition()->second + 0 == player->GetPosition()->second && enemy->GetPosition()->first + 1 == player->GetPosition()->second)
+					else if (enemy->GetPosition()->second + 0 == player->GetPosition()->second && enemy->GetPosition()->first + 1 == player->GetPosition()->first)
 						player->GetDamage(enemy->Attack(2));
 
-					else if (enemy->GetPosition()->second + 0 == player->GetPosition()->second && enemy->GetPosition()->first - 1 == player->GetPosition()->second)
+					else if (enemy->GetPosition()->second + 0 == player->GetPosition()->second && enemy->GetPosition()->first - 1 == player->GetPosition()->first)
 						player->GetDamage(enemy->Attack(3));
 				}
 			}
@@ -206,15 +210,20 @@ void scenes::GameScene::Draw()
 			{
 				enemy->Animate();
 			}
+
+		for (auto& object : _deadObjects)
+		{
+			object->AnimateDeath();
+		}
 	}
 	_levelHandler->DrawAir();
 
-	DrawTexture(_stats, 20, 20, WHITE);
+	DrawTexture(_stats, 20, 0, WHITE);
 
 	//Draw UI here...
-	DrawText(TextFormat("%i", _activePlayer->GetLives()), 70, 38, 20, WHITE);
-	DrawText(TextFormat("%i", _activePlayer->GetMovePoints()), 70, 110, 20, WHITE);
-	DrawText(TextFormat("%i", _activePlayer->GetActionPoints()), 70, 182, 20, WHITE);
+	DrawText(TextFormat("%i", _activePlayer->GetLives()), 48, 34, 20, WHITE);
+	DrawText(TextFormat("%i", _activePlayer->GetMovePoints()), 110, 34, 20, WHITE);
+	DrawText(TextFormat("%i", _activePlayer->GetActionPoints()), 162, 34, 20, WHITE);
 
 	if (_isPauseWindowOpen)
 	{
@@ -228,15 +237,8 @@ void scenes::GameScene::Draw()
 int scenes::GameScene::ChangeScene()
 {
 	// Go to menu after player has died (or F2 is pressed for now)
-	if (IsKeyPressed(KEY_F2) || _ritualLives <= 0 /*|| (_activePlayer->isScarecrow && _activePlayer->GetLives() <= 0)*/)
+	if (IsKeyPressed(KEY_F2) || _players[0]->GetLives() <= 0 /*|| (_activePlayer->isScarecrow && _activePlayer->GetLives() <= 0)*/)
 	{
-		if (_levelHandler->GetNumberOfWheat() > 20)
-		{
-			std::ofstream savegameFile("savegame.txt");
-			savegameFile << _levelHandler->GetNumberOfWheat() / 2 + currentSkillpoints;
-			savegameFile.close();
-		}
-
 		return eMenuScene;
 	}
 
@@ -246,6 +248,10 @@ int scenes::GameScene::ChangeScene()
 
 void scenes::GameScene::NextLevel()
 {
+	std::ofstream savegameFile("savegame.txt");
+	savegameFile << _levelHandler->GetNumberOfWheat() / 2 + currentSkillpoints;
+	savegameFile.close();
+
 	turns = 0;
 	_currentLevel++;
 	_collisionsObjects.clear();
@@ -262,6 +268,10 @@ void scenes::GameScene::NextLevel()
 
 void scenes::GameScene::NextLevel(int level)
 {
+	std::ofstream savegameFile("savegame.txt");
+	savegameFile << _levelHandler->GetNumberOfWheat() / 2 + currentSkillpoints;
+	savegameFile.close();
+
 	_currentLevel = level;
 	_collisionsObjects.clear();
 	_isPreperationPhase = true;

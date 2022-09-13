@@ -47,7 +47,9 @@ namespace scenes
 
 		std::shared_ptr<objects::PC> _activePlayer = {};
 		std::vector<std::shared_ptr<objects::PC>> _players = {};
-		std::vector<std::unique_ptr<objects::NPC>> _enemies = {};
+		std::vector<std::shared_ptr<objects::NPC>> _enemies = {};
+		std::vector<std::shared_ptr<objects::Object>> _deadObjects = {};
+
 
 
 		type::Vec_Ptr_Position _collisionsObjects = {};

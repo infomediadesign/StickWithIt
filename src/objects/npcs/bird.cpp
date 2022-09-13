@@ -6,7 +6,7 @@ std::cout << "Bird called!" << std::endl;
 
 // Default max data
 _initLives = 10;
-_initMovePoints = 2;
+_initMovePoints = 1;
 
 // Default data
 _lives = _initLives;
@@ -14,6 +14,7 @@ _movePoints = _initMovePoints;
 _isAlive = true;
 _canFly = true;
 _position = { 0, 0 };
+_attackDamage = 2;
 
 // Default sprite data 
 _texture = LoadTextureFromImage(textures::BIRD);

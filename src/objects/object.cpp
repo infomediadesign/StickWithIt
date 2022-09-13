@@ -15,14 +15,14 @@ type::Pair_Damage_Vec_Position objects::Object::Attack(int animation)
 {
 	if (animation == 0)
 	{
-		_animationPlayer->SetCurrentAnimation(8);
-		return { {_attackDamage},{{_position.first + 0, _position.second - 1}} };
+		_animationPlayer->SetCurrentAnimation(9);
+		return { {_attackDamage},{{_position.first + 0, _position.second + 1}} };
 	}
 
 	if (animation == 1)
 	{
-		_animationPlayer->SetCurrentAnimation(9);
-		return { {_attackDamage},{{_position.first + 0, _position.second + 1}} };
+		_animationPlayer->SetCurrentAnimation(8);
+		return { {_attackDamage},{{_position.first + 0, _position.second - 1}} };
 	}
 
 	if (animation == 2)
@@ -53,6 +53,12 @@ void objects::Object::GetDamage(type::Pair_Damage_Vec_Position damageAndPosition
 void objects::Object::Animate() 
 {
 	_animationPlayer->Animate();
+}
+
+void objects::Object::AnimateDeath()
+{
+	_animationPlayer->SetCurrentAnimation(handlers::AnimationPlayer::eDeath1);
+	_animationPlayer->AnimateDeath();
 }
 
 bool objects::Object::Move(type::Vec_Position collisionLayer, type::Vec_Ptr_Position collisionsObjects)
@@ -91,6 +97,11 @@ void objects::Object::SetMovePoints(int movePoints) {
 
 int objects::Object::GetInitMovePoints(){
 	return _initMovePoints;
+}
+
+int objects::Object::GetAttackDamage()
+{
+	return _attackDamage;
 }
 
 

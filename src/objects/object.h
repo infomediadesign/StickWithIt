@@ -32,6 +32,7 @@ namespace objects
 
 		// Animate object depending on movement and action
 		virtual void Animate();
+		virtual void AnimateDeath();
 
 
 		// Walk dependant on input or the path found, take collisions into account
@@ -44,6 +45,7 @@ namespace objects
 		int GetInitLives();
 		int GetMovePoints(); void SetMovePoints(int movePoints);
 		int GetInitMovePoints();
+		int GetAttackDamage();
 		bool GetIsAlive(); void SetIsAlive(bool isAlive);
 		bool GetCanFly(); void setCanFly(bool canFly);
 		type::Position* GetPosition(); void SetPosition(type::Position position);

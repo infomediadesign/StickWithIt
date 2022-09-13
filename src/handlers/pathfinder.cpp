@@ -150,7 +150,7 @@ type::Vec_Position handlers::Pathfinder::FindPath(type::Position posStart, type:
 		type::Vec_Position path;
 		if (nodeCurrent == nodeEnd)
 		{
-			while (nodeCurrent->parent != nullptr)
+			while (nodeCurrent->parent->parent != nullptr)
 			{
 				path.push_back(nodeCurrent->position);
 				nodeCurrent = nodeCurrent->parent;

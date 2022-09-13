@@ -146,3 +146,29 @@ void handlers::AnimationPlayer::Animate()
         }
     }
 }
+
+void handlers::AnimationPlayer::AnimateDeath()
+{
+    if (_currentDeathFrame < _framesPerRow[_currentAnimation])
+    {
+        DrawTextureRec(*_texture,
+            { static_cast<float>(_textureWidth) / _textureColumns * _currentDeathFrame,
+            static_cast<float>(_textureHeight) / _textureRows * _currentAnimation,
+            static_cast<float>(_textureWidth) / _textureColumns,
+            static_cast<float>(_textureHeight) / _textureRows },
+            { static_cast<float>(_position->first * game::TILE_SIZE) - _textureOffset.first,
+            static_cast<float>(_position->second * game::TILE_SIZE) - _textureOffset.second },
+            _color);
+
+
+        // Once specific number of updates have happened:
+        // Reset speed iterator and show next frame
+        if (_speedIterator >= *_wantedSpeed)
+        {
+            _currentDeathFrame++;
+            _speedIterator = 0;
+        }
+        else
+            _speedIterator += GetFrameTime() * _standartSpeed;
+    }
+}

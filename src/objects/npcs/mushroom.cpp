@@ -14,6 +14,7 @@ objects::Mushroom::Mushroom()
 	_isAlive = true;
 	_canFly = false;
 	_position = { 0, 0 };
+	_attackDamage = 3;
 
 	// Default sprite data 
 	_texture = LoadTextureFromImage(textures::MUSHROOM);
