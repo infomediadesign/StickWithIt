@@ -47,7 +47,6 @@ void objects::Object::GetDamage(type::Pair_Damage_Vec_Position damageAndPosition
 			_lives -= damageAndPositions.first;
 		}
 	}
-			std::cout << "hello";
 }
 
 

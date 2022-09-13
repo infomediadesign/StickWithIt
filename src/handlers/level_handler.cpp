@@ -160,7 +160,7 @@ void handlers::LevelHandler::DestroyWheat(type::Position position)
 	{
 		int positionToIndex = position.first + position.second * game::TILES_PER_ROW;
 
-		if (_vecDataAllLevel[*_currentLevel][ground][positionToIndex] == wheat)
+		if (_vecDataAllLevel[*_currentLevel][collisions][positionToIndex] == wheat)
 			_vecDataAllLevel[*_currentLevel][ground][positionToIndex] = destroyedWheat;
 	}
 }
@@ -174,7 +174,7 @@ void handlers::LevelHandler::DestroyWheat(type::Vec_Position positions)
 		{
 			int positionToIndex = position.first + position.second * game::TILES_PER_ROW;
 
-			if (_vecDataAllLevel[*_currentLevel][ground][positionToIndex] == wheat)
+			if (_vecDataAllLevel[*_currentLevel][collisions][positionToIndex] == wheat)
 				_vecDataAllLevel[*_currentLevel][ground][positionToIndex] = destroyedWheat;
 		}
 	}

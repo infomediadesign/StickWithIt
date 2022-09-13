@@ -68,7 +68,8 @@ namespace scenes
 			eFly,
 
 			eBird,
-			eMushroom
+			eMushroom,
+			eBat
 		};
 
 

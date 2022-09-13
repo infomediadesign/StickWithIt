@@ -14,6 +14,7 @@ scenes::GameScene::GameScene()
 	AddObject(eFly);
 	AddObject(eBird);
 	AddObject(eMushroom);
+	AddObject(eBat);
 
 	_activePlayer = _players[eScarecrow];
 
@@ -155,13 +156,16 @@ void scenes::GameScene::Update()
 
 			if (turns <= 5)
 			{
-				switch (rand() % 2)
+				switch (rand() % 3)
 				{
 				case 0:
 					AddObject(eMushroom);
 					break;
 				case 1:
 					AddObject(eBird);
+					break;
+				case 2:
+					AddObject(eBat);
 					break;
 				}
 			}
@@ -247,6 +251,12 @@ void scenes::GameScene::NextLevel()
 	_collisionsObjects.clear();
 	_isPreperationPhase = true;
 	_hasPreperationPhaseJustEnded = false;
+
+	int i = 0;
+	for (auto& player : _players) {
+		player->SetPosition(_levelHandler->GetSpawnsPC()[i]);
+		i++;
+	}
 }
 
 
@@ -339,6 +349,13 @@ void scenes::GameScene::AddObject(int object)
 	case eMushroom:
 		_enemies.push_back(std::make_unique<objects::Mushroom>());
 		_enemies.back()->Spawn(_levelHandler->GetSpawnsGround(), _levelHandler->GetCollisionsGround(), _collisionsObjects);
+		_enemies.back()->SetIsPreperationPhase(&_isPreperationPhase);
+		_collisionsObjects.push_back(_enemies.back()->GetPosition());
+		break;
+
+	case eBat:
+		_enemies.push_back(std::make_unique<objects::Bat>());
+		_enemies.back()->Spawn(_levelHandler->GetSpawnsSky(), _levelHandler->GetCollisionsSky(), _collisionsObjects);
 		_enemies.back()->SetIsPreperationPhase(&_isPreperationPhase);
 		_collisionsObjects.push_back(_enemies.back()->GetPosition());
 		break;

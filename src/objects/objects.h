@@ -5,3 +5,4 @@
 
 #include "npcs/bird.h"
 #include "npcs/mushroom.h"
+#include "npcs/bat.h"

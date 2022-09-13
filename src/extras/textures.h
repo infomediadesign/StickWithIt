@@ -8,4 +8,5 @@ namespace textures
 	
 	inline const Image MUSHROOM = LoadImage("assets/graphics/npcs/mushroom_animations.png");
 	inline const Image BIRD = LoadImage("assets/graphics/npcs/bird_animations.png");
+	inline const Image BAT = LoadImage("assets/graphics/npcs/bat_animations.png");
 }

@@ -172,9 +172,9 @@ bool objects::PC::Move(type::Vec_Position collisionLayer, type::Vec_Ptr_Position
 			}
 
 			// Check if position would be on border
-			if (futurePosition.first < 0 + 1 || futurePosition.first > game::TILES_PER_ROW - 2)
+			if (futurePosition.first < 0 || futurePosition.first > game::TILES_PER_ROW - 1)
 				futurePosition.first = _position.first;
-			if (futurePosition.second < 0 + 1 || futurePosition.second > game::TILES_PER_COLUMN - 2)
+			if (futurePosition.second < 0 || futurePosition.second > game::TILES_PER_COLUMN - 1)
 				futurePosition.second = _position.second;
 
 			// Check if positition would be on collision
