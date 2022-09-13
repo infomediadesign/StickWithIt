@@ -66,8 +66,6 @@ int main()
             BeginMode2D(Screencamera);
             activeScene->Draw();
         }
-
-        EndMode2D();
         EndDrawing();
     }
 

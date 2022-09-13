@@ -25,6 +25,8 @@ scenes::GameScene::GameScene()
 scenes::GameScene::~GameScene()
 { 
 	std::cout << "Game scene deleted!" << std::endl; 
+
+	UnloadTexture(_stats);
 }
 
 
@@ -207,14 +209,12 @@ void scenes::GameScene::Draw()
 	}
 	_levelHandler->DrawAir();
 
+	DrawTexture(_stats, 20, 20, WHITE);
+
 	//Draw UI here...
-	DrawText(TextFormat("Wheat: %i", _levelHandler->GetNumberOfWheat()), 40, 40, 20, BLACK);
-	DrawText(TextFormat("Lives: %i", _activePlayer->GetLives()), 40, 65, 20, BLACK);
-	DrawText(TextFormat("Moves: %i", _activePlayer->GetMovePoints()), 40, 90, 20, BLACK);
-	DrawText(TextFormat("Actions: %i", _activePlayer->GetActionPoints()), 40, 115, 20, BLACK);
-	DrawText(TextFormat("Ritual lives: %i", _ritualLives), 40, 140, 20, BLACK);
-	DrawText("Press backspace to end turn", 40, 165, 20, BLACK);
-	DrawFPS(5, game::SCREEN_HEIGHT - 20);
+	DrawText(TextFormat("%i", _activePlayer->GetLives()), 70, 38, 20, WHITE);
+	DrawText(TextFormat("%i", _activePlayer->GetMovePoints()), 70, 110, 20, WHITE);
+	DrawText(TextFormat("%i", _activePlayer->GetActionPoints()), 70, 182, 20, WHITE);
 
 	if (_isPauseWindowOpen)
 	{

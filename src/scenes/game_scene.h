@@ -74,5 +74,7 @@ namespace scenes
 
 
 		std::unique_ptr<handlers::LevelHandler> _levelHandler = std::make_unique<handlers::LevelHandler>(&_currentLevel);
+
+		Texture2D _stats = LoadTexture("assets/graphics/ui/stats.png");
 	};
 }
