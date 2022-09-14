@@ -124,6 +124,8 @@ void scenes::GameScene::Update()
 			type::Vec_Position allCollisions = _levelHandler->GetSpawnsPC();
 			for (auto& player : _players)
 				allCollisions.push_back(*player->GetPosition());
+			for (auto& pos : _levelHandler->GetSpawnsPC())
+				allCollisions.push_back(pos);
 
 			for (auto& enemy : _enemies)
 			{
@@ -270,29 +272,19 @@ int scenes::GameScene::ChangeScene()
 
 void scenes::GameScene::NextLevel()
 {
-	std::ofstream savegameFile("savegame.txt");
-	savegameFile << _levelHandler->GetNumberOfWheat() / 2 + _currentSkillpoints;
-	savegameFile.close();
-
-	_turns = 0;
-	_currentLevel++;
-	_collisionsObjects.clear();
-	_isPreperationPhase = true;
-	_hasPreperationPhaseJustEnded = false;
-
-	int i = 0;
-	for (auto& player : _players) {
-		player->SetPosition(_levelHandler->GetSpawnsPC()[i]);
-		i++;
-	}
+	NextLevel(_currentLevel + 1);
 }
 
 
 void scenes::GameScene::NextLevel(int level)
 {
+	// Write saved wheat tiles into savegame file
 	std::ofstream savegameFile("savegame.txt");
 	savegameFile << _levelHandler->GetNumberOfWheat() / 2 + _currentSkillpoints;
 	savegameFile.close();
+
+	// Remove all dead objects
+	_deadObjects.clear();
 
 	_turns = 0;
 	_currentLevel = level;
