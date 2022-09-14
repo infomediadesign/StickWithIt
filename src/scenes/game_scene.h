@@ -23,14 +23,16 @@ namespace scenes
 
 
 	private:
-		int turns = 0;
-		int currentSkillpoints = 0;
+		int _turns = 0;
+		int _turnsPerLevel = 10;
+		int _currentSkillpoints = 0;
 
 		std::unique_ptr<scenes::windows::PauseWindow> _pauseWindow = std::make_unique<scenes::windows::PauseWindow>();
 		bool _isPauseWindowOpen = false;
 
 
 		int _currentLevel = 0;
+		int _maxLevels = 4;
 		int _ritualLives = 10;
 		void NextLevel();
 		void NextLevel(int level);
