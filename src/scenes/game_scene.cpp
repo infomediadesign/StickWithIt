@@ -259,7 +259,7 @@ void scenes::GameScene::Draw()
 int scenes::GameScene::ChangeScene()
 {
 	// Go to menu after player has died (or F2 is pressed for now)
-	if (IsKeyPressed(KEY_F2) || _players[0]->GetLives() <= 0 || _currentLevel > _maxLevels - 1)
+	if (IsKeyPressed(KEY_F2) || _players[0]->GetLives() <= 0 || _currentLevel >= _maxLevels - 1)
 	{
 		return eMenuScene;
 	}
