@@ -6,7 +6,7 @@ scenes::GameScene::GameScene()
 	std::string skillpointsToString;
 	std::ifstream savegameFile("savegame.txt");
 	while (std::getline(savegameFile, skillpointsToString))
-		currentSkillpoints = std::stoi(skillpointsToString);
+		_currentSkillpoints = std::stoi(skillpointsToString);
 
 	std::cout << "Game scene called!" << std::endl;
 
@@ -39,6 +39,7 @@ void scenes::GameScene::Update()
 	}
 	else 
 	{
+		// player turn
 		if (_isPlayerTurn)
 		{
 			// switch to fighting phase
@@ -84,30 +85,42 @@ void scenes::GameScene::Update()
 				}
 			}
 
+			// If NO pc has move/actionpoints left, we start next turn and reset move/actionpoints
 			int sumOfMoveAndActionPoints = 0;
 			for (auto& player : _players)
 			{
 				sumOfMoveAndActionPoints += player->GetMovePoints() + player->GetActionPoints();
 			}
+			// End turn prematurely
 			if (sumOfMoveAndActionPoints == 0 || (IsKeyPressed(KEY_BACKSPACE) && !_isPreperationPhase))
 			{
 				_isPlayerTurn = false;
 			}
 
-			// switch through players
+
+			// enable switching through players
 			SwitchActivePlayer();
 
+
+			// if an enemy dies it goes to the "graveyard" and plays its death animation, then disappears
 			for (int enemy = 0; enemy < _enemies.size(); enemy++)
 			{
 				if (_enemies[enemy]->GetLives() <= 0)
 				{
+					// Delete its collision
+					for (int i = 0; i < _collisionsObjects.size(); i++)
+						if (_enemies[enemy]->GetPosition() == _collisionsObjects[i])
+							_collisionsObjects.erase(std::next(_collisionsObjects.begin(), i));
+
 					_deadObjects.push_back(_enemies[enemy]);
 					_enemies.erase(std::next(_enemies.begin(), enemy));
 				}
 			}
 		}
+		// enemy turn
 		else
 		{
+			// handle collisions/movement
 			type::Vec_Position allCollisions = _levelHandler->GetSpawnsPC();
 			for (auto& player : _players)
 				allCollisions.push_back(*player->GetPosition());
@@ -123,7 +136,7 @@ void scenes::GameScene::Update()
 				}
 			}
 
-
+			// When an enemy reaches the ritual, it damages the scarecrows lives
 			for (int enemy = 0; enemy < _enemies.size(); enemy++)
 			{
 				for (auto& pos : _levelHandler->GetSpawnsPC())
@@ -137,7 +150,7 @@ void scenes::GameScene::Update()
 				}
 			}
 
-
+			// when an enemy is close to a player, it attacks him and updates attacked players lives
 			for (auto& enemy : _enemies)
 			{
 				for (auto& player : _players)
@@ -153,14 +166,19 @@ void scenes::GameScene::Update()
 
 					else if (enemy->GetPosition()->second + 0 == player->GetPosition()->second && enemy->GetPosition()->first - 1 == player->GetPosition()->first)
 						player->GetDamage(enemy->Attack(3));
+
+					// only works with 2 players for now
+					if (player->GetLives() <= 0) {
+						_deadObjects.push_back(player);
+						_players.pop_back();
+					}
 				}
 			}
 
-			turns++;
-
+			// while we haven't reached a specific number of turns, we will spawn enemies each turn, randomly
+			_turns++;
 			srand(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count()));
-
-			if (turns <= 5)
+			if (_turns <= _turnsPerLevel)
 			{
 				switch (rand() % 3)
 				{
@@ -176,11 +194,14 @@ void scenes::GameScene::Update()
 				}
 			}
 
+			// Reset move/attack points and start player turn
 			ResetPlayersStats();
 			_isPlayerTurn = true;
 		}
 	}
 
+
+	// Handle input for game stop (pause/settings opened)
 	if (IsKeyPressed(KEY_ESCAPE))
 	{
 		_pauseWindow->SetISCurrentlyOpen(true);
@@ -190,7 +211,7 @@ void scenes::GameScene::Update()
 	if (_pauseWindow->GetIsCurrentlyOpen() == false)
 		_isPauseWindowOpen = false;
 
-	if (_enemies.empty() && turns >= 5 && _levelHandler->GetNumberOfLevels() > _currentLevel)
+	if (_enemies.empty() && _turns >= 5 && _levelHandler->GetNumberOfLevels() > _currentLevel)
 		NextLevel();
 }
 
@@ -198,33 +219,34 @@ void scenes::GameScene::Update()
 // Draw current scene here
 void scenes::GameScene::Draw()
 {
+	// Draw Ground...
 	_levelHandler->DrawGround();
+	// ...Then players...
+	for (auto& player : _players)
 	{
-		for (auto& player : _players)
-		{
-			player->Animate();
-		}
-
-		if (!_enemies.empty())
-			for (auto& enemy : _enemies)
-			{
-				enemy->Animate();
-			}
-
-		for (auto& object : _deadObjects)
-		{
-			object->AnimateDeath();
-		}
+		player->Animate();
 	}
+	// ...Then enemies...
+	if (!_enemies.empty())
+		for (auto& enemy : _enemies)
+		{
+			enemy->Animate();
+		}
+	// ...Then dead characters...
+	for (auto& object : _deadObjects)
+	{
+		object->AnimateDeath();
+	}
+	// ...Then treetops etc.
 	_levelHandler->DrawAir();
 
+	// Draw ui for current players stats
 	DrawTexture(_stats, 20, 0, WHITE);
-
-	//Draw UI here...
 	DrawText(TextFormat("%i", _activePlayer->GetLives()), 48, 34, 20, WHITE);
 	DrawText(TextFormat("%i", _activePlayer->GetMovePoints()), 110, 34, 20, WHITE);
 	DrawText(TextFormat("%i", _activePlayer->GetActionPoints()), 162, 34, 20, WHITE);
 
+	// Draw current window (settings/pause) if opened
 	if (_isPauseWindowOpen)
 	{
 		DrawRectangle(0, 0, 640, 360, { 0, 0, 0, 80 });
@@ -237,7 +259,7 @@ void scenes::GameScene::Draw()
 int scenes::GameScene::ChangeScene()
 {
 	// Go to menu after player has died (or F2 is pressed for now)
-	if (IsKeyPressed(KEY_F2) || _players[0]->GetLives() <= 0 /*|| (_activePlayer->isScarecrow && _activePlayer->GetLives() <= 0)*/)
+	if (IsKeyPressed(KEY_F2) || _players[0]->GetLives() <= 0 || _currentLevel > _maxLevels - 1)
 	{
 		return eMenuScene;
 	}
@@ -249,10 +271,10 @@ int scenes::GameScene::ChangeScene()
 void scenes::GameScene::NextLevel()
 {
 	std::ofstream savegameFile("savegame.txt");
-	savegameFile << _levelHandler->GetNumberOfWheat() / 2 + currentSkillpoints;
+	savegameFile << _levelHandler->GetNumberOfWheat() / 2 + _currentSkillpoints;
 	savegameFile.close();
 
-	turns = 0;
+	_turns = 0;
 	_currentLevel++;
 	_collisionsObjects.clear();
 	_isPreperationPhase = true;
@@ -269,42 +291,56 @@ void scenes::GameScene::NextLevel()
 void scenes::GameScene::NextLevel(int level)
 {
 	std::ofstream savegameFile("savegame.txt");
-	savegameFile << _levelHandler->GetNumberOfWheat() / 2 + currentSkillpoints;
+	savegameFile << _levelHandler->GetNumberOfWheat() / 2 + _currentSkillpoints;
 	savegameFile.close();
 
+	_turns = 0;
 	_currentLevel = level;
 	_collisionsObjects.clear();
 	_isPreperationPhase = true;
 	_hasPreperationPhaseJustEnded = false;
+
+	int i = 0;
+	for (auto& player : _players) {
+		player->SetPosition(_levelHandler->GetSpawnsPC()[i]);
+		i++;
+	}
 }
 
 
 void scenes::GameScene::SwitchActivePlayer()
 {
-	if (IsKeyPressed(KEY_Q))
-	{
-		_activePlayer->SetIsActive(false);
-		_activePlayerIndex--;
-
-		if (_activePlayerIndex < 0)
+	if (_players.size() > 1) {
+		if (IsKeyPressed(KEY_Q))
 		{
-			// @TODO change this to 4th helper
-			_activePlayerIndex = eFly;
+			_activePlayer->SetIsActive(false);
+			_activePlayerIndex--;
+
+			if (_activePlayerIndex < 0)
+			{
+				// @TODO change this to 4th helper
+				_activePlayerIndex = eFly;
+			}
+			_activePlayer = _players[_activePlayerIndex];
+			_activePlayer->SetIsActive(true);
 		}
-		_activePlayer = _players[_activePlayerIndex];
-		_activePlayer->SetIsActive(true);
+		if (IsKeyPressed(KEY_E))
+		{
+			_activePlayer->SetIsActive(false);
+			_activePlayerIndex++;
+
+			if (_activePlayerIndex > 1)
+			{
+				// @TODO change this to 4th helper
+				_activePlayerIndex = eScarecrow;
+			}
+			_activePlayer = _players[_activePlayerIndex];
+			_activePlayer->SetIsActive(true);
+		}
 	}
-	if (IsKeyPressed(KEY_E))
+	else
 	{
-		_activePlayer->SetIsActive(false);
-		_activePlayerIndex++;
-
-		if (_activePlayerIndex > 1)
-		{
-			// @TODO change this to 4th helper
-			_activePlayerIndex = eScarecrow;
-		}
-		_activePlayer = _players[_activePlayerIndex];
+		_activePlayer = _players[eScarecrow];
 		_activePlayer->SetIsActive(true);
 	}
 }
@@ -329,6 +365,7 @@ void scenes::GameScene::ResetEnemiesStats()
 
 void scenes::GameScene::AddObject(int object)
 {
+	// Every time we add an object, it has to spawn somewhere where no other character is located, also we need to update the collisions map with every object we add
 	switch (object)
 	{
 	case eScarecrow:
