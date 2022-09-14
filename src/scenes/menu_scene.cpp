@@ -71,12 +71,6 @@ void scenes::MenuScene::Update()
 	if (_isSettingsWindowOpen)
 		_settingsWindow->Update();
 
-	if (IsKeyPressed(KEY_F2) && _isSettingsWindowOpen == false)
-		_isSkilltreeWindowOpen = !_isSkilltreeWindowOpen;
-
-	if (IsKeyPressed(KEY_F3) && _isSkilltreeWindowOpen == false)
-		_isSettingsWindowOpen = !_isSettingsWindowOpen;
-
 	if (IsKeyPressed(KEY_ENTER)) {
 		if (active_button == 1) {
 			_isSkilltreeWindowOpen = !_isSkilltreeWindowOpen;

@@ -168,8 +168,8 @@ void scenes::GameScene::Update()
 						player->GetDamage(enemy->Attack(3));
 
 					// only works with 2 players for now
-					if (player->GetLives() <= 0) {
-						_deadObjects.push_back(player);
+					if (player->GetLives() <= 0 && _players.size() > 1) {
+						_deadObjects.push_back(_players[1]);
 						_players.pop_back();
 					}
 				}
@@ -259,7 +259,7 @@ void scenes::GameScene::Draw()
 int scenes::GameScene::ChangeScene()
 {
 	// Go to menu after player has died (or F2 is pressed for now)
-	if (IsKeyPressed(KEY_F2) || _players[0]->GetLives() <= 0 || _currentLevel >= _maxLevels - 1)
+	if (_players[0]->GetLives() <= 0 || _currentLevel >= _maxLevels - 1)
 	{
 		return eMenuScene;
 	}
