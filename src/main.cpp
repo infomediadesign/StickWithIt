@@ -33,7 +33,7 @@ int main()
 
 
     // Game loop starts here
-    while (resumeGame && (!WindowShouldClose() || IsKeyPressed(KEY_ESCAPE)))        // Exit game when resumGame gets false OR when X-Button of window is pressed
+    while (resumeGame && (!WindowShouldClose() || IsKeyPressed(KEY_ESCAPE)))
     {
         UpdateMusicStream(music);
         // Scenes know when to change to what scene

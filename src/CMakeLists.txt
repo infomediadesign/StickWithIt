@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-add_executable(${PROJECT_NAME} main.cpp
+add_executable(${PROJECT_NAME} main.cpp 
 #Silas
 "config.h" "extras/typedefs.h" "scenes/scene.h" "scenes/scene.cpp" "scenes/game_scene.h" "scenes/game_scene.cpp" "scenes/menu_scene.h" "scenes/menu_scene.cpp" 
 "handlers/animation_player.h" "handlers/animation_player.cpp" "handlers/level_handler.h" "handlers/level_handler.cpp" "handlers/pathfinder.h" "handlers/pathfinder.cpp" 
