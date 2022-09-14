@@ -19,7 +19,7 @@ add_executable(${PROJECT_NAME} main.cpp
   "extras/textures.h" "scenes/windows/pause_window.h" "scenes/windows/pause_window.cpp" "scenes/windows/skilltree_window.h" "scenes/windows/skilltree_window.cpp" "scenes/windows/settings_window.cpp" "scenes/windows/settings_window.h" "gamestate.h" "scenes/button.cpp" "scenes/button.h" "objects/npcs/bat.h" "objects/npcs/bat.cpp")
 
 #  Link to Raylib
-target_link_libraries(${PROJECT_NAME} raylib -static)
+target_link_libraries(${PROJECT_NAME} raylib)
 
 # Copy assets to assets path
 add_custom_target(copy_assets
