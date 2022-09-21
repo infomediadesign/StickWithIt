@@ -233,7 +233,7 @@ int scene::GameScene::ChangeScene() const
 		return scene::Scene::MENU_SCENE;
 	}
 
-	return NULL;
+	return 0;
 }
 
 void scene::GameScene::NextLevel()

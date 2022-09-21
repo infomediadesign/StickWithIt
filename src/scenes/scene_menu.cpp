@@ -94,5 +94,5 @@ int scene::MenuScene::ChangeScene() const
 		return EXIT_GAME;
 	}
 
-	return NULL;
+	return 0;
 }
