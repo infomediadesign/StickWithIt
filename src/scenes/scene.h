@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <memory>
 
 #include "../gamestate.h"
 #include "windows/windows.h"

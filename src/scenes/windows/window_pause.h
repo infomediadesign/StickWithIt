@@ -3,6 +3,7 @@
 #include "window.h"
 
 #include <iostream>
+#include <memory>
 #include <vector>
 
 #include "window_settings.h"

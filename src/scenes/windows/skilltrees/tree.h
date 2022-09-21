@@ -2,6 +2,7 @@
 
 #include <raylib.h>
 #include <iostream>
+#include <memory>
 #include <vector>
 
 #include "../../../gamestate.h"

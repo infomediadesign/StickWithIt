@@ -1,6 +1,8 @@
 #include "level.h"
 
 #include <iostream>
+#include <memory>
+
 level::Level::Level(int number_of_rounds, int enemies_per_round, std::vector<std::vector<int>> tilemap)
 	:
 	number_of_rounds_(number_of_rounds),
