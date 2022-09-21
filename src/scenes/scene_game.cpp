@@ -27,24 +27,6 @@ scene::GameScene::~GameScene()
 
 void scene::GameScene::Update()
 {
-	if (preperation_phase_)
-	{
-		UpdatePreperationPhase();
-	}
-	else
-	{
-		if (player_phase_)
-		{
-			UpdatePlayerPhase();
-		}
-		else
-		{
-			UpdateEnemyPhase();
-		}
-	}
-
-
-
 	// Update window if ones active
 	if (window_active_->GetIsActive())
 	{
@@ -276,18 +258,6 @@ void scene::GameScene::NextLevel()
 			game_won_ = true;
 		}
 	}
-}
-
-void scene::GameScene::UpdatePreperationPhase()
-{
-}
-
-void scene::GameScene::UpdatePlayerPhase()
-{
-}
-
-void scene::GameScene::UpdateEnemyPhase()
-{
 }
 
 void scene::GameScene::SwitchPlayer() const

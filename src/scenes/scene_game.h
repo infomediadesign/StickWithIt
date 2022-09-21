@@ -20,9 +20,6 @@ namespace scene
 	private:
 
 		void NextLevel();
-		void UpdatePreperationPhase();
-		void UpdatePlayerPhase();
-		void UpdateEnemyPhase();
 
 		void SwitchPlayer() const;
 		void DrawUI() const;
