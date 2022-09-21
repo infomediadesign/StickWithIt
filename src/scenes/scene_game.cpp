@@ -133,12 +133,6 @@ void scene::GameScene::Update()
 				{
 					for (auto& enemy : spawner_->SpawnWave(map_->GetLevelHandler()->GetEnemiesPerRound(), map_))
 					{
-						// Delete enemy from enemies vector
-						if (!enemy->GetIsAlive() && enemies_.size() > 0)
-						{
-							enemies_.erase(std::remove(enemies_.begin(), enemies_.end(), enemy), enemies_.end());
-						}
-
 						enemies_.push_back(enemy);
 					}
 
