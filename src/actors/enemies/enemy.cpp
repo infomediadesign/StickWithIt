@@ -1,6 +1,7 @@
 #include "enemy.h"
 
 #include <list>
+#include <math.h>
 
 actor::Enemy::Enemy(int max_hp, int max_move_points, int max_action_points, int attack_damage, bool can_fly, bool is_active,
 	std::shared_ptr<component::AnimationPlayer> animation_player, std::shared_ptr<level::Map>& map, std::shared_ptr<gs::GameState>& gamestate)

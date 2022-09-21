@@ -1,5 +1,6 @@
 #include "pathfinder.h"
 
+#include <math.h>
 #include <list>
 
 component::Pathfinder::Pathfinder(std::shared_ptr<level::Map>& map, int& x, int& y)
