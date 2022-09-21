@@ -1,22 +1,38 @@
 #pragma once
 
-#include "../extras/headers.h"
-#include "../extras/typedefs.h"
+#include <iostream>
 
-namespace scenes 
+#include "../gamestate.h"
+#include "windows/windows.h"
+
+namespace scene
 {
-	class Scene 
+	class Scene
 	{
 	public:
-		virtual ~Scene() = 0;
+
+		Scene(std::shared_ptr<gs::GameState>& gamestate);
+		virtual ~Scene() {}
 
 		virtual void Update() = 0;
 		virtual void Draw() = 0;
-		virtual int ChangeScene();
 
-		enum {
-			eMenuScene = 1,
-			eGameScene = 2
+		virtual int ChangeScene() const = 0;
+
+		// Enum for all possible scenes (+ exit game)
+		enum
+		{
+			EXIT_GAME = 1,
+			MENU_SCENE,
+			GAME_SCENE
 		};
+
+	protected:
+
+		// To show specific window
+		std::unique_ptr<window::Window> window_active_;
+
+		// To update settings etc.
+		std::shared_ptr<gs::GameState> gamestate_;
 	};
 }

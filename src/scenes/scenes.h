@@ -1,4 +1,8 @@
 #pragma once
 
-#include "game_scene.h"
-#include "menu_scene.h"
+// gamestate to communicate between scenes
+#include "gamestate.h"
+
+// scenes
+#include "scene_game.h"
+#include "scene_menu.h"

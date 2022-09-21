@@ -1,21 +1,27 @@
 #pragma once
 
-#include "raylib.h"
-#include <vector>
+#include <raylib.h>
+#include <string>
 
+namespace ui
+{
+	class Button
+	{
+	public:
 
-class Button {
-public:
-    Texture2D texture_active;
-    Texture2D texture_inactive;
+		Button(const char* texture_path, int x, int y, bool is_active);
+		~Button();
 
-    int pos_x;
-    int pos_y;
+		void Draw() const;
+		bool GetIsActive() const; void SetIsActive(bool status);
 
-    Button(Texture2D texture_active, Texture2D texture_inactive, int pos_x, int pos_y, bool active);
+	private:
 
-    ~Button();
+		const Texture2D texture_;
+		
+		const int x_;
+		const int y_;
 
-    bool active;
-    Texture2D getTexture();
-};
+		bool is_active_;
+	};
+}

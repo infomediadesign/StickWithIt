@@ -2,21 +2,35 @@
 
 include(../cmake/raylib.cmake)
 
-project(game VERSION 0.1 LANGUAGES CXX)
+project(stick_with_it VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-add_executable(${PROJECT_NAME} main.cpp
-#Silas
-"config.h" "extras/typedefs.h" "scenes/scene.h" "scenes/scene.cpp" "scenes/game_scene.h" "scenes/game_scene.cpp" "scenes/menu_scene.h" "scenes/menu_scene.cpp" 
-"handlers/animation_player.h" "handlers/animation_player.cpp" "handlers/level_handler.h" "handlers/level_handler.cpp" "handlers/pathfinder.h" "handlers/pathfinder.cpp" 
-"objects/objects.h" "objects/object.h" "objects/object.cpp" "objects/npc.h" "objects/pc.h" "objects/npc.cpp" "objects/pc.cpp" "objects/npcs/mushroom.h" "objects/npcs/mushroom.cpp" 
-"objects/pcs/scarecrow.h" "objects/pcs/scarecrow.cpp" "objects/npcs/bird.h" "objects/npcs/bird.cpp" "objects/pcs/fly.h" "objects/pcs/fly.cpp" 
-#Levin
+add_executable(${PROJECT_NAME} main.cpp "scenes/scene.h" "scenes/scene_menu" "scenes/scene_game.h" "scenes/scenes.h" "scenes/scene_menu.cpp" "scenes/scene_game.cpp" 
+"gamestate.h" "levels/level.h" "levels/levels.h" "levels/level.cpp" "levels/level_1.h" "levels/level_2.h" "levels/level_3.h" "levels/level_4.h"
+"levels/level_1.cpp" "levels/level_2.cpp" "levels/level_3.cpp" "levels/level_4.cpp" "levels/level_handler.h" "levels/level_handler.cpp" "actors/actor.h" "actors/actors.h" 
+"actors/components/sprite.h" "actors/components/animation_player.h" "actors/components/all_components.h" "actors/components/sprite.cpp" "actors/components/animation_player.cpp"  
+"actors/enemies/bat.h" "actors/enemies/bat.cpp" "actors/enemies/bird.h" "actors/enemies/bird.cpp" "actors/enemies/boar.h" "actors/enemies/boar.cpp" "actors/enemies/spider.h" 
+"actors/enemies/spider.cpp" "actors/enemies/mushroom.h" "actors/enemies/mushroom.cpp" "actors/players/scarecrow.h" "actors/players/scarecrow.cpp" "actors/players/fly.h" 
+"actors/players/fly.cpp"  "actors/spawner.h" "actors/spawner.cpp" "actors/state.cpp" "actors/players/player.h" "actors/players/player.cpp" "actors/enemies/enemy.h" 
+"actors/enemies/enemy.cpp" "scenes/scene.cpp" "scenes/windows/window_settings.h" "scenes/windows/window_settings.cpp" "scenes/windows/window_pause.h" "scenes/windows/window_pause.cpp" 
+"scenes/windows/window_skilltree.h" "scenes/windows/window_skilltree.cpp" "scenes/windows/window_game_over.h" "scenes/windows/window_game_over.cpp" "scenes/windows/window_game_won.h" 
+"scenes/windows/window_game_won.cpp" "scenes/windows/window_next_level.h" "scenes/windows/window_next_level.cpp" "scenes/windows/window.h" "scenes/windows/window.cpp" 
+"scenes/windows/windows.h" "scenes/scene_menu.h"     "scenes/button.h" "scenes/button.cpp" "scenes/windows/window_credits.h" 
+"scenes/windows/window_credits.cpp" "scenes/windows/skilltrees/tree.h"   "scenes/windows/skilltrees/tree.cpp" "scenes/windows/skilltrees/trees.h" "scenes/windows/skilltrees/tree_scythe.h" 
+"scenes/windows/skilltrees/tree_scythe.cpp" "scenes/windows/skilltrees/tree_pitchfork.h" "scenes/windows/skilltrees/tree_pitchfork.cpp" "scenes/windows/skilltrees/tree_shovel.h" 
+"scenes/windows/skilltrees/tree_shovel.cpp" "scenes/windows/skilltrees/upgrade.h" "scenes/windows/skilltrees/upgrade.cpp" "gamestate.cpp"   "levels/map.h" "levels/map.cpp"             
+"actors/actor.cpp" "scenes/windows/window_blend_out.h" "scenes/windows/window_blend_out.cpp" "actors/components/weapons/weapon.h" "actors/components/weapons/weapon.cpp" 
+"actors/components/weapons/scythe.h" "actors/components/weapons/scythe.cpp" "actors/components/weapons/pitchfork.h" "actors/components/weapons/pitchfork.cpp" "actors/components/weapons/shovel.h" 
+"actors/components/weapons/shovel.cpp" "actors/components/weapons/weapons.h" "actors/components/pathfinder.h" "actors/components/pathfinder.cpp")
 
-  "extras/textures.h" "scenes/windows/pause_window.h" "scenes/windows/pause_window.cpp" "scenes/windows/skilltree_window.h" "scenes/windows/skilltree_window.cpp" "scenes/windows/settings_window.cpp" "scenes/windows/settings_window.h" "gamestate.h" "scenes/button.cpp" "scenes/button.h" "objects/npcs/bat.h" "objects/npcs/bat.cpp")
+# Add config.h.in file
+configure_file(config.h.in config.h)
+target_include_directories(${PROJECT_NAME} PUBLIC
+        "${PROJECT_BINARY_DIR}"
+        )
 
 #  Link to Raylib
 target_link_libraries(${PROJECT_NAME} raylib)

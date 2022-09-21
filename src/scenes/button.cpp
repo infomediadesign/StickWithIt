@@ -1,17 +1,37 @@
 #include "button.h"
 
-Texture2D Button::getTexture() {
-    if (active)
-        return this->texture_active;
-
-    return this->texture_inactive;
+ui::Button::Button(const char* texture_path, int x, int y, bool is_active)
+	: 
+	texture_(LoadTexture(texture_path)),
+	x_(x),
+	y_(y),
+	is_active_(is_active)
+{
 }
 
-Button::Button(Texture2D texture_active, Texture2D texture_inactive, int pos_x, int pos_y, bool active)
-    : texture_active(texture_active), texture_inactive(texture_inactive), pos_x(pos_x), pos_y(pos_y), active(active) {
+ui::Button::~Button()
+{
+	UnloadTexture(texture_);
 }
 
-Button::~Button() {
-    UnloadTexture(this->texture_active);
-    UnloadTexture(this->texture_inactive);
+void ui::Button::Draw() const
+{
+	if (is_active_)
+	{
+		DrawTexture(texture_, x_, y_, WHITE);
+	}
+	else
+	{
+		DrawTexture(texture_, x_, y_, DARKGRAY);
+	}
+}
+
+bool ui::Button::GetIsActive() const
+{
+	return is_active_;
+}
+
+void ui::Button::SetIsActive(bool status)
+{
+	is_active_ = status;
 }

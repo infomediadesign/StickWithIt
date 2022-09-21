@@ -1,76 +1,80 @@
-﻿#include "config.h"
-#include "extras/headers.h"
+﻿#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
+
+#include <raylib.h>
+#include <iostream>
+#include <time.h>
+
+#include "config.h"
+#include "gamestate.h"
 #include "scenes/scenes.h"
 
-#include <fstream>
-#include <filesystem>
-
-int main()
+int main() 
 {
-    std::cout << std::filesystem::current_path() << std::endl;
-
-    // Init game
+    // Set window + name + icon + fps + seed
     InitWindow(game::SCREEN_WIDTH * 2, game::SCREEN_HEIGHT * 2, game::PROJECT_NAME);
-    SetWindowIcon(game::ICON);
     SetTargetFPS(game::FRAMERATE);
+    const Image icon = LoadImage("assets/graphics/extras/icon.png");
+    SetWindowIcon(icon);
+    SetRandomSeed(static_cast<unsigned int>(time(NULL)));
 
+    // Audio
     InitAudioDevice();
-    Music music = LoadMusicStream("assets/audio/tracks/Ambience.mp3");
+    Music music = LoadMusicStream("assets/audio/tracks/song.mp3");
     PlayMusicStream(music);
+    float time_played = 0.0f;
 
-    float timePlayed = 0.0f;
-    bool pause = false;
+    // Enable fullscreen
+    Camera2D camera{};
+    camera.zoom = 2.0f;
 
-    // Init starting scene
-    std::unique_ptr<scenes::Scene> activeScene = std::make_unique<scenes::MenuScene>();
+    // Our gamestate that has to communicate between scenes (e.g. skilltree and settings)
+    std::shared_ptr<gs::GameState> gamestate = std::make_unique<gs::GameState>();
 
-    Camera2D Screencamera{};
+    // Our current scene
+    std::unique_ptr<scene::Scene> scene_current = std::make_unique<scene::MenuScene>(gamestate);
 
-    Screencamera.zoom = 2.0f;
+    // Bool to end game
+    bool end_game = false;
 
-    // Exit game bool
-    bool resumeGame = true;
-
-
-    // Game loop starts here
-    while (resumeGame && (!WindowShouldClose() || IsKeyPressed(KEY_ESCAPE)))        // Exit game when resumGame gets false OR when X-Button of window is pressed
+    // Main game loop
+    while (!end_game && (!WindowShouldClose() || IsKeyPressed(KEY_ESCAPE)))     // Exit game loop when end_game becomes true or the exit window icon is pressed
     {
-        UpdateMusicStream(music);
-        // Scenes know when to change to what scene
-        switch (activeScene->ChangeScene())
+        if (!gamestate->GetMusicPause())
         {
-        case scenes::Scene::eMenuScene:
-            activeScene = std::make_unique<scenes::MenuScene>();
-            break;
-        case scenes::Scene::eGameScene:
-            activeScene = std::make_unique<scenes::GameScene>();
-            break;
-        case -1:
-            resumeGame = false;
+            UpdateMusicStream(music);
         }
 
-        if (IsKeyPressed(KEY_M))
+        // Change current scene
+        switch (scene_current->ChangeScene())
         {
-            pause = !pause;
-            if (pause) PauseMusicStream(music);
-            else ResumeMusicStream(music);
+        case scene::Scene::MENU_SCENE:
+            scene_current = std::make_unique<scene::MenuScene>(gamestate);
+            break;
+        case scene::Scene::GAME_SCENE:
+            scene_current = std::make_unique<scene::GameScene>(gamestate);
+            break;
+        case scene::Scene::EXIT_GAME:
+            end_game = true;
+            break;
         }
 
-        // Update active scene
-        activeScene->Update();
+        // Update
+        scene_current->Update();
 
-        // Clear Background and draw scene
+        // Draw
         BeginDrawing();
-        {
-            ClearBackground(WHITE);
-            BeginMode2D(Screencamera);
-            activeScene->Draw();
-        }
+
+        BeginMode2D(camera);
+
+        ClearBackground(WHITE);
+
+        scene_current->Draw();
+
         EndDrawing();
     }
 
-    UnloadImage(game::ICON);
+    // Delete heap memory
+    UnloadImage(icon);
 
-    // Deinit game
     CloseWindow();
 }

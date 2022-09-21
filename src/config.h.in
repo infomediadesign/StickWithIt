@@ -1,0 +1,12 @@
+#pragma once
+
+namespace game {
+    inline constexpr char* PROJECT_NAME    = "Stick With It";
+
+    inline constexpr int FRAMERATE         = 60;
+    inline constexpr int SCREEN_WIDTH      = 640;
+    inline constexpr int SCREEN_HEIGHT     = 360;
+    inline constexpr int TILES_WIDTH       = 20;
+    inline constexpr int TILES_HEIGHT      = 12;
+    inline constexpr int TILE_SIZE         = 32;
+}
