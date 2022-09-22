@@ -38,7 +38,7 @@ namespace actor
 
 		int damage_scythe_ = 0;
 		int damage_pitchfork_ = 0;
-		int damage_shovel = 3;
+		int damage_shovel = 2;
 
 		int active_weapon_index_ = SCYTHE;
 	};

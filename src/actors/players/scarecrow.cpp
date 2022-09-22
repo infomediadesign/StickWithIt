@@ -4,13 +4,13 @@ actor::Scarecrow::Scarecrow(std::shared_ptr<level::Map>& map, std::shared_ptr<gs
 	:
 	Player(
 		//max_hp
-		10,
+		20,
 		//max_move_points
-		10,
+		5,
 		//max_action_points
 		3,
 		//attack_damage
-		10,
+		4,
 		//can_fly
 		false,
 		//is_active
@@ -255,11 +255,11 @@ void actor::Scarecrow::EvaluateBoosts()
 	if (gamestate_->GetUpgradeStatus(gs::GameState::PITCHFORK, gs::GameState::UPGRADE_MID))
 	{
 		max_move_points_	+= 0;
-		max_action_points_	+= 0;
+		max_action_points_	+= 1;
 	}
 	if (gamestate_->GetUpgradeStatus(gs::GameState::PITCHFORK, gs::GameState::UPGRADE_LEFT_1))
 	{
-		max_move_points_	+= 3;
+		max_move_points_	+= 1;
 		max_action_points_	+= 0;
 	}
 	if (gamestate_->GetUpgradeStatus(gs::GameState::PITCHFORK, gs::GameState::UPGRADE_LEFT_2))
@@ -270,19 +270,19 @@ void actor::Scarecrow::EvaluateBoosts()
 	if (gamestate_->GetUpgradeStatus(gs::GameState::PITCHFORK, gs::GameState::UPGRADE_RIGHT_1))
 	{
 		max_move_points_	+= 0;
-		max_action_points_	+= 0;
+		max_action_points_	+= 1;
 	}
 	if (gamestate_->GetUpgradeStatus(gs::GameState::PITCHFORK, gs::GameState::UPGRADE_RIGHT_2))
 	{
-		max_move_points_	+= 2;
-		max_action_points_	+= 2;
+		max_move_points_	+= 1;
+		max_action_points_	+= 0;
 	}
 
 	// SCYTHE
 	if (gamestate_->GetUpgradeStatus(gs::GameState::SCYTHE, gs::GameState::UPGRADE_MID))
 	{
-		max_move_points_	+= 0;
-		max_action_points_	+= 0;
+		max_move_points_	+= 1;
+		max_action_points_	+= 1;
 	}
 	if (gamestate_->GetUpgradeStatus(gs::GameState::SCYTHE, gs::GameState::UPGRADE_LEFT_1))
 	{
@@ -291,18 +291,18 @@ void actor::Scarecrow::EvaluateBoosts()
 	}
 	if (gamestate_->GetUpgradeStatus(gs::GameState::SCYTHE, gs::GameState::UPGRADE_LEFT_2))
 	{
-		max_move_points_	+= 1;
-		max_action_points_	+= 1;
+		max_move_points_	+= 2;
+		max_action_points_	+= 2;
 	}
 	if (gamestate_->GetUpgradeStatus(gs::GameState::SCYTHE, gs::GameState::UPGRADE_RIGHT_1))
 	{
 		max_move_points_	+= 0;
-		max_action_points_	+= 0;
+		max_action_points_	+= 2;
 	}
 	if (gamestate_->GetUpgradeStatus(gs::GameState::SCYTHE, gs::GameState::UPGRADE_RIGHT_2))
 	{
-		max_move_points_	+= 2;
-		max_action_points_	+= 2;
+		max_move_points_	+= 1;
+		max_action_points_	+= 3;
 	}
 
 	// SHOVEL
@@ -313,7 +313,7 @@ void actor::Scarecrow::EvaluateBoosts()
 	}
 	if (gamestate_->GetUpgradeStatus(gs::GameState::SHOVEL, gs::GameState::UPGRADE_LEFT_1))
 	{
-		max_move_points_	+= 3;
+		max_move_points_	+= 1;
 		max_action_points_	+= 0;
 	}
 	if (gamestate_->GetUpgradeStatus(gs::GameState::SHOVEL, gs::GameState::UPGRADE_LEFT_2))
@@ -324,7 +324,7 @@ void actor::Scarecrow::EvaluateBoosts()
 	if (gamestate_->GetUpgradeStatus(gs::GameState::SHOVEL, gs::GameState::UPGRADE_RIGHT_1))
 	{
 		max_move_points_	+= 0;
-		max_action_points_	+= 0;
+		max_action_points_	+= 1;
 	}
 	if (gamestate_->GetUpgradeStatus(gs::GameState::SHOVEL, gs::GameState::UPGRADE_RIGHT_2))
 	{
@@ -345,7 +345,7 @@ int actor::Scarecrow::EvaluateAttackBoost()
 	case SCYTHE:
 		if (gamestate_->GetUpgradeStatus(gs::GameState::SCYTHE, gs::GameState::UPGRADE_MID))
 		{
-			damage_scythe_ += 3;
+			damage_scythe_ += 0;
 		}
 		if (gamestate_->GetUpgradeStatus(gs::GameState::SCYTHE, gs::GameState::UPGRADE_LEFT_1))
 		{
@@ -353,34 +353,34 @@ int actor::Scarecrow::EvaluateAttackBoost()
 		}
 		if (gamestate_->GetUpgradeStatus(gs::GameState::SCYTHE, gs::GameState::UPGRADE_LEFT_2))
 		{
-			damage_scythe_ += 0;
+			damage_scythe_ += 1;
 		}
 		if (gamestate_->GetUpgradeStatus(gs::GameState::SCYTHE, gs::GameState::UPGRADE_RIGHT_1))
 		{
-			damage_scythe_ += 4;
+			damage_scythe_ += 0;
 		}
 		if (gamestate_->GetUpgradeStatus(gs::GameState::SCYTHE, gs::GameState::UPGRADE_RIGHT_2))
 		{
-			damage_scythe_ += 2;
+			damage_scythe_ += 1;
 		}
 		break;
 
 	case PITCHFORK:
 		if (gamestate_->GetUpgradeStatus(gs::GameState::PITCHFORK, gs::GameState::UPGRADE_MID))
 		{
-			damage_pitchfork_ += 3;
+			damage_pitchfork_ += 0;
 		}
 		if (gamestate_->GetUpgradeStatus(gs::GameState::PITCHFORK, gs::GameState::UPGRADE_LEFT_1))
 		{
-			damage_pitchfork_ += 0;
+			damage_pitchfork_ += 1;
 		}
 		if (gamestate_->GetUpgradeStatus(gs::GameState::PITCHFORK, gs::GameState::UPGRADE_LEFT_2))
 		{
-			damage_pitchfork_ += 0;
+			damage_pitchfork_ += 1;
 		}
 		if (gamestate_->GetUpgradeStatus(gs::GameState::PITCHFORK, gs::GameState::UPGRADE_RIGHT_1))
 		{
-			damage_pitchfork_ += 4;
+			damage_pitchfork_ += 0;
 		}
 		if (gamestate_->GetUpgradeStatus(gs::GameState::PITCHFORK, gs::GameState::UPGRADE_RIGHT_2))
 		{
@@ -391,7 +391,7 @@ int actor::Scarecrow::EvaluateAttackBoost()
 	case SHOVEL:
 		if (gamestate_->GetUpgradeStatus(gs::GameState::SHOVEL, gs::GameState::UPGRADE_MID))
 		{
-			damage_shovel += 3;
+			damage_shovel += 1;
 		}
 		if (gamestate_->GetUpgradeStatus(gs::GameState::SHOVEL, gs::GameState::UPGRADE_LEFT_1))
 		{
@@ -399,15 +399,15 @@ int actor::Scarecrow::EvaluateAttackBoost()
 		}
 		if (gamestate_->GetUpgradeStatus(gs::GameState::SHOVEL, gs::GameState::UPGRADE_LEFT_2))
 		{
-			damage_shovel += 0;
+			damage_shovel += 1;
 		}
 		if (gamestate_->GetUpgradeStatus(gs::GameState::SHOVEL, gs::GameState::UPGRADE_RIGHT_1))
 		{
-			damage_shovel += 4;
+			damage_shovel += 2;
 		}
 		if (gamestate_->GetUpgradeStatus(gs::GameState::SHOVEL, gs::GameState::UPGRADE_RIGHT_2))
 		{
-			damage_shovel += 2;
+			damage_shovel += 3;
 		}
 		break;
 	}

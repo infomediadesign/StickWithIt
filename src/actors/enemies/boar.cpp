@@ -4,13 +4,13 @@ actor::Boar::Boar(std::shared_ptr<level::Map>& map, std::shared_ptr<gs::GameStat
 	:
 	Enemy(
 		//max_hp
-		1,
+		9,
 		//max_move_points
 		1,
 		//max_action_points
 		1,
 		//attack_damage
-		1,
+		4,
 		//can_fly
 		false,
 		//is_active

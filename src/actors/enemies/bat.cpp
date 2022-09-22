@@ -4,7 +4,7 @@ actor::Bat::Bat(std::shared_ptr<level::Map>& map, std::shared_ptr<gs::GameState>
 	:
 	Enemy(
 		//max_hp
-		1,
+		3,
 		//max_move_points
 		1,
 		//max_action_points

@@ -4,13 +4,13 @@ actor::Mushroom::Mushroom(std::shared_ptr<level::Map>& map, std::shared_ptr<gs::
 	:
 	Enemy(
 		//max_hp
-		1,
+		6,
 		//max_move_points
 		1,
 		//max_action_points
 		1,
 		//attack_damage
-		1,
+		2,
 		//can_fly
 		false,
 		//is_active

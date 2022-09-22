@@ -6,11 +6,11 @@ actor::Fly::Fly(std::shared_ptr<level::Map>& map, std::shared_ptr<gs::GameState>
 		//max_hp
 		10,
 		//max_move_points
-		10,
+		12,
 		//max_action_points
-		4,
+		6,
 		//attack_damage
-		10,
+		2,
 		//can_fly
 		true,
 		//is_active
