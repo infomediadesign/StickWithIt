@@ -51,7 +51,7 @@ void window::WindowPause::Update()
 			}
 		}
 
-		if (IsKeyPressed(KEY_ESCAPE) && settings_ != nullptr && !settings_->GetIsActive())
+		if (IsKeyPressed(KEY_ESCAPE))
 		{
 			is_active_ = false;
 		}
