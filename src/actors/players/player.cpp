@@ -185,10 +185,7 @@ std::pair<int, std::vector<std::pair<int, int>>> actor::Player::Attack()
 			}
 
 			// if we have attacked, reduce action points
-			if (position.first != 0 && position.second != 0)
-			{
-				action_points_--;
-			}
+			action_points_--;
 
 			// Destroy wheat on position of atttack
 			map_->GetLevelHandler()->DestroyWheat(position);
