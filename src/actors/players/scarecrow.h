@@ -31,8 +31,14 @@ namespace actor
 
 		std::unique_ptr<weapon::Weapon> active_weapon_ = std::make_unique<weapon::Scythe>();
 
+		Texture2D button_swap_weapon = LoadTexture("assets/graphics/ui/button_swap_weapon.png");
+
 		void EvaluateBoosts();
 		int EvaluateAttackBoost();
+
+		int damage_scythe_ = 0;
+		int damage_pitchfork_ = 0;
+		int damage_shovel = 3;
 
 		int active_weapon_index_ = SCYTHE;
 	};

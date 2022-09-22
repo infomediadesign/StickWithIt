@@ -24,10 +24,10 @@ namespace scene
 		void SwitchPlayer() const;
 		void DrawUI() const;
 
-		Texture2D stats_			= LoadTexture("assets/graphics/ui/stats.png");
-		Texture2D button_exit_		= LoadTexture("assets/graphics/ui/button_escape_2.png");
-		Texture2D button_end_turn	= LoadTexture("assets/graphics/ui/button_end_turn.png");
-		Texture2D button_end_prep	= LoadTexture("assets/graphics/ui/button_end_prep.png");
+		Texture2D stats_				= LoadTexture("assets/graphics/ui/stats.png");
+		Texture2D button_exit_			= LoadTexture("assets/graphics/ui/button_escape_2.png");
+		Texture2D button_end_turn		= LoadTexture("assets/graphics/ui/button_end_turn.png");
+		Texture2D button_end_prep		= LoadTexture("assets/graphics/ui/button_end_prep.png");
 
 		const int max_level_		= 4;
 

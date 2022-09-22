@@ -37,42 +37,37 @@ void scene::GameScene::Update()
 	{
 		SwitchPlayer();
 
+
+		// Get to new level once all enemies are dead + their death animations have been played
+		bool all_enemies_dead = true;
+		bool all_enemies_done_with_animation = true;
+		for (auto& enemy : enemies_)
 		{
-			bool all_enemies_dead = true;
-			bool all_enemies_done_with_animation = true;
-			for (auto& enemy : enemies_)
+			if (!enemy->GetIsAnimationOver())
 			{
-				if (!enemy->GetIsAnimationOver())
-				{
-					all_enemies_done_with_animation = false;
-					break;
-				}
-			}
-			for (auto& enemy : enemies_)
-			{
-				if (enemy->GetIsAlive())
-				{
-					all_enemies_dead = false;
-					break;
-				}
-			}
-			// If all enemies are killed and have played their animation
-			if (level_current_ < max_level_ && all_enemies_dead && all_enemies_done_with_animation && round_current_ >= map_->GetLevelHandler()->GetNumberOfRounds() - 1)
-			{
-				NextLevel();
+				all_enemies_done_with_animation = false;
+				break;
 			}
 		}
+		for (auto& enemy : enemies_)
+		{
+			if (enemy->GetIsAlive())
+			{
+				all_enemies_dead = false;
+				break;
+			}
+		}
+		// If all enemies are killed and have played their animation
+		if (level_current_ < max_level_ && all_enemies_dead && all_enemies_done_with_animation && round_current_ >= map_->GetLevelHandler()->GetNumberOfRounds() - 1)
+		{
+			NextLevel();
+		}
+
 
 		if (IsKeyPressed(KEY_ESCAPE))
 		{
 			window_active_ = std::make_unique<window::WindowPause>(gamestate_);
 		}
-
-		if (IsKeyPressed(KEY_K))
-		{
-			players_[0]->SetHP(0);
-		}
-
 
 		if (IsKeyPressed(KEY_ENTER))
 		{
@@ -86,6 +81,7 @@ void scene::GameScene::Update()
 			}
 			else
 			{
+				// Save all players positions for enemies pathfinding
 				std::vector<std::pair<int, int>> positions;
 				for (auto& player : players_)
 				{
@@ -111,6 +107,7 @@ void scene::GameScene::Update()
 					}
 				}
 
+				// Spawn enemies as long as we haven't reached the number of rounds of current level
 				if (round_current_ < map_->GetLevelHandler()->GetNumberOfRounds())
 				{
 					for (auto& enemy : spawner_->SpawnWave(map_->GetLevelHandler()->GetEnemiesPerRound(), map_))
@@ -121,6 +118,7 @@ void scene::GameScene::Update()
 					round_current_++;
 				}
 
+				// Reset players stats after round end
 				for (auto& player : players_)
 				{
 					player->ResetStats();
@@ -162,6 +160,7 @@ void scene::GameScene::Update()
 		enemy->UpdateAnimation();
 	}
 
+	// If the scarecrow is dead and it's death animation is over and we have no window playing at the moment
 	if (!players_[0]->GetIsAlive() && players_[0]->GetIsAnimationOver() && !window_active_->GetIsActive() && !game_won_)
 	{
 		window_active_ = std::make_unique<window::WindowGameOver>(gamestate_);
@@ -232,10 +231,13 @@ void scene::GameScene::NextLevel()
 		round_current_ = 0;
 		preperation_phase_ = true;
 
+		// If we go to the next level but have not won yet
 		if (level_current_ < max_level_)
 		{
+			// Clear all enemies (they are all dead)
 			enemies_.clear();
 
+			// Spawn a new wave
 			for (auto& enemy : spawner_->SpawnWave(map_->GetLevelHandler()->GetEnemiesPerRound(), map_))
 			{
 				enemies_.push_back(enemy);
@@ -243,6 +245,7 @@ void scene::GameScene::NextLevel()
 
 			window_active_ = std::make_unique<window::WindowNextLevel>(gamestate_, level_current_);
 
+			// Reset the map to update collisions
 			map_->ResetMap();
 
 			for (auto& player : players_)
@@ -251,6 +254,7 @@ void scene::GameScene::NextLevel()
 				player->Spawn();
 			}
 		}
+		// If we have won the last level pop the game won window
 		if (level_current_ == max_level_)
 		{
 			window_active_ = std::make_unique<window::WindowGameWon>(gamestate_);

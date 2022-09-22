@@ -58,6 +58,7 @@ actor::Scarecrow::Scarecrow(std::shared_ptr<level::Map>& map, std::shared_ptr<gs
 	)
 {
 	EvaluateBoosts();
+	EvaluateAttackBoost();
 }
 
 void actor::Scarecrow::SwapWeapon()
@@ -84,8 +85,6 @@ void actor::Scarecrow::SwapWeapon()
 			break;
 		}
 	}
-
-	// @TODO hier stats anpassen von gamestate
 }
 
 void actor::Scarecrow::Draw() const
@@ -95,6 +94,7 @@ void actor::Scarecrow::Draw() const
 	if (is_active_)
 	{
 		active_weapon_->Draw();
+		DrawTexture(button_swap_weapon, 544, 333, WHITE);
 	}
 }
 
@@ -229,7 +229,21 @@ std::pair<int, std::vector<std::pair<int, int>>> actor::Scarecrow::Attack()
 			positions.push_back({ x_ + pos.first, y_ + pos.second });
 		}
 
-		return { attack_damage_ + EvaluateAttackBoost(), positions};
+
+		switch (active_weapon_index_)
+		{
+		case SCYTHE:
+			return { attack_damage_ + damage_scythe_, positions };
+			break;
+
+		case PITCHFORK:
+			return { attack_damage_ + damage_scythe_, positions };
+			break;
+
+		case SHOVEL:
+			return { attack_damage_ + damage_shovel, positions };
+			break;
+		}
 	}
 
 	return std::pair<int, std::vector<std::pair<int, int>>>();
@@ -331,69 +345,69 @@ int actor::Scarecrow::EvaluateAttackBoost()
 	case SCYTHE:
 		if (gamestate_->GetUpgradeStatus(gs::GameState::SCYTHE, gs::GameState::UPGRADE_MID))
 		{
-			attack_damage_ += 3;
+			damage_scythe_ += 3;
 		}
 		if (gamestate_->GetUpgradeStatus(gs::GameState::SCYTHE, gs::GameState::UPGRADE_LEFT_1))
 		{
-			attack_damage_ += 0;
+			damage_scythe_ += 0;
 		}
 		if (gamestate_->GetUpgradeStatus(gs::GameState::SCYTHE, gs::GameState::UPGRADE_LEFT_2))
 		{
-			attack_damage_ += 0;
+			damage_scythe_ += 0;
 		}
 		if (gamestate_->GetUpgradeStatus(gs::GameState::SCYTHE, gs::GameState::UPGRADE_RIGHT_1))
 		{
-			attack_damage_ += 4;
+			damage_scythe_ += 4;
 		}
 		if (gamestate_->GetUpgradeStatus(gs::GameState::SCYTHE, gs::GameState::UPGRADE_RIGHT_2))
 		{
-			attack_damage_ += 2;
+			damage_scythe_ += 2;
 		}
 		break;
 
 	case PITCHFORK:
 		if (gamestate_->GetUpgradeStatus(gs::GameState::PITCHFORK, gs::GameState::UPGRADE_MID))
 		{
-			attack_damage_ += 3;
+			damage_pitchfork_ += 3;
 		}
 		if (gamestate_->GetUpgradeStatus(gs::GameState::PITCHFORK, gs::GameState::UPGRADE_LEFT_1))
 		{
-			attack_damage_ += 0;
+			damage_pitchfork_ += 0;
 		}
 		if (gamestate_->GetUpgradeStatus(gs::GameState::PITCHFORK, gs::GameState::UPGRADE_LEFT_2))
 		{
-			attack_damage_ += 0;
+			damage_pitchfork_ += 0;
 		}
 		if (gamestate_->GetUpgradeStatus(gs::GameState::PITCHFORK, gs::GameState::UPGRADE_RIGHT_1))
 		{
-			attack_damage_ += 4;
+			damage_pitchfork_ += 4;
 		}
 		if (gamestate_->GetUpgradeStatus(gs::GameState::PITCHFORK, gs::GameState::UPGRADE_RIGHT_2))
 		{
-			attack_damage_ += 2;
+			damage_pitchfork_ += 2;
 		}
 		break;
 
 	case SHOVEL:
 		if (gamestate_->GetUpgradeStatus(gs::GameState::SHOVEL, gs::GameState::UPGRADE_MID))
 		{
-			attack_damage_ += 3;
+			damage_shovel += 3;
 		}
 		if (gamestate_->GetUpgradeStatus(gs::GameState::SHOVEL, gs::GameState::UPGRADE_LEFT_1))
 		{
-			attack_damage_ += 0;
+			damage_shovel += 0;
 		}
 		if (gamestate_->GetUpgradeStatus(gs::GameState::SHOVEL, gs::GameState::UPGRADE_LEFT_2))
 		{
-			attack_damage_ += 0;
+			damage_shovel += 0;
 		}
 		if (gamestate_->GetUpgradeStatus(gs::GameState::SHOVEL, gs::GameState::UPGRADE_RIGHT_1))
 		{
-			attack_damage_ += 4;
+			damage_shovel += 4;
 		}
 		if (gamestate_->GetUpgradeStatus(gs::GameState::SHOVEL, gs::GameState::UPGRADE_RIGHT_2))
 		{
-			attack_damage_ += 2;
+			damage_shovel += 2;
 		}
 		break;
 	}
